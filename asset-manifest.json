@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/seanxbrown.github.io/firebase-todo-2/static/css/main.c59cc657.css",
-    "main.js": "/seanxbrown.github.io/firebase-todo-2/static/js/main.687f1704.js",
+    "main.js": "/seanxbrown.github.io/firebase-todo-2/static/js/main.39cb2531.js",
     "index.html": "/seanxbrown.github.io/firebase-todo-2/index.html",
     "main.c59cc657.css.map": "/seanxbrown.github.io/firebase-todo-2/static/css/main.c59cc657.css.map",
-    "main.687f1704.js.map": "/seanxbrown.github.io/firebase-todo-2/static/js/main.687f1704.js.map"
+    "main.39cb2531.js.map": "/seanxbrown.github.io/firebase-todo-2/static/js/main.39cb2531.js.map"
   },
   "entrypoints": [
     "static/css/main.c59cc657.css",
-    "static/js/main.687f1704.js"
+    "static/js/main.39cb2531.js"
   ]
 }
