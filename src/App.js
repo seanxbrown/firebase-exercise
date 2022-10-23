@@ -8,7 +8,7 @@ function App() {
   return (
     <Container fluid className="App">
       <header className="py-3 bg-gradient bg-dark">
-        <h1 className="text-light">Exercise Tracker</h1>
+        <h1 className="text-light">Exercise Tracker App</h1>
       </header>
       <FormComponent /> 
 
