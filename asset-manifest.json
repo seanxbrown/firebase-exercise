@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/firebase-todo-2/static/css/main.c59cc657.css",
-    "main.js": "/firebase-todo-2/static/js/main.39cb2531.js",
-    "index.html": "/firebase-todo-2/index.html",
-    "main.c59cc657.css.map": "/firebase-todo-2/static/css/main.c59cc657.css.map",
-    "main.39cb2531.js.map": "/firebase-todo-2/static/js/main.39cb2531.js.map"
+    "main.css": "/firebase-exercise/static/css/main.c59cc657.css",
+    "main.js": "/firebase-exercise/static/js/main.39cb2531.js",
+    "index.html": "/firebase-exercise/index.html",
+    "main.c59cc657.css.map": "/firebase-exercise/static/css/main.c59cc657.css.map",
+    "main.39cb2531.js.map": "/firebase-exercise/static/js/main.39cb2531.js.map"
   },
   "entrypoints": [
     "static/css/main.c59cc657.css",
