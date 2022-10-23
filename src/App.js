@@ -1,9 +1,18 @@
+import Container from "react-bootstrap/Container";
+import FormComponent from "./components/FormComponent";
+import { useState } from "react"
 
 function App() {
-  return (
-    <div className="App">Firebase Todo
+  const [exercise, setExercise] = useState([])
 
-    </div>
+  return (
+    <Container fluid className="App">
+      <header className="py-3 bg-gradient bg-dark">
+        <h1 className="text-light">Exercise Tracker</h1>
+      </header>
+      <FormComponent /> 
+
+    </Container>
   );
 }
 
