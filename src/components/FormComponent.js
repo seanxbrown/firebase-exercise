@@ -1,4 +1,5 @@
 import {Form, Button } from "react-bootstrap";
+import {Link} from "react-router-dom"
 
 const FormComponent = () => {
     return (
@@ -26,6 +27,9 @@ const FormComponent = () => {
             </Form.Group>
             <Button type="submit">Submit</Button>
         </Form>
+        <Link to="/firebase-exercise/signup">Sign Up Component</Link>
+      <Link to="/firebase-exercise/login">Login Component</Link>
+
         </>
     )
 }
