@@ -8,10 +8,12 @@ import {auth} from "./firebase"
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import {Button } from "react-bootstrap"
 import PrivateRoute from "./components/PrivateRoute";
+import Dashboard from "./components/Dashboard"
+import Workout from "./components/Workout"
  
 
 function App() {
-  const [exercise, setExercise] = useState([]);
+  const [workouts, setWorkouts] = useState([{id: 1, title: "Test", date: "01/01/2022", exercises: [{id: 1, name: "bench", sets: 3, reps: 10, weight: "90 KG", target: true}]}, {id: 2, title: "Test 2", date: "01/01/2022", exercises: [{id: 1, name: "Deadlift", sets: 3, reps: 10, weight: "150 KG", target: false}]}])
   const [user, setUser] = useState();
   
 
@@ -19,8 +21,8 @@ function App() {
     
     return await signOut(auth)
 
-
   }
+
 
   useEffect(() => {
 
@@ -39,12 +41,11 @@ function App() {
 
         </header>
         <h2>Logged in as {user && user.email }</h2>
-        <h2>Auth: {auth.currentUser && auth.currentUser.email}</h2>
         <Routes>
           <Route path="/firebase-exercise/signup" element={<Signup user={user}/>} />
           <Route path="/firebase-exercise/login" element={<Login logOut={logOut} user={user}/>} />
           <Route element={<PrivateRoute user={user}/>} >
-            <Route path="/firebase-exercise" element={<FormComponent /> } user={user}/>
+            <Route path="/firebase-exercise" element={<Dashboard workouts={workouts}/> } user={user}/>
           </Route>
         </Routes>
       </Container>
