@@ -22,7 +22,7 @@ export default function Login({logOut, user}) {
     navigate("/firebase-exercise")
 
   }
-  
+
   return (
     <Container className="border border-1 border-secondary mt-5 py-5 rounded">
         <h2 className="text-center">Log In</h2>
@@ -38,7 +38,6 @@ export default function Login({logOut, user}) {
             <Button disabled={user} type="submit" className="w-100 mt-5">Log in</Button>
         </Form>
         <p className="text-center text-muted">Don't have an account? <Link to="/firebase-exercise/signup">Sign up</Link></p>
-        <Button className="btn btn-primary" onClick={() => {logOut()}}>Log Out</Button>
         
     </Container>
   )
