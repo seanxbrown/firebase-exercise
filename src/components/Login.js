@@ -1,11 +1,32 @@
 import {Container, Form, Button} from 'react-bootstrap';
-import {Link} from "react-router-dom"
+import {Link, useNavigate } from "react-router-dom";
+import { auth } from "../firebase";
+import { signInWithEmailAndPassword } from 'firebase/auth';
+ 
+export default function Login({logOut, user}) {
+  const navigate = useNavigate()
 
-export default function Login({logIn, logOut, user}) {
+  async function logUserIn(e) {
+    e.preventDefault();
+
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log("sign in successful");      
+    } catch(e) {
+      alert(e)
+    }
+    navigate("/firebase-exercise")
+
+  }
+  
   return (
     <Container className="border border-1 border-secondary mt-5 py-5 rounded">
         <h2 className="text-center">Log In</h2>
-        <Form className="w-75 mx-auto" onSubmit={logIn}>
+        <Form className="w-75 mx-auto" onSubmit={logUserIn}>
             <Form.Group>
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control required type="email" placeholder="example@address.com" id="loginEmail"></Form.Control>

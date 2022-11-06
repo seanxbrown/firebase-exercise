@@ -1,11 +1,36 @@
 import {Container, Form, Button} from 'react-bootstrap';
-import {Link} from "react-router-dom"
+import {Link, useNavigate } from "react-router-dom";
+import { auth  } from "../firebase"
+import { createUserWithEmailAndPassword } from "firebase/auth"
 
 export default function Signup({signUp, user}) {
+    const navigate = useNavigate()
+
+    async function signUserUp(e) {
+        e.preventDefault()
+    
+        const email = document.getElementById("signupEmail").value;
+        const password = document.getElementById("signupPassword").value;
+        const passwordConf = document.getElementById("signupPasswordConf").value;
+    
+        if(password !== passwordConf) {
+          return
+        }
+    
+        try {
+          await createUserWithEmailAndPassword(auth, email, password);
+        } catch(e) {
+          alert(e)
+        }
+
+        navigate("/firebase-exercise")
+    
+      }
+
   return (
     <Container className="border border-1 border-secondary mt-5 py-5 rounded">
         <h2 className="text-center">Sign Up</h2>
-        <Form className="w-75 mx-auto" onSubmit={signUp}>
+        <Form className="w-75 mx-auto" onSubmit={signUserUp}>
             <Form.Group>
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control required type="email" placeholder="example@address.com" id="signupEmail"></Form.Control>
