@@ -9,11 +9,9 @@ import {createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateC
 import {Button } from "react-bootstrap"
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./components/Dashboard"
-import Workout from "./components/Workout"
  
 
 function App() {
-  const [workouts, setWorkouts] = useState([{id: 1, title: "Test", date: "01/01/2022", exercises: [{id: 1, name: "bench", sets: 3, reps: 10, weight: "90 KG", target: true}]}, {id: 2, title: "Test 2", date: "01/01/2022", exercises: [{id: 1, name: "Deadlift", sets: 3, reps: 10, weight: "150 KG", target: false}]}])
   const [user, setUser] = useState();
   
 
@@ -45,7 +43,7 @@ function App() {
           <Route path="/firebase-exercise/signup" element={<Signup user={user}/>} />
           <Route path="/firebase-exercise/login" element={<Login logOut={logOut} user={user}/>} />
           <Route element={<PrivateRoute user={user}/>} >
-            <Route path="/firebase-exercise" element={<Dashboard workouts={workouts}/> } user={user}/>
+            <Route path="/firebase-exercise" element={<Dashboard/> } user={user}/>
           </Route>
         </Routes>
       </Container>
