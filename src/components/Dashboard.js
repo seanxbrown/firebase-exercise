@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import { Button } from "react-bootstrap";
 import Exercise from "./Exercise";
-import Workout from './Workout';
 import AddNewWorkout from "./AddNewWorkout";
-import { v4 as uuidv4 } from "uuid"
+import { v4 as uuidv4 } from "uuid";
+import WorkoutComponent from './WorkoutComponent';
 
 const Dashboard = () => {
     const [selectedWorkout, setSelectedWorkout] = useState();
@@ -39,13 +39,20 @@ function addWorkoutToList(e) {
 
 }
 
+function removeWorkoutFromList(id) {
+    const newWorkouts = [...workouts].filter(workout => id !== workout.id);
+    setWorkouts(newWorkouts);
+    console.log(id)
+
+}
+
   return (
     <div>
         {creatingNewWorkout && <AddNewWorkout addWorkoutToList={addWorkoutToList} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         <div id="workoutDiv">
             <h2>Workouts</h2>
             <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary">Add New Workout</Button>
-            {workouts.map(workout => <p id={workout.id} key={workout.id} className="bg-info" onClick={(() => selectWorkout([workout.id]))}>{workout.title}</p>)}
+            {workouts.map(workout => <WorkoutComponent key={workout.id} removeWorkoutFromList={removeWorkoutFromList} selectWorkout={selectWorkout} workout={workout}/> )}
         </div>
         <div>
             <h2>Exercise</h2>

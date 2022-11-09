@@ -8,7 +8,7 @@ const AddNewWorkout = ({toggleNewWorkoutStatus, addWorkoutToList}) => {
         <Form onSubmit={addWorkoutToList}>
             <Form.Group>
                 <Form.Label>Title</Form.Label>
-                <Form.Control id="workoutTitle" type="text" placeholder="Push Day" maxlength="30"/>
+                <Form.Control id="workoutTitle" type="text" placeholder="Push Day" maxLength="30"/>
             </Form.Group>
             <Form.Group>
                 <Form.Label>Date</Form.Label>
