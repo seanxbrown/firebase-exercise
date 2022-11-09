@@ -50,6 +50,42 @@ function removeWorkoutFromList(id) {
 
 }
 
+function addExerciseToWorkout(e) {
+    e.preventDefault();
+
+    console.log("workouts", workouts)
+    const newWorkouts = [...workouts]
+   const exerciseID = uuidv4();
+    const exerciseName = document.getElementById("exerciseName").value
+    const exerciseSets = document.getElementById("exerciseSets").value
+    const exerciseReps = document.getElementById("exerciseReps").value
+    const exerciseWeight = document.getElementById("exerciseWeight").value
+    const exercisetTarget = document.getElementById("exercisetTarget").value
+    const exerciseNotes = document.getElementById("exerciseNotes").value;
+
+    const newExercise = {
+        id: exerciseID,
+        name: exerciseName,
+        sets: exerciseSets,
+        reps: exerciseReps,
+        weight: `${exerciseWeight}kg`,
+        target: exercisetTarget,
+        notes: exerciseNotes,
+    }
+
+
+    for (let key of newWorkouts) {
+        if (key.id === selectedWorkout.id) {
+            key.exercises.push(newExercise)
+        }
+
+    }
+
+    setWorkouts(newWorkouts)
+
+
+}
+
 
   return (
     <div>
@@ -57,11 +93,11 @@ function removeWorkoutFromList(id) {
         <div id="workoutDiv">
             <h2>Workouts</h2>
             <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary">Add New Workout</Button>
-            {workouts.map(workout => <WorkoutComponent key={workout.id} removeWorkoutFromList={removeWorkoutFromList} selectWorkout={selectWorkout} workout={workout}/> )}
+            {workouts && workouts.map(workout => <WorkoutComponent key={workout.id} removeWorkoutFromList={removeWorkoutFromList} selectWorkout={selectWorkout} workout={workout}/> )}
         </div>
         <div>
             <h2>Exercise</h2>
-            {addingNewExercise && <AddNewExercise toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
+            {addingNewExercise && <AddNewExercise selectedWorkout={selectedWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
             <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary">Add New Exercise</Button>
 
 
