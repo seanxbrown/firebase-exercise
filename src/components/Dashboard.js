@@ -86,6 +86,18 @@ function addExerciseToWorkout(e) {
 
 }
 
+function removeExerciseFromWorkout(id) {
+    const newWorkouts = [...workouts];
+    for (let workout of newWorkouts) {
+        if(selectedWorkout.id === workout.id) {
+            workout.exercises = workout.exercises.filter(exercise => exercise.id !== id)
+            console.log(workout.id)
+        }
+    }
+
+    setWorkouts(newWorkouts)
+}
+
 
   return (
     <div>
@@ -101,7 +113,7 @@ function addExerciseToWorkout(e) {
             <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary">Add New Exercise</Button>
 
 
-            {selectedWorkout && selectedWorkout.exercises.map(exercise => <Exercise key={exercise.id} exercise={exercise}/>)}
+            {selectedWorkout && selectedWorkout.exercises.map(exercise => <Exercise removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>)}
         </div>
     </div>
   )
