@@ -4,22 +4,26 @@ import Exercise from "./Exercise";
 import AddNewWorkout from "./AddNewWorkout";
 import { v4 as uuidv4 } from "uuid";
 import WorkoutComponent from './WorkoutComponent';
+import AddNewExercise from "./AddNewExercise"
 
 const Dashboard = () => {
     const [selectedWorkout, setSelectedWorkout] = useState();
-    const [workouts, setWorkouts] = useState([{id: 1, title: "Test", date: "01/01/2022", exercises: [{id: 1, name: "bench", sets: 3, reps: 10, weight: "90 KG", target: true}]}, {id: 2, title: "Test 2", date: "01/01/2022", exercises: [{id: 1, name: "Deadlift", sets: 3, reps: 10, weight: "150 KG", target: false}]}])
-    const [creatingNewWorkout, setCreatingNewWorkout] = useState(false)
+    const [workouts, setWorkouts] = useState([{id: 1, title: "Test", date: "01/01/2022", exercises: [{id: 1, name: "bench", sets: 3, reps: 10, weight: "90 KG", target: true, notes: ""}]}, {id: 2, title: "Test 2", date: "01/01/2022", exercises: [{id: 1, name: "Deadlift", sets: 3, reps: 10, weight: "150 KG", target: false, notes: ""}]}])
+    const [creatingNewWorkout, setCreatingNewWorkout] = useState(false);
+    const [addingNewExercise, setAddingNewExercise] = useState(false)
 
 function selectWorkout(number) {
     const selection = [...workouts].filter(workout => number == workout.id);
     setSelectedWorkout(selection[0])
 }
 
-//Create "add new workout" functionality next
-
 function toggleNewWorkoutStatus(e) {
     e.preventDefault()
     setCreatingNewWorkout(creatingNewWorkout => !creatingNewWorkout)
+}
+
+function toggleNewExerciseStatus() {
+    setAddingNewExercise(addingNewExercise => !addingNewExercise)
 }
 
 function addWorkoutToList(e) {
@@ -46,6 +50,7 @@ function removeWorkoutFromList(id) {
 
 }
 
+
   return (
     <div>
         {creatingNewWorkout && <AddNewWorkout addWorkoutToList={addWorkoutToList} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
@@ -56,6 +61,10 @@ function removeWorkoutFromList(id) {
         </div>
         <div>
             <h2>Exercise</h2>
+            {addingNewExercise && <AddNewExercise toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
+            <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary">Add New Exercise</Button>
+
+
             {selectedWorkout && selectedWorkout.exercises.map(exercise => <Exercise key={exercise.id} exercise={exercise}/>)}
         </div>
     </div>
