@@ -2,7 +2,8 @@ import React, {useState} from 'react'
 import { Button } from "react-bootstrap";
 import Exercise from "./Exercise";
 import Workout from './Workout';
-import AddNewWorkout from "./AddNewWorkout"
+import AddNewWorkout from "./AddNewWorkout";
+import { v4 as uuidv4 } from "uuid"
 
 const Dashboard = () => {
     const [selectedWorkout, setSelectedWorkout] = useState();
@@ -16,13 +17,31 @@ function selectWorkout(number) {
 
 //Create "add new workout" functionality next
 
-function toggleNewWorkoutStatus() {
+function toggleNewWorkoutStatus(e) {
+    e.preventDefault()
     setCreatingNewWorkout(creatingNewWorkout => !creatingNewWorkout)
+}
+
+function addWorkoutToList(e) {
+    e.preventDefault()
+    
+    const newWorkouts = [...workouts]
+    const workoutTitle = document.getElementById("workoutTitle").value || new Date(Date.now()).toString()
+    const workoutDate = document.getElementById("workoutDate").value;
+    newWorkouts.push({
+        id: uuidv4(),
+        title: workoutTitle,
+        date: workoutDate,
+        exercises: []
+    })
+
+    setWorkouts(newWorkouts)
+
 }
 
   return (
     <div>
-        {creatingNewWorkout && <AddNewWorkout toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
+        {creatingNewWorkout && <AddNewWorkout addWorkoutToList={addWorkoutToList} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         <div id="workoutDiv">
             <h2>Workouts</h2>
             <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary">Add New Workout</Button>
