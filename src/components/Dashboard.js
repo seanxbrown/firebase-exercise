@@ -121,9 +121,16 @@ function removeExerciseFromWorkout(id) {
     const newWorkouts = [...workouts];
     for (let workout of newWorkouts) {
         if(selectedWorkout.id === workout.id) {
+            if (!workout.exercises) {return}
             workout.exercises = workout.exercises.filter(exercise => exercise.id !== id)
         }
     }
+
+    console.log({...selectedWorkout})
+    const newSelectedWorkout = {...selectedWorkout}
+    newSelectedWorkout.exercises = newSelectedWorkout.exercises.filter(exercise => exercise.id !== id)
+    setSelectedWorkout(newSelectedWorkout)
+
     update(ref(database, `${user.uid}`), {"workouts": newWorkouts} )
 
 
