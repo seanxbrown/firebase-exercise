@@ -72,22 +72,22 @@ function addWorkoutToListDB(e) {
 
 function removeWorkoutFromList(id) {
     const newWorkouts = [...workouts].filter(workout => id !== workout.id);
-    set(ref(database, `${user.uid}/workouts/`), newWorkouts )
+    update(ref(database, `${user.uid}`), {"workouts": newWorkouts} )
 
 }
 
 function addExerciseToWorkout(e) {
     e.preventDefault();
 
-    console.log("workouts", workouts)
     const newWorkouts = [...workouts]
    const exerciseID = uuidv4();
     const exerciseName = document.getElementById("exerciseName").value
     const exerciseSets = document.getElementById("exerciseSets").value
     const exerciseReps = document.getElementById("exerciseReps").value
     const exerciseWeight = document.getElementById("exerciseWeight").value
-    const exercisetTarget = document.getElementById("exercisetTarget").value
+    const exercisetTarget = document.getElementById("exercisetTarget").checked
     const exerciseNotes = document.getElementById("exerciseNotes").value;
+    console.log(exercisetTarget)
 
     const newExercise = {
         id: exerciseID,
@@ -98,16 +98,21 @@ function addExerciseToWorkout(e) {
         target: exercisetTarget,
         notes: exerciseNotes,
     }
+    console.log(newWorkouts)
 
 
     for (let key of newWorkouts) {
         if (key.id === selectedWorkout.id) {
-            key.exercises.push(newExercise)
+            if (key.exercises) {
+                key.exercises.push(newExercise)
+            } else {
+                key.exercises = [newExercise]
+            }
         }
 
     }
 
-    setWorkouts(newWorkouts)
+    update(ref(database, `${user.uid}`), {"workouts": newWorkouts} )
 
 
 }
@@ -117,11 +122,11 @@ function removeExerciseFromWorkout(id) {
     for (let workout of newWorkouts) {
         if(selectedWorkout.id === workout.id) {
             workout.exercises = workout.exercises.filter(exercise => exercise.id !== id)
-            console.log(workout.id)
         }
     }
+    update(ref(database, `${user.uid}`), {"workouts": newWorkouts} )
 
-    setWorkouts(newWorkouts)
+
 }
 
 useEffect(() => {
