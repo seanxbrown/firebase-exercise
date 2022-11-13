@@ -141,7 +141,7 @@ useEffect(() => {
     function getWorkoutData() {
         const dbRef = ref(database, `${user.uid}`);
         onValue(dbRef, snapshot => {
-            setWorkouts(snapshot.val().workouts)
+            setWorkouts(workouts => workouts = snapshot.val().workouts)
 
             
         }
