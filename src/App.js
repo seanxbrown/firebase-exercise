@@ -43,7 +43,7 @@ function App() {
           <Route path="/firebase-exercise/signup" element={<Signup user={user}/>} />
           <Route path="/firebase-exercise/login" element={<Login logOut={logOut} user={user}/>} />
           <Route element={<PrivateRoute user={user}/>} >
-            <Route path="/firebase-exercise" element={<Dashboard/> } user={user}/>
+            <Route path="/firebase-exercise" element={<Dashboard user={user}/> }/>
           </Route>
         </Routes>
       </Container>

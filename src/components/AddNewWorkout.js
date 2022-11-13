@@ -1,11 +1,11 @@
 import React from 'react';
 import {Form, Container, Button, CloseButton} from "react-bootstrap"
 
-const AddNewWorkout = ({toggleNewWorkoutStatus, addWorkoutToList}) => {
+const AddNewWorkout = ({toggleNewWorkoutStatus, addWorkoutToListDB}) => {
   return (
     <Container className="border border-1 border-secondary p-5">
         <CloseButton onClick={toggleNewWorkoutStatus} className="float-end"/>
-        <Form onSubmit={addWorkoutToList}>
+        <Form onSubmit={addWorkoutToListDB}>
             <Form.Group>
                 <Form.Label>Title</Form.Label>
                 <Form.Control id="workoutTitle" type="text" placeholder="Push Day" maxLength="30"/>
