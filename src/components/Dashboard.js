@@ -27,22 +27,6 @@ function toggleNewExerciseStatus() {
     setAddingNewExercise(addingNewExercise => !addingNewExercise)
 }
 
-function addWorkoutToList(e) {
-    e.preventDefault()
-    
-    const newWorkouts = [...workouts]
-    const workoutTitle = document.getElementById("workoutTitle").value || new Date(Date.now()).toString()
-    const workoutDate = document.getElementById("workoutDate").value;
-    newWorkouts.push({
-        id: uuidv4(),
-        title: workoutTitle,
-        date: workoutDate,
-        exercises: []
-    })
-
-    setWorkouts(newWorkouts)
-
-}
 function writeData() {
     const newWorkouts = [...workouts]
     const workoutTitle = document.getElementById("workoutTitle").value || new Date(Date.now()).toString()
@@ -54,21 +38,14 @@ function writeData() {
         exercises: []
     })
 
-    console.log(newWorkouts)
-
     set(ref(database, `${user.uid}/workouts/`), newWorkouts )
  
-
-
-
 }
+
 function addWorkoutToListDB(e) {
     e.preventDefault();
     writeData(user.uid)
-
-    
 }
-
 
 function removeWorkoutFromList(id) {
     const newWorkouts = [...workouts].filter(workout => id !== workout.id);
@@ -101,8 +78,6 @@ function addExerciseToWorkout(e) {
         target: exercisetTarget,
         notes: exerciseNotes,
     }
-    console.log(newWorkouts)
-
 
     for (let key of newWorkouts) {
         if (key.id === selectedWorkout.id) {
@@ -129,7 +104,6 @@ function removeExerciseFromWorkout(id) {
         }
     }
 
-    console.log({...selectedWorkout})
     const newSelectedWorkout = {...selectedWorkout}
     newSelectedWorkout.exercises = newSelectedWorkout.exercises.filter(exercise => exercise.id !== id)
     setSelectedWorkout(newSelectedWorkout)
