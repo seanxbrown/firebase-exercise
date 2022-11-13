@@ -5,7 +5,7 @@ import AddNewWorkout from "./AddNewWorkout";
 import { v4 as uuidv4 } from "uuid";
 import WorkoutComponent from './WorkoutComponent';
 import AddNewExercise from "./AddNewExercise"
-import { database, set, ref, onValue } from "../firebase"
+import { database, set, ref, onValue, update } from "../firebase"
 
 const Dashboard = ({user}) => {
     const [selectedWorkout, setSelectedWorkout] = useState();
@@ -72,8 +72,7 @@ function addWorkoutToListDB(e) {
 
 function removeWorkoutFromList(id) {
     const newWorkouts = [...workouts].filter(workout => id !== workout.id);
-    setWorkouts(newWorkouts);
-    console.log(id)
+    set(ref(database, `${user.uid}/workouts/`), newWorkouts )
 
 }
 
@@ -156,7 +155,7 @@ useEffect(() => {
             <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary">Add New Exercise</Button>
 
 
-            {selectedWorkout && selectedWorkout.exercises.map(exercise => <Exercise removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>)}
+            {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.map(exercise => <Exercise removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>)}
         </div>
     </div>
   )
