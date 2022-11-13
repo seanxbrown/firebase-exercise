@@ -78,6 +78,10 @@ function removeWorkoutFromList(id) {
 
 function addExerciseToWorkout(e) {
     e.preventDefault();
+    if (selectedWorkout === undefined) {
+        alert("No workout selected") 
+        return
+    }
 
     const newWorkouts = [...workouts]
    const exerciseID = uuidv4();
@@ -87,7 +91,6 @@ function addExerciseToWorkout(e) {
     const exerciseWeight = document.getElementById("exerciseWeight").value
     const exercisetTarget = document.getElementById("exercisetTarget").checked
     const exerciseNotes = document.getElementById("exerciseNotes").value;
-    console.log(exercisetTarget)
 
     const newExercise = {
         id: exerciseID,
@@ -161,7 +164,7 @@ useEffect(() => {
     <div>
         {creatingNewWorkout && <AddNewWorkout addWorkoutToListDB={addWorkoutToListDB} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         <div id="workoutDiv">
-            <h2>Workouts</h2>
+            <h2>Workouts</h2><p>{selectedWorkout ? selectedWorkout.title : "No workout selected"}</p>
             <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary">Add New Workout</Button>
             {workouts && workouts.map(workout => <WorkoutComponent key={workout.id} removeWorkoutFromList={removeWorkoutFromList} selectWorkout={selectWorkout} workout={workout}/> )}
         </div>
