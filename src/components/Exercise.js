@@ -11,6 +11,8 @@ const Exercise = ({exercise, removeExerciseFromWorkout}) => {
         <p>Sets: {exercise.sets}</p>
         <p>Reps: {exercise.reps}</p>
         <p>Target hit? {exercise.target? "Yes" : "No" }</p>
+        <p>Target hit? {exercise.notes}</p>
+
         <CloseButton onClick={() => removeExerciseFromWorkout(exercise.id)} />
 
         </Container>

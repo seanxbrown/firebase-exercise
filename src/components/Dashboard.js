@@ -38,7 +38,9 @@ function writeData() {
         exercises: []
     })
 
-    set(ref(database, `${user.uid}/workouts/`), newWorkouts )
+    set(ref(database, `${user.uid}/workouts/`), newWorkouts );
+    setCreatingNewWorkout(creatingNewWorkout => !creatingNewWorkout)
+
  
 }
 
@@ -91,6 +93,8 @@ function addExerciseToWorkout(e) {
     }
 
     update(ref(database, `${user.uid}`), {"workouts": newWorkouts} )
+    setAddingNewExercise(addingNewExercise => !addingNewExercise)
+
 
 
 }
