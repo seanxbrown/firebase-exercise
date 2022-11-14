@@ -168,19 +168,23 @@ useEffect(() => {
         {creatingNewWorkout && <AddNewWorkout addWorkoutToListDB={addWorkoutToListDB} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         <Col xs={12} sm={4} id="workoutDiv" className="">
             <div>
-            <h2 className="text-center">Workouts</h2>
-            <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary">Add New Workout</Button>
+                <h2 className="text-center">Workouts</h2>
+                <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary">Add New Workout</Button>
             </div>
-            
-            {workouts && workouts.map(workout => <WorkoutComponent key={workout.id} removeWorkoutFromList={removeWorkoutFromList} selectWorkout={selectWorkout} workout={workout}/> )}
+            <div className="workoutDataContainer">
+                {workouts && workouts.map(workout => <WorkoutComponent key={workout.id} removeWorkoutFromList={removeWorkoutFromList} selectWorkout={selectWorkout} workout={workout}/> )}
+            </div>  
         </Col>
-        <Col xs={12} sm={8} className="">
+        <Col xs={12} sm={8} id="exerciseDiv">
             {addingNewExercise && <AddNewExercise selectedWorkout={selectedWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
             <div>
                 <h2 className="text-center">Exercises {selectedWorkout ? `(${selectedWorkout.title})` : null}</h2>
                 <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary">Add New Exercise</Button>
-            </div>            
-            {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.map(exercise => <Exercise removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>)}
+            </div>
+            <div className="workoutDataContainer">
+                {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.map(exercise => <Exercise removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>)}
+            </div>          
+            
         </Col>
     </Row>
   )

@@ -5,7 +5,7 @@ const Exercise = ({exercise, removeExerciseFromWorkout}) => {
 
     return (
         <>
-        <Row xs={3}className="justify-content-center text-center" >
+        <Row xs={3}className="justify-content-center text-center workoutData" >
             <Col sm={1}>
                 <p>{exercise.name}</p>
             </Col>

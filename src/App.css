@@ -2,3 +2,13 @@
 #logout-text:hover{
   cursor: pointer
 }
+
+.workoutData:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.workoutDataContainer > .workoutData:nth-child(even) {
+  background-color:grey;
+  color: #fff
+}
