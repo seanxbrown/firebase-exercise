@@ -119,9 +119,10 @@ useEffect(() => {
         const dbRef = ref(database, `${user.uid}`);
         onValue(dbRef, snapshot => {
             if (snapshot.val()) {
+                console.log(snapshot.val().workouts)
                 setWorkouts(workouts => workouts = snapshot.val().workouts)
-
-
+            } else {
+                setWorkouts(workouts => workouts = [])
             }
 
             
