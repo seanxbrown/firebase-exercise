@@ -8,7 +8,9 @@ import {auth} from "./firebase"
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import {Button } from "react-bootstrap"
 import PrivateRoute from "./components/PrivateRoute";
-import Dashboard from "./components/Dashboard"
+import Dashboard from "./components/Dashboard";
+import Header from "./components/Header"
+import "./App.css"
  
 
 function App() {
@@ -32,13 +34,8 @@ function App() {
 
   return (
     <BrowserRouter>
+        <Header user={user} logOut={logOut} />
       <Container fluid className="App">
-        <header className="py-3 bg-gradient bg-dark">
-          <Link to="/firebase-exercise" className="text-light h1">Exercise Tracker App</Link>
-          <Button className="btn btn-primary" onClick={() => {logOut()}}>Log Out</Button>
-
-        </header>
-        <h2>Logged in as {user && user.email }</h2>
         <Routes>
           <Route path="/firebase-exercise/signup" element={<Signup user={user}/>} />
           <Route path="/firebase-exercise/login" element={<Login logOut={logOut} user={user}/>} />
