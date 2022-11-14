@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/firebase-exercise/static/css/main.d50f8472.css",
-    "main.js": "/firebase-exercise/static/js/main.41ca63e0.js",
+    "main.css": "/firebase-exercise/static/css/main.ba55e14f.css",
+    "main.js": "/firebase-exercise/static/js/main.db5080ef.js",
     "index.html": "/firebase-exercise/index.html",
-    "main.d50f8472.css.map": "/firebase-exercise/static/css/main.d50f8472.css.map",
-    "main.41ca63e0.js.map": "/firebase-exercise/static/js/main.41ca63e0.js.map"
+    "main.ba55e14f.css.map": "/firebase-exercise/static/css/main.ba55e14f.css.map",
+    "main.db5080ef.js.map": "/firebase-exercise/static/js/main.db5080ef.js.map"
   },
   "entrypoints": [
-    "static/css/main.d50f8472.css",
-    "static/js/main.41ca63e0.js"
+    "static/css/main.ba55e14f.css",
+    "static/js/main.db5080ef.js"
   ]
 }
