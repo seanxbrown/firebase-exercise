@@ -38,7 +38,11 @@ function writeData() {
         exercises: []
     })
 
-    set(ref(database, `${user.uid}/workouts/`), newWorkouts );
+    try {
+        set(ref(database, `${user.uid}/workouts/`), newWorkouts )
+    } catch(error) {
+        alert(error)
+    }
     setCreatingNewWorkout(creatingNewWorkout => !creatingNewWorkout)
 
  
@@ -51,7 +55,12 @@ function addWorkoutToListDB(e) {
 
 function removeWorkoutFromList(id) {
     const newWorkouts = [...workouts].filter(workout => id !== workout.id);
-    update(ref(database, `${user.uid}`), {"workouts": newWorkouts} )
+
+    try {
+        update(ref(database, `${user.uid}`), {"workouts": newWorkouts} )
+    } catch(error) {
+        alert(error)
+    }
 
 }
 
@@ -63,7 +72,7 @@ function addExerciseToWorkout(e) {
     }
 
     const newWorkouts = [...workouts]
-   const exerciseID = uuidv4();
+    const exerciseID = uuidv4();
     const exerciseName = document.getElementById("exerciseName").value
     const exerciseSets = document.getElementById("exerciseSets").value
     const exerciseReps = document.getElementById("exerciseReps").value
@@ -92,7 +101,12 @@ function addExerciseToWorkout(e) {
 
     }
 
-    update(ref(database, `${user.uid}`), {"workouts": newWorkouts} )
+    try {
+        update(ref(database, `${user.uid}`), {"workouts": newWorkouts} )
+    } catch(error) {
+        alert(error)
+    }
+
     setAddingNewExercise(addingNewExercise => !addingNewExercise)
 
 
@@ -111,9 +125,13 @@ function removeExerciseFromWorkout(id) {
     const newSelectedWorkout = {...selectedWorkout}
     newSelectedWorkout.exercises = newSelectedWorkout.exercises.filter(exercise => exercise.id !== id)
     setSelectedWorkout(newSelectedWorkout)
+    
+    try {
+        update(ref(database, `${user.uid}`), {"workouts": newWorkouts} )
 
-    update(ref(database, `${user.uid}`), {"workouts": newWorkouts} )
-
+    }catch(error) {
+        alert(error)
+    }
 
 }
 
@@ -121,17 +139,23 @@ useEffect(() => {
 
     function getWorkoutData() {
         const dbRef = ref(database, `${user.uid}`);
-        onValue(dbRef, snapshot => {
-            if (snapshot.val()) {
-                console.log(snapshot.val().workouts)
-                setWorkouts(workouts => workouts = snapshot.val().workouts)
-            } else {
-                setWorkouts(workouts => workouts = [])
+        
+        try {
+            onValue(dbRef, snapshot => {
+                if (snapshot.val()) {
+                    setWorkouts(workouts => workouts = snapshot.val().workouts)
+                } else {
+                    setWorkouts(workouts => workouts = [])
+                }
+                
             }
+                )
 
-            
+        } catch(error) {
+            alert(error)
+
         }
-            )
+        
     }
 
     getWorkoutData()
