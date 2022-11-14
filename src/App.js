@@ -34,7 +34,7 @@ function App() {
 
   return (
     <BrowserRouter>
-        <Header user={user} logOut={logOut} />
+      <Header user={user} logOut={logOut} />
       <Container fluid className="App">
         <Routes>
           <Route path="/firebase-exercise/signup" element={<Signup user={user}/>} />

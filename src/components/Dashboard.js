@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Button } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 import Exercise from "./Exercise";
 import AddNewWorkout from "./AddNewWorkout";
 import { v4 as uuidv4 } from "uuid";
@@ -164,25 +164,22 @@ useEffect(() => {
 
 
   return (
-    <div>
+    <Row className="">
         {creatingNewWorkout && <AddNewWorkout addWorkoutToListDB={addWorkoutToListDB} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
-        <div id="workoutDiv">
-            <h2>Workouts</h2><p>{selectedWorkout ? selectedWorkout.title : "No workout selected"}</p>
+        <Col xs={12} sm={4} id="workoutDiv" clasName="text-center">
+            <h2 className="text-center">Workouts</h2>
             <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary">Add New Workout</Button>
             {workouts && workouts.map(workout => <WorkoutComponent key={workout.id} removeWorkoutFromList={removeWorkoutFromList} selectWorkout={selectWorkout} workout={workout}/> )}
-        </div>
-        <div>
-            <h2>Exercise</h2>
+        </Col>
+        <Col xs={12} sm={8}>
+            <h2 className="text-center">Exercises {selectedWorkout ? `(${selectedWorkout.title})` : null}</h2>
             {addingNewExercise && <AddNewExercise selectedWorkout={selectedWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
             <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary">Add New Exercise</Button>
-
-
             {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.map(exercise => <Exercise removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>)}
-        </div>
-    </div>
+        </Col>
+    </Row>
   )
 }
 
 export default Dashboard
 
-/*{id: 1, title: "Test", date: "01/01/2022", exercises: [{id: 1, name: "bench", sets: 3, reps: 10, weight: "90 KG", target: true, notes: ""}]},*/
