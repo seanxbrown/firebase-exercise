@@ -1,12 +1,15 @@
 import React from 'react'
-import { CloseButton } from "react-bootstrap"
+import { CloseButton, Row, Col } from "react-bootstrap"
 
 const WorkoutComponent = ({workout, selectWorkout, removeWorkoutFromList}) => {
   return (
-    <div id={workout.id} className="bg-info" onClick={(() => selectWorkout([workout.id]))}>
-        {workout.title}
-        <CloseButton onClick={() => removeWorkoutFromList(workout.id)}/>
-    </div>
+    <Row className="" id={workout.id} onClick={(() => selectWorkout([workout.id]))}>
+      <Col xs={6}>{workout.title}</Col>
+      <Col xs={4}>{workout.date}</Col>
+        <Col xs={2}>
+          <CloseButton onClick={() => removeWorkoutFromList(workout.id)}/>
+        </Col>
+    </Row>
   )
 }
 
