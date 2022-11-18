@@ -166,7 +166,7 @@ useEffect(() => {
   return (
     <Row className="bg-">
         {creatingNewWorkout && <AddNewWorkout addWorkoutToListDB={addWorkoutToListDB} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
-        <Col xs={12} sm={4} id="workoutDiv" className="">
+        <Col xs={12} sm={4} id="workoutDiv" className="border-end border-1 border-light">
             <div>
                 <h2 className="text-center">Workouts</h2>
                 <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary">Add New Workout</Button>

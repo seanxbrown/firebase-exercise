@@ -11,6 +11,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./components/Dashboard";
 import Header from "./components/Header"
 import "./App.css"
+import Footer from "./components/Footer"
  
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header user={user} logOut={logOut} />
-      <Container fluid className="App">
+      <Container fluid className="App vh-100">
         <Routes>
           <Route path="/firebase-exercise/signup" element={<Signup user={user}/>} />
           <Route path="/firebase-exercise/login" element={<Login logOut={logOut} user={user}/>} />
@@ -44,6 +45,7 @@ function App() {
           </Route>
         </Routes>
       </Container>
+      <Footer />
     </BrowserRouter>
 
   );
