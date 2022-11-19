@@ -14,7 +14,7 @@ const AddNewWorkout = ({toggleNewWorkoutStatus, addWorkoutToListDB}) => {
                 <Form.Label>Date</Form.Label>
                 <Form.Control required id="workoutDate" type="date"/>
             </Form.Group>
-            <Button type="submit" className="btn btn-primary">Create Workout</Button>
+            <Button type="submit" className="btn btn-primary rounded-pill">Create Workout</Button>
         </Form>
     </Container>
   )

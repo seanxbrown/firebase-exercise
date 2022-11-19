@@ -53,7 +53,7 @@ export default function Signup({signUp, user}) {
                 <Form.Label>Confirm password</Form.Label>
                 <Form.Control required type="password" id="signupPasswordConf"></Form.Control>
             </Form.Group>
-            <Button disabled={user} type="submit" className="w-100 mt-5">Create Account</Button>
+            <Button disabled={user} type="submit" className="w-100 mt-5 rounded-pill">Create Account</Button>
         </Form>
         <p className="text-center text-muted">Already have an account? <Link to="/firebase-exercise/login">Log in</Link></p>
         

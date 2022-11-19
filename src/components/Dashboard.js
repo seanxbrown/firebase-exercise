@@ -169,7 +169,7 @@ useEffect(() => {
         <Col xs={12} sm={4} id="workoutDiv" className="border-end border-1 border-light mt-3">
             <div className="border-bottom border-light border-1 d-flex flex-column">
                 <h2 className="text-center fw-bold">Workouts</h2>
-                <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary align-self-center mb-3">Add New Workout</Button>
+                <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Workout</Button>
             </div>
             <div className="workoutDataContainer">
                 {workouts && workouts.map(workout => <WorkoutComponent key={workout.id} removeWorkoutFromList={removeWorkoutFromList} selectWorkout={selectWorkout} workout={workout}/> )}
@@ -179,7 +179,7 @@ useEffect(() => {
             {addingNewExercise && <AddNewExercise selectedWorkout={selectedWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
             <div className="border-bottom border-1 border-light d-flex flex-column">
                 <h2 className="text-center fw-bold">Exercises {selectedWorkout ? `(${selectedWorkout.title})` : null}</h2>
-                <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary align-self-center mb-3">Add New Exercise</Button>
+                <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Exercise</Button>
             </div>
             <div className="workoutDataContainer">
                 {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.map(exercise => <Exercise removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>)}

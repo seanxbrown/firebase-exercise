@@ -35,7 +35,7 @@ export default function Login({logOut, user}) {
                 <Form.Label>Password</Form.Label>
                 <Form.Control required type="password" id="loginPassword"></Form.Control>
             </Form.Group>
-            <Button disabled={user} type="submit" className="w-100 mt-5">Log in</Button>
+            <Button disabled={user} type="submit" className="w-100 mt-5 rounded-pill">Log in</Button>
         </Form>
         <p className="text-center text-muted">Don't have an account? <Link to="/firebase-exercise/signup">Sign up</Link></p>
         
