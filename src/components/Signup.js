@@ -1,7 +1,8 @@
 import {Container, Form, Button} from 'react-bootstrap';
 import {Link, useNavigate } from "react-router-dom";
 import { auth  } from "../firebase"
-import { createUserWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import {useEffect} from "react"
 
 export default function Signup({signUp, user}) {
     const navigate = useNavigate()
@@ -26,9 +27,18 @@ export default function Signup({signUp, user}) {
         navigate("/firebase-exercise")
     
       }
+      
+    useEffect(()=> {
+      const signupDiv = document.getElementById("signupContainer");
+      signupDiv.classList.remove("container-invisible");
+
+    }, [])
+
+
+
 
   return (
-    <Container className="border border-1 border-secondary mt-5 py-5 rounded">
+    <Container className="border border-1 border-secondary mt-5 py-5 rounded container-invisible" id="signupContainer">
         <h2 className="text-center">Sign Up</h2>
         <Form className="w-75 mx-auto" onSubmit={signUserUp}>
             <Form.Group>
