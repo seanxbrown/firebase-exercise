@@ -1,3 +1,38 @@
+:root {
+  --primary: #243D4D;
+  --secondary: #3F484D;
+  --tertiary: #3B464D;
+  --fourth: #487A99;
+  --fourth-hover: #17618f;
+  --black: #020405
+
+}
+
+#header, footer {
+  background-color: var(--black)
+
+}
+
+#root {
+  background-color: var(--black)
+}
+
+button.btn {
+  background-color: var(--fourth);
+  border: none;
+}
+
+button.btn:hover {
+  background-color: var(--fourth-hover);
+}
+
+h2 {
+  color: var(--secondary)
+}
+
+
+
+
 
 #logout-text:hover{
   cursor: pointer
