@@ -9,19 +9,19 @@ const AddNewExercise = ({toggleNewExerciseStatus, addExerciseToWorkout, selected
         <Form onSubmit={addExerciseToWorkout}>
             <Form.Group>
                 <Form.Label>Exercise</Form.Label>
-                <Form.Control  id="exerciseName" type="text" placeholder="Bench Press" maxLength="30"/>
+                <Form.Control required id="exerciseName" type="text" placeholder="Bench Press" maxLength="30"/>
             </Form.Group>
             <Form.Group>
                 <Form.Label>Sets</Form.Label>
-                <Form.Control  id="exerciseSets" type="number" min="1"/>
+                <Form.Control required id="exerciseSets" type="number" min="1"/>
             </Form.Group>
             <Form.Group>
                 <Form.Label>Reps</Form.Label>
-                <Form.Control  id="exerciseReps" type="number" min="0"/>
+                <Form.Control required id="exerciseReps" type="number" min="0"/>
             </Form.Group>
             <Form.Group>
                 <Form.Label>Weight (kg)</Form.Label>
-                <Form.Control  id="exerciseWeight" type="number" min="0"/>
+                <Form.Control required id="exerciseWeight" type="number" min="0"/>
             </Form.Group>
             <Form.Group>
                 <Form.Check id="exercisetTarget" type="checkbox" label="Target achieved?"/>
