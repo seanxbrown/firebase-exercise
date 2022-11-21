@@ -6,7 +6,7 @@ const Exercise = ({exercise, removeExerciseFromWorkout}) => {
     return (
         <>
         <Row xs={3}className="justify-content-center text-center workoutData" >
-            <Col sm={1}>
+            <Col sm={2}>
                 <p>{exercise.name}</p>
             </Col>
             <Col sm={1}>
@@ -21,7 +21,7 @@ const Exercise = ({exercise, removeExerciseFromWorkout}) => {
             <Col sm={2}>       
                 <p>Target hit? {exercise.target? "Yes" : "No" }</p>
             </Col>
-            <Col sm={5}>        
+            <Col sm={4}>        
                 <p>Notes: {exercise.notes}</p>
             </Col>
             <Col sm={1}>

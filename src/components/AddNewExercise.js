@@ -13,18 +13,18 @@ const AddNewExercise = ({toggleNewExerciseStatus, addExerciseToWorkout, selected
             </Form.Group>
             <Form.Group>
                 <Form.Label>Sets</Form.Label>
-                <Form.Control required id="exerciseSets" type="number" min="1"/>
+                <Form.Control required id="exerciseSets" type="number" min="1" max="99"/>
             </Form.Group>
             <Form.Group>
                 <Form.Label>Reps</Form.Label>
-                <Form.Control required id="exerciseReps" type="number" min="0"/>
+                <Form.Control required id="exerciseReps" type="number" min="0" max="99"/>
             </Form.Group>
             <Form.Group>
                 <Form.Label>Weight (kg)</Form.Label>
-                <Form.Control required id="exerciseWeight" type="number" min="0"/>
+                <Form.Control required id="exerciseWeight" type="number" min="0" max="999"/>
             </Form.Group>
             <Form.Group>
-                <Form.Check id="exercisetTarget" type="checkbox" label="Target achieved?"/>
+                <Form.Check id="exercisetTarget" type="checkbox" label="Target achieved?" maxlength="30"/>
             </Form.Group>
             <Form.Group>
                 <Form.Label>Notes</Form.Label>
