@@ -3,7 +3,7 @@ import {Form, Container, Button, CloseButton} from "react-bootstrap"
 
 const AddNewWorkout = ({toggleNewWorkoutStatus, addWorkoutToListDB}) => {
   return (
-    <Container className="border border-1 border-secondary p-5">
+    <Container className="border border-1 border-secondary p-5" id="addWorkoutDiv">
         <CloseButton onClick={toggleNewWorkoutStatus} className="float-end"/>
         <Form onSubmit={addWorkoutToListDB}>
             <Form.Group>

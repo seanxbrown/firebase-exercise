@@ -66,3 +66,21 @@ button.btn-close {
   color:#fff;
   background-color: #fff
 }
+
+#addWorkoutDiv, #addExerciseDiv {
+  background-color: #000;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+}
+
+@media only screen and (min-width: 992px) {
+  #addWorkoutDiv, #addExerciseDiv {
+    width: 50%;
+    left: 50;
+
+  }
+}
