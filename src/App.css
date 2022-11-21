@@ -53,20 +53,27 @@ h2 {
   
 }
 
-
-
 #logout-text:hover{
   cursor: pointer
 }
 
+.workoutDataContainer > .workoutData:nth-child(odd) {
+  background-color:#000;
+  color: #aaa
+}
+
+.workoutDataContainer > .workoutData:nth-child(odd):hover {
+  background-color:#111;
+  color: #aaa
+}
+
 .workoutData:hover {
-  background-color: #222;
   cursor: pointer;
 }
 
 .workoutDataContainer > .workoutData:nth-child(even) {
   background-color:#aaa;
-  color: #fff
+  color: #000
 }
 
 .workoutDataContainer > .workoutData:nth-child(even):hover {
