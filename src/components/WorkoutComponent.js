@@ -7,7 +7,7 @@ const WorkoutComponent = ({workout, selectWorkout, removeWorkoutFromList}) => {
       <Col xs={6}>{workout.title}</Col>
       <Col xs={4}>{workout.date}</Col>
         <Col xs={2}>
-          <CloseButton onClick={() => removeWorkoutFromList(workout.id)}/>
+          <CloseButton variant="white" onClick={() => removeWorkoutFromList(workout.id)}/>
         </Col>
     </Row>
   )

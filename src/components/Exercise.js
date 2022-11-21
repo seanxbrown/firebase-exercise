@@ -25,7 +25,7 @@ const Exercise = ({exercise, removeExerciseFromWorkout}) => {
                 <p>Notes: {exercise.notes}</p>
             </Col>
             <Col sm={1}>
-                <CloseButton onClick={() => removeExerciseFromWorkout(exercise.id)} />
+                <CloseButton variant="white" className="border border-1 border-light" onClick={() => removeExerciseFromWorkout(exercise.id)} />
             </Col>
 
         </Row>

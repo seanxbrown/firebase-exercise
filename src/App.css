@@ -61,3 +61,8 @@ h2 {
   background-color:#ccc;
   color: #000
 }
+
+button.btn-close {
+  color:#fff;
+  background-color: #fff
+}
