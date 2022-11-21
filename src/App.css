@@ -48,11 +48,16 @@ h2 {
 }
 
 .workoutData:hover {
-  color: red;
+  background-color: #222;
   cursor: pointer;
 }
 
 .workoutDataContainer > .workoutData:nth-child(even) {
-  background-color:grey;
+  background-color:#aaa;
   color: #fff
+}
+
+.workoutDataContainer > .workoutData:nth-child(even):hover {
+  background-color:#ccc;
+  color: #000
 }
