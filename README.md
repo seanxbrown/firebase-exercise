@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Metis
+> Metis - Ancient Greek for "skill" or "wisdom" - is an exercise tracker application that you can use to log your workout progress.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).   
+## Table of Contents
+* [General Info](#general-information)
+* [Technologies Used](#technologies-used)
+* [Features](#features)
+* [Future Updates](#room-for-improvement)
 
-## Available Scripts
+## General Information
+Metis is an exercise tracker/logger application. It allows a user to create an account and save their workout history so that it can be referred to later, across multiple devices.
 
-In the project directory, you can run:
+Workouts are collections of exercises, and exercises allow you to track sets, reps, weight and other information. 
 
-### `npm start`
+For example, a user could define a chest day workout as:
+- Bench press: 90kg, 2 sets, 5 reps
+- Lateral raises: 10kg, 3 sets, 15 reps
+- Incline dumbell bench press: 40kg, 3 sets, 7 reps
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+I built this application because I wanted a better way to review my previous workouts without using my phone's notes application. 
+It was also an opportunity for me to push my skills by using Firebase for the first time.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
+- React 18
+- React Bootstrap 5.2
+- CSS
+- Firebase Authentication
+- Firebase Realtime Database
 
-### `npm test`
+## Features
+List the ready features here:
+- User authentication: Create an account with a username and password
+- Cross-platform data retrieval: Firebase Realtime Database integration allows you to view workouts on multiple devices
+- Save workouts and exercises: Flexibility to save workout and exercise details as necessary. Workouts are saved as collections of exercises for easy grouping.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Future Updates
+Include areas you believe need improvement / could be improved. Also add TODOs for future development.
 
-### `npm run build`
+Room for improvement:
+- Positioning of the "Add new exercise/workout" pop-ups
+- Improvement colour schemes to add contrast on buttons / text
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To do:
+- Replace current workout input with a datalist populated with popular exercises (e.g. Bench Press) or workouts (e.g. Chest Day). A datalist will allow users to quickly enter a workout/exercise while allowing the flexibility for them to write their own title.
+- Add date filter functionality to workouts list
+- Allow users to update their profile (e.g. add a display name)
+- Add a change / retrieve password option
+- Add ability for an exercise to be tagged as a record or personal best. Personal bests will be visible in a separate window.
+- Automatically define a workout as "selected" after it is added
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
