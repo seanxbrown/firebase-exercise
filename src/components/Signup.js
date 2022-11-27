@@ -1,10 +1,10 @@
-import {Container, Form, Button} from 'react-bootstrap';
-import {Link, useNavigate } from "react-router-dom";
-import { auth  } from "../firebase"
+import { Container, Form, Button } from 'react-bootstrap';
+import { Link, useNavigate } from "react-router-dom";
+import { auth  } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import {useEffect} from "react"
+import { useEffect } from "react";
 
-export default function Signup({signUp, user}) {
+export default function Signup({ user }) {
     const navigate = useNavigate()
 
     async function signUserUp(e) {
@@ -21,10 +21,10 @@ export default function Signup({signUp, user}) {
         try {
           await createUserWithEmailAndPassword(auth, email, password);
         } catch(e) {
-          alert(e)
+          alert(e);
         }
 
-        navigate("/firebase-exercise")
+        navigate("/firebase-exercise");
     
       }
       
@@ -33,9 +33,6 @@ export default function Signup({signUp, user}) {
       signupDiv.classList.remove("container-invisible");
 
     }, [])
-
-
-
 
   return (
     <Container className="border border-1 border-secondary mt-5 py-5 rounded container-invisible" id="signupContainer">

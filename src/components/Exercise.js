@@ -7,9 +7,7 @@ class Exercise {
         this.weight = weight;
         this.target = target;
         this.notes = notes;
-
     }
-
 }
 
 export default Exercise

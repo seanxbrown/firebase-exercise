@@ -6,9 +6,9 @@ const WorkoutComponent = ({workout, selectWorkout, removeWorkoutFromList}) => {
     <Row className="workoutData" id={workout.id} onClick={(() => selectWorkout([workout.id]))}>
       <Col xs={6}>{workout.title}</Col>
       <Col xs={4}>{workout.date}</Col>
-        <Col xs={2}>
-          <CloseButton variant="white" onClick={() => removeWorkoutFromList(workout.id)}/>
-        </Col>
+      <Col xs={2}>
+        <CloseButton variant="white" onClick={() => removeWorkoutFromList(workout.id)}/>
+      </Col>
     </Row>
   )
 }

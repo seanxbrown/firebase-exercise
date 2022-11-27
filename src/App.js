@@ -1,29 +1,24 @@
 import Container from "react-bootstrap/Container";
-import FormComponent from "./components/FormComponent";
 import { useEffect, useState } from "react";
-import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Signup from "./components/Signup"
 import Login from './components/Login';
-import {auth} from "./firebase"
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
-import {Button } from "react-bootstrap"
+import { auth } from "./firebase"
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./components/Dashboard";
 import Header from "./components/Header"
 import "./App.css"
 import Footer from "./components/Footer"
  
-
 function App() {
   const [user, setUser] = useState();
-  
 
   async function logOut() {
     
-    return await signOut(auth)
+    return await signOut(auth);
 
   }
-
 
   useEffect(() => {
 

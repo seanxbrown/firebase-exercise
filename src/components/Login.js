@@ -1,10 +1,10 @@
-import {Container, Form, Button} from 'react-bootstrap';
-import {Link, useNavigate } from "react-router-dom";
+import { Container, Form, Button } from 'react-bootstrap';
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from 'firebase/auth';
  
-export default function Login({logOut, user}) {
-  const navigate = useNavigate()
+export default function Login({ user }) {
+  const navigate = useNavigate();
 
   async function logUserIn(e) {
     e.preventDefault();
@@ -12,14 +12,12 @@ export default function Login({logOut, user}) {
     const email = document.getElementById("loginEmail").value;
     const password = document.getElementById("loginPassword").value;
 
-
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      console.log("sign in successful");      
     } catch(e) {
-      alert(e)
+      alert(e);
     }
-    navigate("/firebase-exercise")
+    navigate("/firebase-exercise");
 
   }
 
@@ -38,7 +36,6 @@ export default function Login({logOut, user}) {
             <Button disabled={user} type="submit" className="w-100 mt-5 rounded-pill">Log in</Button>
         </Form>
         <p className="text-center text-muted">Don't have an account? <Link to="/firebase-exercise/signup">Sign up</Link></p>
-        
     </Container>
   )
 }
