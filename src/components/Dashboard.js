@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import { Button, Row, Col } from "react-bootstrap";
-import Exercise from "./Exercise";
+import ExerciseComponent from "./ExerciseComponent";
 import AddNewWorkout from "./AddNewWorkout";
 import { v4 as uuidv4 } from "uuid";
 import WorkoutComponent from './WorkoutComponent';
 import AddNewExercise from "./AddNewExercise"
 import { database, set, ref, onValue, update } from "../firebase"
+import Workout from "./Workout";
+import Exercise from './Exercise';
 
 const Dashboard = ({user}) => {
     const [selectedWorkout, setSelectedWorkout] = useState();
@@ -29,14 +31,11 @@ function toggleNewExerciseStatus() {
 
 function writeData() {
     const newWorkouts = [...workouts]
-    const workoutTitle = document.getElementById("workoutTitle").value || new Date(Date.now()).toString()
+    const workoutTitle = document.getElementById("workoutTitle").value || new Date(Date.now()).toString();
     const workoutDate = document.getElementById("workoutDate").value;
-    newWorkouts.push({
-        id: uuidv4(),
-        title: workoutTitle,
-        date: workoutDate,
-        exercises: []
-    })
+    const workoutID = uuidv4();
+    const newWorkout = new Workout(workoutID, workoutTitle, workoutDate);
+    newWorkouts.push(newWorkout);
 
     try {
         set(ref(database, `${user.uid}/workouts/`), newWorkouts )
@@ -44,8 +43,6 @@ function writeData() {
         alert(error)
     }
     setCreatingNewWorkout(creatingNewWorkout => !creatingNewWorkout)
-
- 
 }
 
 function addWorkoutToListDB(e) {
@@ -80,15 +77,7 @@ function addExerciseToWorkout(e) {
     const exercisetTarget = document.getElementById("exercisetTarget").checked
     const exerciseNotes = document.getElementById("exerciseNotes").value;
 
-    const newExercise = {
-        id: exerciseID,
-        name: exerciseName,
-        sets: exerciseSets,
-        reps: exerciseReps,
-        weight: `${exerciseWeight}kg`,
-        target: exercisetTarget,
-        notes: exerciseNotes,
-    }
+    const newExercise = new Exercise(exerciseID, exerciseName, exerciseSets, exerciseReps,`${exerciseWeight}kg`, exercisetTarget, exerciseNotes)
 
     for (let key of newWorkouts) {
         if (key.id === selectedWorkout.id) {
@@ -182,7 +171,7 @@ useEffect(() => {
                 <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Exercise</Button>
             </div>
             <div className="workoutDataContainer">
-                {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.map(exercise => <Exercise removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>)}
+                {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.map(exercise => <ExerciseComponent removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>)}
             </div>          
             
         </Col>

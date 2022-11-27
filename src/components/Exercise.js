@@ -1,39 +1,15 @@
-import React from 'react'
-import {Container, CloseButton, Row, Col } from "react-bootstrap"
+class Exercise {
+    constructor(id, name, sets, reps, weight, target, notes){
+        this.id = id;
+        this.name = name;
+        this.sets = sets;
+        this.reps = reps;
+        this.weight = weight;
+        this.target = target;
+        this.notes = notes;
 
-const Exercise = ({exercise, removeExerciseFromWorkout}) => {
+    }
 
-    return (
-        <>
-        <Row xs={3}className="justify-content-center text-center workoutData" >
-            <Col sm={2}>
-                <p>{exercise.name}</p>
-            </Col>
-            <Col sm={1}>
-                <p>{exercise.weight}</p>
-            </Col>
-            <Col sm={1}>
-                <p>Sets: {exercise.sets}</p>
-            </Col>
-            <Col sm={1}>
-                <p>Reps: {exercise.reps}</p>
-            </Col>
-            <Col sm={2}>       
-                <p>Target hit? {exercise.target? "Yes" : "No" }</p>
-            </Col>
-            <Col sm={4}>        
-                <p>Notes: {exercise.notes}</p>
-            </Col>
-            <Col sm={1}>
-                <CloseButton variant="white" className="border border-1 border-light" onClick={() => removeExerciseFromWorkout(exercise.id)} />
-            </Col>
-
-        </Row>
-
-        </>
- 
-
-    )
 }
 
 export default Exercise

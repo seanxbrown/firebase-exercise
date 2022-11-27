@@ -1,5 +1,6 @@
 class Workout {
-    constructor(title, date) {
+    constructor(id, title, date) {
+        this.id = id;
         this.title = title;
         this.date = date;
         this.exercises = [];
