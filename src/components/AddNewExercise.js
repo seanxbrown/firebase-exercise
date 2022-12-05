@@ -24,7 +24,7 @@ const AddNewExercise = ({ toggleNewExerciseStatus, addExerciseToWorkout, selecte
                 <Form.Control required id="exerciseWeight" type="number" min="0" max="999"/>
             </Form.Group>
             <Form.Group>
-                <Form.Check id="exercisetTarget" type="checkbox" label="Target achieved?" maxlength="30"/>
+                <Form.Check id="exercisetTarget" type="checkbox" label="Target achieved?" maxLength="30"/>
             </Form.Group>
             <Form.Group>
                 <Form.Label>Notes</Form.Label>

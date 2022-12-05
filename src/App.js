@@ -19,7 +19,7 @@ function App() {
     return await signOut(auth);
 
   }
-
+  
   useEffect(() => {
 
     onAuthStateChanged(auth, (currentUser) => {

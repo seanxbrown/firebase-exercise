@@ -15,8 +15,8 @@ const Dashboard = ({ user }) => {
     const [creatingNewWorkout, setCreatingNewWorkout] = useState(false);
     const [addingNewExercise, setAddingNewExercise] = useState(false);
 
-function selectWorkout(number) {
-    const selection = [...workouts].filter(workout => number == workout.id);
+function selectWorkout(selectedID) {
+    const selection = [...workouts].filter(workout => selectedID == workout.id);
     setSelectedWorkout(selection[0]);
 }
 
@@ -29,7 +29,7 @@ function toggleNewExerciseStatus() {
     setAddingNewExercise(addingNewExercise => !addingNewExercise);
 }
 
-function writeData() {
+function addWorkout() {
     const newWorkouts = [...workouts];
     const workoutTitle = document.getElementById("workoutTitle").value || new Date(Date.now()).toString();
     const workoutDate = document.getElementById("workoutDate").value;
@@ -45,9 +45,9 @@ function writeData() {
     setCreatingNewWorkout(creatingNewWorkout => !creatingNewWorkout);
 }
 
-function addWorkoutToListDB(e) {
+function handleWorkoutSubmit(e) {
     e.preventDefault();
-    writeData();
+    addWorkout();
 }
 
 function removeWorkoutFromList(id) {
@@ -143,7 +143,7 @@ useEffect(() => {
 
   return (
     <Row id="dashboard">
-        {creatingNewWorkout && <AddNewWorkout addWorkoutToListDB={addWorkoutToListDB} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
+        {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         <Col xs={12} sm={4} id="workoutDiv" className="border-end border-1 border-light mt-3">
             <div className="border-bottom border-light border-1 d-flex flex-column">
                 <h2 className="text-center fw-bold">Workouts</h2>
