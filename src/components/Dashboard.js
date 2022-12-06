@@ -144,7 +144,7 @@ useEffect(() => {
   return (
     <Row id="dashboard">
         {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
-        <Col xs={12} sm={4} id="workoutDiv" className="border-end border-1 border-light mt-3">
+        <Col xs={12} sm={4} id="workoutDiv" className="border-end border-1 border-light mt-3 ">
             <div className="border-bottom border-light border-1 d-flex flex-column">
                 <h2 className="text-center fw-bold">Workouts</h2>
                 <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Workout</Button>
