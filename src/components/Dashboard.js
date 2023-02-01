@@ -39,6 +39,8 @@ function addWorkout() {
 
     try {
         set(ref(database, `${user.uid}/workouts/`), newWorkouts);
+        getWorkoutData();
+
     } catch(error) {
         alert(error);
     }
@@ -55,6 +57,8 @@ function removeWorkoutFromList(id) {
 
     try {
         update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
+        getWorkoutData();
+
     } catch(error) {
         alert(error);
     }
@@ -89,6 +93,8 @@ function addExerciseToWorkout(e) {
 
     try {
         update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
+        getWorkoutData();
+
     } catch(error) {
         alert(error);
     }
@@ -112,30 +118,32 @@ function removeExerciseFromWorkout(id) {
     
     try {
         update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
+        getWorkoutData();
 
     }catch(error) {
         alert(error);
     }
 }
 
-useEffect(() => {
-
-    function getWorkoutData() {
-        const dbRef = ref(database, `${user.uid}`);
-        
-        try {
-            onValue(dbRef, snapshot => {
-                if (snapshot.val()) {
-                    setWorkouts(workouts => workouts = snapshot.val().workouts.sort((a, b) => b.date > a.date))
+function getWorkoutData() {
+    const dbRef = ref(database, `${user.uid}`);
+    
+    try {
+        onValue(dbRef, snapshot => {
+            if (snapshot.val()) {
+                setWorkouts(workouts => workouts = snapshot.val().workouts.sort((a, b) => b.date > a.date))
                 } else {
-                    setWorkouts(workouts => workouts = [])
-                }       
-            }
-                )
-        } catch(error) {
-            alert(error)
+                setWorkouts(workouts => workouts = [])
+            }       
         }
+            )
+    } catch(error) {
+        alert(error)
     }
+}
+
+
+useEffect(() => {
 
     getWorkoutData()
 
