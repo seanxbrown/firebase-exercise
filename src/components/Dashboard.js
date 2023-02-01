@@ -126,7 +126,7 @@ useEffect(() => {
         try {
             onValue(dbRef, snapshot => {
                 if (snapshot.val()) {
-                    setWorkouts(workouts => workouts = snapshot.val().workouts)
+                    setWorkouts(workouts => workouts = snapshot.val().workouts.sort((a, b) => b.date > a.date))
                 } else {
                     setWorkouts(workouts => workouts = [])
                 }       
