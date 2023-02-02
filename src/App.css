@@ -4,7 +4,8 @@
   --tertiary: #3B464D;
   --fourth: #487A99;
   --fourth-hover: #17618f;
-  --black: #020405
+  --black: #020405;
+  --selected: rgb(182, 178, 41);
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -50,12 +51,12 @@ h2 {
   cursor: pointer
 }
 
-.workoutDataContainer > .workoutData:nth-child(odd) {
+.workoutData:nth-child(odd) {
   background-color:#000;
   color: #aaa
 }
 
-.workoutDataContainer > .workoutData:nth-child(odd):hover {
+.workoutData:nth-child(odd):hover {
   background-color:#111;
   color: #aaa
 }
@@ -64,13 +65,18 @@ h2 {
   cursor: pointer;
 }
 
-.workoutDataContainer > .workoutData:nth-child(even) {
+.workoutData:nth-child(even) {
   background-color:#aaa;
   color: #000
 }
 
-.workoutDataContainer > .workoutData:nth-child(even):hover {
+.workoutData:nth-child(even):hover {
   background-color:#ccc;
+  color: #000
+}
+
+.workoutData.selected, .workoutData.selected:hover {
+  background-color: var(--selected);
   color: #000
 }
 

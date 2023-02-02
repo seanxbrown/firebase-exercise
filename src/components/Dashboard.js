@@ -18,6 +18,18 @@ const Dashboard = ({ user }) => {
 function selectWorkout(selectedID) {
     const selection = [...workouts].filter(workout => selectedID == workout.id);
     setSelectedWorkout(selection[0]);
+
+    const workoutComponents = [...document.getElementsByClassName("workoutData")]
+    for (let component of workoutComponents) {
+        if (component.id == selectedID) {
+            component.classList.add("selected")
+        } else {
+            if (component.classList.contains("selected")) {
+                component.classList.remove("selected")
+            }
+        }
+    } 
+
 }
 
 function toggleNewWorkoutStatus(e) {
