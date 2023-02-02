@@ -8,12 +8,14 @@ import AddNewExercise from "./AddNewExercise";
 import { database, set, ref, onValue, update } from "../firebase";
 import Workout from "./Workout";
 import Exercise from './Exercise';
+import DeleteItem from './DeleteItem';
 
 const Dashboard = ({ user }) => {
     const [selectedWorkout, setSelectedWorkout] = useState();
     const [workouts, setWorkouts] = useState([]);
     const [creatingNewWorkout, setCreatingNewWorkout] = useState(false);
     const [addingNewExercise, setAddingNewExercise] = useState(false);
+    const [deletingWorkout, setDeletingWorkout] = useState(false)
 
 function selectWorkout(selectedID) {
     const selection = [...workouts].filter(workout => selectedID == workout.id);
@@ -64,12 +66,24 @@ function handleWorkoutSubmit(e) {
     addWorkout();
 }
 
+function openWorkoutDeletionBox(workout) {
+    //This opens the div to confirm deletion of workout
+    setDeletingWorkout(true)
+}
+
+function closeWorkoutDeletionBox() {
+    setDeletingWorkout(false)
+
+}
+
 function removeWorkoutFromList(id) {
     const newWorkouts = [...workouts].filter(workout => id !== workout.id);
 
     try {
         update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
         getWorkoutData();
+        setDeletingWorkout(false)
+
 
     } catch(error) {
         alert(error);
@@ -164,13 +178,14 @@ useEffect(() => {
   return (
     <Row id="dashboard">
         {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
+        {deletingWorkout && <DeleteItem workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
         <Col xs={12} sm={4} id="workoutDiv" className="border-end border-1 border-light mt-3 ">
             <div className="border-bottom border-light border-1 d-flex flex-column">
                 <h2 className="text-center fw-bold">Workouts</h2>
                 <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Workout</Button>
             </div>
             <div className="workoutDataContainer">
-                {workouts && workouts.map(workout => <WorkoutComponent key={workout.id} removeWorkoutFromList={removeWorkoutFromList} selectWorkout={selectWorkout} workout={workout}/> )}
+                {workouts && workouts.map(workout => <WorkoutComponent key={workout.id} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> )}
             </div>  
         </Col>
         <Col xs={12} sm={8} id="exerciseDiv" className="mt-3">
