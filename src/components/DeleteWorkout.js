@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Button } from "react-bootstrap"
 
-const DeleteItem = ({workout, closeWorkoutDeletionBox, removeWorkoutFromList}) => {
+const DeleteWorkout = ({workout, closeWorkoutDeletionBox, removeWorkoutFromList}) => {
   return (
     <Container className="bg-danger text-dark d-flex justify-content-center align-items-center flex-column rounded p-2">
         <p>Delete "{workout.title}"" (created on {workout.date})?</p>
@@ -13,4 +13,4 @@ const DeleteItem = ({workout, closeWorkoutDeletionBox, removeWorkoutFromList}) =
   )
 }
 
-export default DeleteItem
+export default DeleteWorkout

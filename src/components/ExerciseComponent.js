@@ -1,11 +1,11 @@
 import React from 'react';
 import { CloseButton, Row, Col } from "react-bootstrap";
 
-const ExerciseComponent = ({ exercise, removeExerciseFromWorkout }) => {
+const ExerciseComponent = ({ exercise, openExerciseDeletionBox, selectExercise }) => {
 
     return (
         <>
-            <Row xs={3}className="justify-content-center text-center workoutData" >
+            <Row xs={3}className="justify-content-center text-center workoutData" id={exercise.id} onClick={() => selectExercise(exercise.id)}>
                 <Col sm={2}>
                     <p>{exercise.name}</p>
                 </Col>
@@ -25,7 +25,7 @@ const ExerciseComponent = ({ exercise, removeExerciseFromWorkout }) => {
                     <p>Notes: {exercise.notes}</p>
                 </Col>
                 <Col sm={1}>
-                    <CloseButton variant="white" className="border border-1 border-light" onClick={() => removeExerciseFromWorkout(exercise.id)} />
+                    <CloseButton variant="white" className="border border-1 border-light" onClick={() => openExerciseDeletionBox(exercise)} />
                 </Col>
             </Row>
         </>

@@ -8,7 +8,8 @@ import AddNewExercise from "./AddNewExercise";
 import { database, set, ref, onValue, update } from "../firebase";
 import Workout from "./Workout";
 import Exercise from './Exercise';
-import DeleteItem from './DeleteItem';
+import DeleteWorkout from './DeleteWorkout';
+import DeleteExercise from './DeleteExercise';
 
 const Dashboard = ({ user }) => {
     const [selectedWorkout, setSelectedWorkout] = useState();
@@ -16,6 +17,8 @@ const Dashboard = ({ user }) => {
     const [creatingNewWorkout, setCreatingNewWorkout] = useState(false);
     const [addingNewExercise, setAddingNewExercise] = useState(false);
     const [deletingWorkout, setDeletingWorkout] = useState(false)
+    const [deletingExercise, setDeletingExercise] = useState(false)
+    const [selectedExercise, setSelectedExercise] = useState("")
 
 function selectWorkout(selectedID) {
     const selection = [...workouts].filter(workout => selectedID == workout.id);
@@ -76,6 +79,16 @@ function closeWorkoutDeletionBox() {
 
 }
 
+function openExerciseDeletionBox(exercise) {
+    //This opens the div to confirm deletion of exercise
+    setDeletingExercise(true)
+}
+
+function closeExerciseDeletionBox() {
+    setDeletingExercise(false)
+
+}
+
 function removeWorkoutFromList(id) {
     const newWorkouts = [...workouts].filter(workout => id !== workout.id);
 
@@ -83,8 +96,6 @@ function removeWorkoutFromList(id) {
         update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
         getWorkoutData();
         setDeletingWorkout(false)
-
-
     } catch(error) {
         alert(error);
     }
@@ -149,6 +160,12 @@ function removeExerciseFromWorkout(id) {
     }catch(error) {
         alert(error);
     }
+
+    setDeletingExercise(false)
+}
+
+function selectExercise(id) {
+    setSelectedExercise(id)
 }
 
 function getWorkoutData() {
@@ -178,7 +195,7 @@ useEffect(() => {
   return (
     <Row id="dashboard">
         {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
-        {deletingWorkout && <DeleteItem workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
+        {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
         <Col xs={12} sm={4} id="workoutDiv" className="border-end border-1 border-light mt-3 ">
             <div className="border-bottom border-light border-1 d-flex flex-column">
                 <h2 className="text-center fw-bold">Workouts</h2>
@@ -195,7 +212,8 @@ useEffect(() => {
                 <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Exercise</Button>
             </div>
             <div className="workoutDataContainer">
-                {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.map(exercise => <ExerciseComponent removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>)}
+                {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.map(exercise => <ExerciseComponent selectExercise={selectExercise} openExerciseDeletionBox={openExerciseDeletionBox} removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>)}
+                {deletingExercise && <DeleteExercise selectedExercise={selectedExercise} removeExerciseFromWorkout={removeExerciseFromWorkout} closeExerciseDeletionBox={closeExerciseDeletionBox}/>}
             </div>          
             
         </Col>
