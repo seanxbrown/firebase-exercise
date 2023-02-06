@@ -106,7 +106,7 @@ button.btn-close {
 }
 
 #addWorkoutDiv, #addExerciseDiv {
-  background-color: #000;
+  color: var(--primary);
   z-index: 10;
   position: fixed;
   top: 0;

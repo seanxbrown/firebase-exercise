@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import {Button, Form} from "react-bootstrap";
-import { auth, updateProfile } from "../firebase"
+import { auth, updateProfile } from "../firebase";
+import { Link } from "react-router-dom"
 
 
 const Profile = ({ user }) => {
@@ -27,6 +28,7 @@ const Profile = ({ user }) => {
             {updating && <Button type="button" className="btn" onClick={updateUserProfile}>Save</Button>}
         </div>
         <p id="userEmail">Email Address: {user.email}</p>
+        <Link to="/firebase-exercise">Return to dashboard</Link>
     </>
   )
 }

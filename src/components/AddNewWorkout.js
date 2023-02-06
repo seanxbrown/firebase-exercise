@@ -3,7 +3,7 @@ import { Form, Container, Button, CloseButton } from "react-bootstrap"
 
 const AddNewWorkout = ({toggleNewWorkoutStatus, handleWorkoutSubmit}) => {
   return (
-    <Container className="border border-1 border-secondary p-5" id="addWorkoutDiv">
+    <Container className="border border-1 border-secondary p-5 bg-light" id="addWorkoutDiv">
         <CloseButton onClick={toggleNewWorkoutStatus} className="float-end"/>
         <Form onSubmit={handleWorkoutSubmit}>
             <Form.Group>
@@ -26,7 +26,7 @@ const AddNewWorkout = ({toggleNewWorkoutStatus, handleWorkoutSubmit}) => {
                 <Form.Label>Date</Form.Label>
                 <Form.Control required id="workoutDate" type="date"/>
             </Form.Group>
-            <Button type="submit" className="btn btn-primary rounded-pill">Create Workout</Button>
+            <Button type="submit" className="btn btn-primary rounded-pill mt-3">Create Workout</Button>
         </Form>
     </Container>
   )
