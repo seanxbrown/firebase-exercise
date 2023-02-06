@@ -20,7 +20,7 @@ const Profile = ({ user }) => {
 
   return (
     <>
-        <h2>Profile Div</h2>
+        <h2>Profile</h2>
         <div>
             {updating ? <Form.Control id="displayNameInput" type="text" defaultValue={user.displayName} /> : <p id="userDisplayName">{user.displayName ? `Display Name: ${user.displayName}` : "No Display Name Available"}</p>}
             <Button type="button" className="btn btn-primary" onClick={() => setUpdating(true)}>Edit</Button>

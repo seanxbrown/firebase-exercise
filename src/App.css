@@ -25,6 +25,10 @@ header, footer {
 
 }
 
+p {
+  color: var(--primary)
+}
+
 #workoutColumnHeader, #exerciseColumnHeader {
   color: var(--primary);
 }
