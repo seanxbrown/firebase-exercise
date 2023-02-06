@@ -203,7 +203,7 @@ useEffect(() => {
                 <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Workout</Button>
             </div>
             <div className="workoutDataContainer overflow-hidden">
-                {workouts && workouts.map(workout => <WorkoutComponent key={workout.id} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> )}
+                {workouts && workouts.length > 0 ? workouts.map(workout => <WorkoutComponent key={workout.id} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
             </div>  
         </Col>
         <Col xs={12} sm={8} id="exerciseDiv" className="p-0">
@@ -213,7 +213,7 @@ useEffect(() => {
                 <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Exercise</Button>
             </div>
             <div className="workoutDataContainer overflow-hidden">
-                {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.map(exercise => <ExerciseComponent selectExercise={selectExercise} openExerciseDeletionBox={openExerciseDeletionBox} removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>)}
+                {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.length > 0 ? selectedWorkout.exercises.map(exercise => <ExerciseComponent selectExercise={selectExercise} openExerciseDeletionBox={openExerciseDeletionBox} removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>) : <h3 className="fw-bold text-center">No exercise selected.</h3>}
                 {deletingExercise && <DeleteExercise selectedExercise={selectedExercise} removeExerciseFromWorkout={removeExerciseFromWorkout} closeExerciseDeletionBox={closeExerciseDeletionBox}/>}
             </div>          
             

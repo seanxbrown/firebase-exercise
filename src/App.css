@@ -33,6 +33,10 @@ p {
   color: var(--primary);
 }
 
+h3 {
+  color: var(--primary)
+}
+
 button.btn {
   background-color: var(--button);
   border: none;
