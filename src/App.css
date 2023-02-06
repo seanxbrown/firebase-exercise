@@ -20,7 +20,7 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-header, footer {
+nav#header, footer {
   background-color: var(--primary)
 
 }
