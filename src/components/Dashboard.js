@@ -192,26 +192,27 @@ useEffect(() => {
 
 },[])
 
+// 5th Feb: Use line breaks to separate workout/exercise lines, add gap between tables
   return (
-    <Row id="dashboard">
+    <Row id="dashboard" className="p-5">
         {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
-        <Col xs={12} sm={4} id="workoutDiv" className="border-end border-1 border-light mt-3 ">
-            <div className="border-bottom border-light border-1 d-flex flex-column">
+        <Col xs={12} sm={4} id="workoutDiv" className="border-end border-1 border-light p-0">
+            <div className="d-flex flex-column" id="workoutColumnHeader">
                 <h2 className="text-center fw-bold">Workouts</h2>
                 <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Workout</Button>
             </div>
-            <div className="workoutDataContainer">
+            <div className="workoutDataContainer overflow-hidden">
                 {workouts && workouts.map(workout => <WorkoutComponent key={workout.id} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> )}
             </div>  
         </Col>
-        <Col xs={12} sm={8} id="exerciseDiv" className="mt-3">
+        <Col xs={12} sm={8} id="exerciseDiv" className="p-0">
             {addingNewExercise && <AddNewExercise selectedWorkout={selectedWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
-            <div className="border-bottom border-1 border-light d-flex flex-column">
+            <div className="d-flex flex-column" id="exerciseColumnHeader">
                 <h2 className="text-center fw-bold">Exercises {selectedWorkout ? `(${selectedWorkout.title})` : null}</h2>
                 <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Exercise</Button>
             </div>
-            <div className="workoutDataContainer">
+            <div className="workoutDataContainer overflow-hidden">
                 {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.map(exercise => <ExerciseComponent selectExercise={selectExercise} openExerciseDeletionBox={openExerciseDeletionBox} removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>)}
                 {deletingExercise && <DeleteExercise selectedExercise={selectedExercise} removeExerciseFromWorkout={removeExerciseFromWorkout} closeExerciseDeletionBox={closeExerciseDeletionBox}/>}
             </div>          

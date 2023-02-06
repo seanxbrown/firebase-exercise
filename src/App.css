@@ -1,11 +1,11 @@
 :root {
-  --primary: #243D4D;
-  --secondary: #3F484D;
-  --tertiary: #3B464D;
-  --fourth: #487A99;
-  --fourth-hover: #17618f;
+  --primary: #3735DB;
+  --secondary: #848F14;
+  --tertiary: #CBDB2A;
+  --button: #DBA140;
+  --button-hover: #8F6B31;
   --black: #020405;
-  --selected: rgb(182, 178, 41);
+  --selected: #CBDB2A
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -20,22 +20,26 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-#header, footer, #root {
-  background-color: var(--black)
+header, footer {
+  background-color: var(--primary)
 
 }
 
+#workoutColumnHeader, #exerciseColumnHeader {
+  color: var(--primary);
+}
+
 button.btn {
-  background-color: var(--fourth);
+  background-color: var(--button);
   border: none;
 }
 
 button.btn:hover {
-  background-color: var(--fourth-hover);
+  background-color: var(--button-hover);
 }
 
 h2 {
-  color: var(--secondary)
+  color: var(--primary)
 }
 
 #signupContainer {
@@ -51,6 +55,11 @@ h2 {
   cursor: pointer
 }
 
+.workoutData {
+  color: var(--primary);
+  border-bottom: 1px solid var(--primary)
+}
+/*
 .workoutData:nth-child(odd) {
   background-color:#000;
   color: #aaa
@@ -61,9 +70,6 @@ h2 {
   color: #aaa
 }
 
-.workoutData:hover {
-  cursor: pointer;
-}
 
 .workoutData:nth-child(even) {
   background-color:#aaa;
@@ -73,6 +79,12 @@ h2 {
 .workoutData:nth-child(even):hover {
   background-color:#ccc;
   color: #000
+}
+*/
+
+.workoutData:hover {
+  background-color: #c5c2c2fb;
+  cursor: pointer;
 }
 
 .workoutData.selected, .workoutData.selected:hover {
