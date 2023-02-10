@@ -15,7 +15,7 @@ const Header = ({ logOut, user }) => {
           </Nav>
 
           <Nav>
-            <Link to="/firebase-exercise/profile" className="text-light text-decoration-none nav-link">Profile</Link>
+            <Link to={`/firebase-exercise/${user && user.uid}/profile`} className="text-light text-decoration-none nav-link">Profile</Link>
           </Nav>
 
           <Nav>

@@ -14,6 +14,7 @@ import Profile from "./components/Profile"
 import AllWorkouts from "./components/AllWorkouts";
 import Home from "./components/Home";
 import { AuthContext } from "./contexts/AuthContext"
+import WorkoutDetail from "./components/WorkoutDetail";
  
 function App() {
   const [user, setUser] = useState();
@@ -35,22 +36,23 @@ function App() {
 
   return (
     <AuthContext.Provider value={user}>
-    <BrowserRouter>
-      <Header user={user} logOut={logOut} />
-      <Container fluid className="App min-vh-100 text-light overflow-scroll">
-        <Routes>
-          <Route path="/firebase-exercise/signup" element={<Signup user={user}/>} />
-          <Route path="/firebase-exercise/login" element={<Login logOut={logOut} user={user}/>} />
-          <Route path="/firebase-exercise" element={<Home user={user}/> }/>
-          <Route element={<PrivateRoute user={user}/>} >
-            <Route path="/firebase-exercise/:id/dashboard" element={<Dashboard user={user}/> }/>
-            <Route path="/firebase-exercise/profile" element={<Profile user={user}/> }/>
-            <Route path="/firebase-exercise/:id/workouts" element={<AllWorkouts />}/>
-          </Route>
-        </Routes>
-      </Container>
-      <Footer />
-    </BrowserRouter>
+      <BrowserRouter>
+        <Header user={user} logOut={logOut} />
+        <Container fluid className="App min-vh-100 text-light overflow-scroll">
+          <Routes>
+            <Route path="/firebase-exercise/signup" element={<Signup user={user}/>} />
+            <Route path="/firebase-exercise/login" element={<Login logOut={logOut} user={user}/>} />
+            <Route path="/firebase-exercise" element={<Home user={user}/> }/>
+            <Route element={<PrivateRoute user={user}/>} >
+              <Route path="/firebase-exercise/:userid/dashboard" element={<Dashboard user={user}/> }/>
+              <Route path="/firebase-exercise/:userid/profile" element={<Profile user={user}/> }/>
+              <Route path="/firebase-exercise/:userid/workouts" element={<AllWorkouts />}/>
+              <Route path="/firebase-exercise/:userid/workouts/:workoutid" element={<WorkoutDetail />}/>
+            </Route>
+          </Routes>
+        </Container>
+        <Footer />
+      </BrowserRouter>
     </AuthContext.Provider>
 
   );
