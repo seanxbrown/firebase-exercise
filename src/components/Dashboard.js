@@ -210,7 +210,7 @@ useEffect(() => {
             <div className="workoutDataContainer overflow-hidden">
                 {workouts && workouts.length > 0 ? workouts.map(workout => <WorkoutComponent key={workout.id} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
             </div>  
-            <Link to="/firebase-exercise/workouts">View all workouts</Link>
+            <Link to={`/firebase-exercise/${user.uid}/workouts`}>View all workouts</Link>
         </Col>
         <Col xs={12} sm={8} id="exerciseDiv" className="p-0">
             {addingNewExercise && <AddNewExercise selectedWorkout={selectedWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }

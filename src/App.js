@@ -39,11 +39,11 @@ function App() {
         <Routes>
           <Route path="/firebase-exercise/signup" element={<Signup user={user}/>} />
           <Route path="/firebase-exercise/login" element={<Login logOut={logOut} user={user}/>} />
-          <Route path="/firebase-exercise" element={<Home /> }/>
+          <Route path="/firebase-exercise" element={<Home user={user}/> }/>
           <Route element={<PrivateRoute user={user}/>} >
-            <Route path="/firebase-exercise/dashboard" element={<Dashboard user={user}/> }/>
+            <Route path="/firebase-exercise/:id/dashboard" element={<Dashboard user={user}/> }/>
             <Route path="/firebase-exercise/profile" element={<Profile user={user}/> }/>
-            <Route path="/firebase-exercise/workouts" element={<AllWorkouts />}/>
+            <Route path="/firebase-exercise/:id/workouts" element={<AllWorkouts />}/>
           </Route>
         </Routes>
       </Container>

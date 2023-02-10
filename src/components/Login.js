@@ -13,11 +13,13 @@ export default function Login({ user }) {
     const password = document.getElementById("loginPassword").value;
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      const userID = response.user.uid
+      navigate(`/firebase-exercise/${userID}/dashboard`);
     } catch(e) {
       alert(e);
     }
-    navigate("/firebase-exercise/dashboard");
+    
 
   }
 
