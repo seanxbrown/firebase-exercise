@@ -13,6 +13,7 @@ import Footer from "./components/Footer"
 import Profile from "./components/Profile"
 import AllWorkouts from "./components/AllWorkouts";
 import Home from "./components/Home";
+import { AuthContext } from "./contexts/AuthContext"
  
 function App() {
   const [user, setUser] = useState();
@@ -33,6 +34,7 @@ function App() {
   })
 
   return (
+    <AuthContext.Provider value={user}>
     <BrowserRouter>
       <Header user={user} logOut={logOut} />
       <Container fluid className="App min-vh-100 text-light overflow-scroll">
@@ -49,6 +51,7 @@ function App() {
       </Container>
       <Footer />
     </BrowserRouter>
+    </AuthContext.Provider>
 
   );
 }
