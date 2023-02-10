@@ -11,6 +11,8 @@ import Header from "./components/Header"
 import "./App.css"
 import Footer from "./components/Footer"
 import Profile from "./components/Profile"
+import AllWorkouts from "./components/AllWorkouts";
+import Home from "./components/Home";
  
 function App() {
   const [user, setUser] = useState();
@@ -25,6 +27,7 @@ function App() {
 
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
+    
     })
 
   })
@@ -36,9 +39,11 @@ function App() {
         <Routes>
           <Route path="/firebase-exercise/signup" element={<Signup user={user}/>} />
           <Route path="/firebase-exercise/login" element={<Login logOut={logOut} user={user}/>} />
+          <Route path="/firebase-exercise" element={<Home /> }/>
           <Route element={<PrivateRoute user={user}/>} >
-            <Route path="/firebase-exercise" element={<Dashboard user={user}/> }/>
+            <Route path="/firebase-exercise/dashboard" element={<Dashboard user={user}/> }/>
             <Route path="/firebase-exercise/profile" element={<Profile user={user}/> }/>
+            <Route path="/firebase-exercise/workouts" element={<AllWorkouts />}/>
           </Route>
         </Routes>
       </Container>

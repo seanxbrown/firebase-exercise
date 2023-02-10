@@ -17,7 +17,7 @@ export default function Login({ user }) {
     } catch(e) {
       alert(e);
     }
-    navigate("/firebase-exercise");
+    navigate("/firebase-exercise/dashboard");
 
   }
 

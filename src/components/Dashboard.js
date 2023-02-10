@@ -10,6 +10,8 @@ import Workout from "./Workout";
 import Exercise from './Exercise';
 import DeleteWorkout from './DeleteWorkout';
 import DeleteExercise from './DeleteExercise';
+import AllWorkouts from "./AllWorkouts"
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 
 const Dashboard = ({ user }) => {
     const [selectedWorkout, setSelectedWorkout] = useState();
@@ -195,7 +197,9 @@ useEffect(() => {
 
 // 5th Feb: Use line breaks to separate workout/exercise lines, add gap between tables
   return (
+
     <Row id="dashboard" className="p-5">
+
         {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
         <Col xs={12} sm={4} id="workoutDiv" className="border-end border-1 border-light p-0">
@@ -206,6 +210,7 @@ useEffect(() => {
             <div className="workoutDataContainer overflow-hidden">
                 {workouts && workouts.length > 0 ? workouts.map(workout => <WorkoutComponent key={workout.id} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
             </div>  
+            <Link to="/firebase-exercise/workouts">View all workouts</Link>
         </Col>
         <Col xs={12} sm={8} id="exerciseDiv" className="p-0">
             {addingNewExercise && <AddNewExercise selectedWorkout={selectedWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
