@@ -115,6 +115,14 @@ button.btn-close {
 
 }
 
+.btn.homeLinkButton {
+  background-color: var(--button);
+}
+
+.btn.homeLinkButton:hover {
+  background-color: var(--button-hover);
+}
+
 @media only screen and (min-width: 992px) {
   #addWorkoutDiv, #addExerciseDiv {
     width: 50%;
