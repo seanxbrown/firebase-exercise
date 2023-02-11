@@ -9,15 +9,11 @@ import AddNewWorkout from "./AddNewWorkout";
 import { Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
-
-
 const AllWorkouts = () => {
   const [workouts, setWorkouts] = useState([])
   const [deletingWorkout, setDeletingWorkout] = useState(false);
   const [selectedWorkout, setSelectedWorkout] = useState();
   const [creatingNewWorkout, setCreatingNewWorkout] = useState(false);
-
-
 
   const user = useContext(AuthContext)
 
@@ -89,10 +85,6 @@ function toggleNewWorkoutStatus(e) {
   setCreatingNewWorkout(creatingNewWorkout => !creatingNewWorkout);
 }
 
-
-
-
-
   function getWorkoutData() {
     const dbRef = ref(database, `${user.uid}`);
     
@@ -111,18 +103,11 @@ function toggleNewWorkoutStatus(e) {
 }
 
 
-
 useEffect(() => {
 
     if(user) {getWorkoutData()}
 
 },[user])
-
-
-
-
-
-
    
   return (
 
@@ -135,7 +120,7 @@ useEffect(() => {
         {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
 
             {workouts && workouts.length > 0 ? workouts.map(workout => <WorkoutComponent key={workout.id} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
-            <Link to={`/firebase-exercise/${user.uid}/dashboard`} >Return to dashboard </Link>
+            <Link to={`/firebase-exercise/dashboard`} >Return to dashboard </Link>
         </div>
   
   )

@@ -21,7 +21,7 @@ const WorkoutComponent = ({workout, selectWorkout, openWorkoutDeletionBox}) => {
       <Col xs={6}>{workout.title}</Col>
       <Col xs={4}>{formatDate(workout.date)}</Col>
       <Col xs={1}>
-        <Link to={`/firebase-exercise/${user.uid}/workouts/${workout.id}`}>View</Link>
+        <Link to={`/firebase-exercise/workouts/${workout.id}`}>View</Link>
       </Col>
 
       <Col xs={1}>

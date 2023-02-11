@@ -149,7 +149,7 @@ function toggleNewExerciseStatus() {
                 key={exercise.id} exercise={exercise}/>) 
                 : <h3 className="fw-bold text-center">No exercise selected.</h3>
         }
-        <Link to={`/firebase-exercise/${user.uid}/dashboard`}>Return to dashboard</Link>
+        <Link to={`/firebase-exercise/dashboard`}>Return to dashboard</Link>
 
     </div>
   )

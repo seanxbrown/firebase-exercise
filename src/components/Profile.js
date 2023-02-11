@@ -28,7 +28,7 @@ const Profile = ({ user }) => {
             {updating && <Button type="button" className="btn" onClick={updateUserProfile}>Save</Button>}
         </div>
         <p id="userEmail">Email Address: {user.email}</p>
-        <Link to={`/firebase-exercise/${user.uid}/dashboard`}>Return to dashboard</Link>
+        <Link to={`/firebase-exercise/dashboard`}>Return to dashboard</Link>
     </>
   )
 }
