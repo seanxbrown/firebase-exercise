@@ -21,13 +21,21 @@ const Profile = ({ user }) => {
 
   return (
     <>
-        <h2>Profile</h2>
-        <div>
-            {updating ? <Form.Control id="displayNameInput" type="text" defaultValue={user.displayName} /> : <p id="userDisplayName">{user.displayName ? `Display Name: ${user.displayName}` : "No Display Name Available"}</p>}
-            <Button type="button" className="btn btn-primary" onClick={() => setUpdating(true)}>Edit</Button>
-            {updating && <Button type="button" className="btn" onClick={updateUserProfile}>Save</Button>}
+        <h2 className="fw-bold text-center py-5">Profile</h2>
+        <div className="border border-3 border-secondary rounded p-5 mb-5" id="profileDiv">
+          <div className="d-flex align-items-center border-bottom border-1 border-secondary">
+              {updating ? 
+              <Form.Control 
+                id="displayNameInput" 
+                type="text" defaultValue={user.displayName} /> 
+                : <p id="userDisplayName"><span className="fw-bold">Display Name: </span>{user.displayName ? `${user.displayName}` 
+                : "No Display Name Available"}</p>}
+              {!updating && <Button type="button" className="btn btn-primary p-1 ms-4 " onClick={() => setUpdating(true)}>Edit</Button> }
+              {updating && <Button type="button" className="btn" onClick={updateUserProfile}>Save</Button>}
+          </div>
+          <p id="userEmail"><span className="fw-bold">Email Address: </span>{user.email}</p>
         </div>
-        <p id="userEmail">Email Address: {user.email}</p>
+        
         <Link to={`/firebase-exercise/dashboard`}>Return to dashboard</Link>
     </>
   )
