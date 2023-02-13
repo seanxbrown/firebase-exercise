@@ -67,28 +67,6 @@ h2 {
   color: var(--primary);
   border-bottom: 1px solid var(--primary)
 }
-/*
-.workoutData:nth-child(odd) {
-  background-color:#000;
-  color: #aaa
-}
-
-.workoutData:nth-child(odd):hover {
-  background-color:#111;
-  color: #aaa
-}
-
-
-.workoutData:nth-child(even) {
-  background-color:#aaa;
-  color: #000
-}
-
-.workoutData:nth-child(even):hover {
-  background-color:#ccc;
-  color: #000
-}
-*/
 
 .workoutData:hover {
   background-color: #c5c2c2fb;
@@ -107,11 +85,11 @@ button.btn-close {
 
 #addWorkoutDiv, #addExerciseDiv {
   color: var(--primary);
-  z-index: 10;
-  position: fixed;
+  z-index: 1;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
 
 }
 
@@ -126,7 +104,9 @@ button.btn-close {
 @media only screen and (min-width: 992px) {
   #addWorkoutDiv, #addExerciseDiv {
     width: 50%;
-    left: 50;
+    margin: 0 auto;
+    left: 25vw;
+    
 
   }
 }
