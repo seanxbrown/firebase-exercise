@@ -138,7 +138,7 @@ function toggleNewExerciseStatus() {
             <h3 className="fw-bold">Exercises</h3>
             <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary align-self-center mb-3 rounded-pill text-center">Add New Exercise</Button>
          </div>
-        {addingNewExercise && <AddNewExercise selectedUserWorkout={selectedUserWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
+        {addingNewExercise && <AddNewExercise selectedWorkout={selectedUserWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
         {deletingExercise && <DeleteExercise selectedExercise={selectedExercise} removeExerciseFromWorkout={removeExerciseFromWorkout} closeExerciseDeletionBox={closeExerciseDeletionBox}/>}
         {selectedUserWorkout && selectedUserWorkout.exercises && selectedUserWorkout.exercises.length > 0 ? 
             selectedUserWorkout.exercises.map(exercise => 
