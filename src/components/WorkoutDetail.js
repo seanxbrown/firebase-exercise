@@ -132,14 +132,14 @@ function toggleNewExerciseStatus() {
     }, [])
 
   return (
-    <div className="text-dark bg-info position-relative">
-        <h2>{selectedUserWorkout && selectedUserWorkout.title}</h2>
-        <h3>Exercises</h3>
-        <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Exercise</Button>
-
+    <div className="text-dark position-relative">
+        <h2 className="fw-bold py-4 text-center">{selectedUserWorkout && selectedUserWorkout.title}</h2>
+        <div className="d-flex gap-4 mb-3" id="exerciseTitleButtonContainer">
+            <h3 className="fw-bold">Exercises</h3>
+            <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary align-self-center mb-3 rounded-pill text-center">Add New Exercise</Button>
+         </div>
         {addingNewExercise && <AddNewExercise selectedUserWorkout={selectedUserWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
         {deletingExercise && <DeleteExercise selectedExercise={selectedExercise} removeExerciseFromWorkout={removeExerciseFromWorkout} closeExerciseDeletionBox={closeExerciseDeletionBox}/>}
-
         {selectedUserWorkout && selectedUserWorkout.exercises && selectedUserWorkout.exercises.length > 0 ? 
             selectedUserWorkout.exercises.map(exercise => 
             <ExerciseComponent 
@@ -150,7 +150,6 @@ function toggleNewExerciseStatus() {
                 : <h3 className="fw-bold text-center">No exercise selected.</h3>
         }
         <Link to={`/firebase-exercise/dashboard`}>Return to dashboard</Link>
-
     </div>
   )
 }
