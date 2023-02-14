@@ -132,7 +132,7 @@ function toggleNewExerciseStatus() {
     }, [])
 
   return (
-    <div className="text-dark">
+    <div className="text-dark bg-info position-relative">
         <h2>{selectedUserWorkout && selectedUserWorkout.title}</h2>
         <h3>Exercises</h3>
         <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Exercise</Button>
