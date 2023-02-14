@@ -197,7 +197,7 @@ useEffect(() => {
 // 5th Feb: Use line breaks to separate workout/exercise lines, add gap between tables
   return (
 
-    <Row id="dashboard" className="p-5">
+    <Row id="dashboard" className="p-5 position-relative">
 
         {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
