@@ -22,7 +22,7 @@ const Profile = ({ user }) => {
   return (
     <>
         <h2 className="fw-bold text-center py-5">Profile</h2>
-        <div className="border border-3 border-secondary rounded p-5 mb-5" id="profileDiv">
+        <div className="border border-3 border-secondary rounded p-5 mb-5 w-75 m-auto" id="profileDiv">
           <div className="d-flex align-items-center border-bottom border-1 border-secondary">
               {updating ? 
               <Form.Control 
