@@ -194,15 +194,14 @@ useEffect(() => {
 
 },[])
 
-// 5th Feb: Use line breaks to separate workout/exercise lines, add gap between tables
   return (
 
-    <Row id="dashboard" className="p-5 position-relative">
+    <Row id="dashboard" className="p-4 position-relative">
 
         {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
         {deletingExercise && <DeleteExercise selectedExercise={selectedExercise} removeExerciseFromWorkout={removeExerciseFromWorkout} closeExerciseDeletionBox={closeExerciseDeletionBox}/>}
-        <Col xs={12} sm={4} id="workoutDiv" className="border-end border-1 border-light p-0">
+        <Col xs={12} sm={5} id="workoutDiv" className="border-end border-1 border-light p-1">
             <div className="d-flex flex-column" id="workoutColumnHeader">
                 <h2 className="text-center fw-bold">Workouts</h2>
                 <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Workout</Button>
@@ -212,7 +211,7 @@ useEffect(() => {
             </div>  
             <Link to={`/firebase-exercise/workouts`}>View all workouts</Link>
         </Col>
-        <Col xs={12} sm={8} id="exerciseDiv" className="p-0">
+        <Col xs={12} sm={7} id="exerciseDiv" className="p-0">
             {addingNewExercise && <AddNewExercise selectedWorkout={selectedWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
             <div className="d-flex flex-column" id="exerciseColumnHeader">
                 <h2 className="text-center fw-bold">Exercises {selectedWorkout ? `(${selectedWorkout.title})` : null}</h2>
