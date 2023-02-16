@@ -2,10 +2,12 @@ import { Container, Form, Button } from 'react-bootstrap';
 import { Link, useNavigate } from "react-router-dom";
 import { auth  } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { AuthContext } from '../contexts/AuthContext';
 
-export default function Signup({ user }) {
+export default function Signup() {
     const navigate = useNavigate()
+    const user = useContext(AuthContext)
 
     async function signUserUp(e) {
         e.preventDefault()

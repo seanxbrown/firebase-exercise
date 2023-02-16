@@ -1,11 +1,13 @@
-import {useState} from 'react'
+import { useState, useContext } from "react";
+import { AuthContext } from '../contexts/AuthContext';
 import {Button, Form} from "react-bootstrap";
 import { auth, updateProfile } from "../firebase";
 import { Link } from "react-router-dom"
 
 
-const Profile = ({ user }) => {
+const Profile = () => {
     const [updating, setUpdating] = useState(false);
+    const user = useContext(AuthContext)
 
     async function updateUserProfile() {
         const newDisplayName = document.getElementById("displayNameInput").value;

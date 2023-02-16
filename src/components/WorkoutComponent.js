@@ -1,4 +1,4 @@
-import {useContext} from 'react'
+import { useContext } from 'react'
 import { CloseButton, Row, Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { AuthContext } from '../contexts/AuthContext'
@@ -23,7 +23,6 @@ const WorkoutComponent = ({workout, selectWorkout, openWorkoutDeletionBox}) => {
       <Col xs={1}>
         <Link to={`/firebase-exercise/workouts/${workout.id}`}>View</Link>
       </Col>
-
       <Col xs={2} className="gx-5">
         <CloseButton variant="white" onClick={() => openWorkoutDeletionBox(workout)}/>
       </Col>

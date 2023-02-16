@@ -1,8 +1,12 @@
-import React from 'react'
+import { useContext } from 'react'
 import {Link} from "react-router-dom"
 import { Navbar, Container, Nav } from "react-bootstrap"
+import { AuthContext } from '../contexts/AuthContext';
 
-const Header = ({ logOut, user }) => {
+const Header = ({ logOut }) => {
+
+  const user = useContext(AuthContext)
+  
   return (
     <Navbar expand="lg" id="header">
       <Container>

@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, useEffect, useContext } from "react"
 import { useParams, Link } from "react-router-dom"
 import { AuthContext } from '../contexts/AuthContext'
@@ -11,8 +10,6 @@ import Exercise from './Exercise';
 import DeleteExercise from './DeleteExercise';
 import { Button } from "react-bootstrap"
 
-
-
 const WorkoutDetail = () => {
     const [selectedUserWorkout, setSelectedUserWorkout] = useState({})
     const [allUserWorkouts, setAllUserWorkouts] = useState([])
@@ -20,7 +17,6 @@ const WorkoutDetail = () => {
     const [selectedExercise, setSelectedExercise] = useState("")
     const [addingNewExercise, setAddingNewExercise] = useState(false)
     const {workoutid} = useParams();
-    
     const user = useContext(AuthContext)
 
     function getDataForOneWorkout() {

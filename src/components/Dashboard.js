@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button, Row, Col } from "react-bootstrap";
 import ExerciseComponent from "./ExerciseComponent";
 import AddNewWorkout from "./AddNewWorkout";
@@ -10,10 +10,11 @@ import Workout from "./Workout";
 import Exercise from './Exercise';
 import DeleteWorkout from './DeleteWorkout';
 import DeleteExercise from './DeleteExercise';
-import AllWorkouts from "./AllWorkouts"
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
+import { AuthContext } from '../contexts/AuthContext';
 
-const Dashboard = ({ user }) => {
+
+const Dashboard = () => {
     const [selectedWorkout, setSelectedWorkout] = useState();
     const [workouts, setWorkouts] = useState([]);
     const [creatingNewWorkout, setCreatingNewWorkout] = useState(false);
@@ -21,6 +22,7 @@ const Dashboard = ({ user }) => {
     const [deletingWorkout, setDeletingWorkout] = useState(false)
     const [deletingExercise, setDeletingExercise] = useState(false)
     const [selectedExercise, setSelectedExercise] = useState("")
+    const user = useContext(AuthContext)
 
 function selectWorkout(selectedID) {
     const selection = [...workouts].filter(workout => selectedID == workout.id);
@@ -197,7 +199,6 @@ useEffect(() => {
   return (
 
     <Row id="dashboard" className="p-4 position-relative">
-
         {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
         {deletingExercise && <DeleteExercise selectedExercise={selectedExercise} removeExerciseFromWorkout={removeExerciseFromWorkout} closeExerciseDeletionBox={closeExerciseDeletionBox}/>}

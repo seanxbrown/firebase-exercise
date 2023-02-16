@@ -37,15 +37,15 @@ function App() {
   return (
     <AuthContext.Provider value={user}>
       <BrowserRouter>
-        <Header user={user} logOut={logOut} />
+        <Header logOut={logOut} />
         <Container fluid className="App min-vh-100 text-light overflow-scroll position-relative">
           <Routes>
-            <Route path="/firebase-exercise/signup" element={<Signup user={user}/>} />
-            <Route path="/firebase-exercise/login" element={<Login logOut={logOut} user={user}/>} />
+            <Route path="/firebase-exercise/signup" element={<Signup />} />
+            <Route path="/firebase-exercise/login" element={<Login logOut={logOut}/>} />
             <Route path="/firebase-exercise" element={<Home user={user}/> }/>
             <Route element={<PrivateRoute user={user}/>} >
-              <Route path="/firebase-exercise/dashboard" element={<Dashboard user={user}/> }/>
-              <Route path="/firebase-exercise/profile" element={<Profile user={user}/> }/>
+              <Route path="/firebase-exercise/dashboard" element={<Dashboard/> }/>
+              <Route path="/firebase-exercise/profile" element={<Profile /> }/>
               <Route path="/firebase-exercise/workouts" element={<AllWorkouts />}/>
               <Route path="/firebase-exercise/workouts/:workoutid" element={<WorkoutDetail />}/>
             </Route>

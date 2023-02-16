@@ -1,4 +1,3 @@
-import React from 'react';
 import { CloseButton, Row, Col } from "react-bootstrap";
 
 const ExerciseComponent = ({ exercise, openExerciseDeletionBox, selectExercise }) => {

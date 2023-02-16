@@ -1,4 +1,3 @@
-import React from 'react';
 import { Form, Container, Button, CloseButton } from "react-bootstrap"
 
 const AddNewExercise = ({ toggleNewExerciseStatus, addExerciseToWorkout, selectedWorkout }) => {
