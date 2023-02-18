@@ -17,7 +17,6 @@ import { AuthContext } from '../contexts/AuthContext';
 const Dashboard = () => {
     const [selectedWorkout, setSelectedWorkout] = useState();
     const [workouts, setWorkouts] = useState([]);
-    const [workoutsPreview, setWorkoutsPreview] = useState([])
     const [creatingNewWorkout, setCreatingNewWorkout] = useState(false);
     const [addingNewExercise, setAddingNewExercise] = useState(false);
     const [deletingWorkout, setDeletingWorkout] = useState(false)

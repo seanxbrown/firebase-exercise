@@ -26,7 +26,7 @@ export default function Signup() {
           alert(e);
         }
 
-        navigate("/firebase-exercise");
+        navigate("/firebase-exercise/dashboard");
     
       }
       
