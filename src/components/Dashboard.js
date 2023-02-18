@@ -17,6 +17,7 @@ import { AuthContext } from '../contexts/AuthContext';
 const Dashboard = () => {
     const [selectedWorkout, setSelectedWorkout] = useState();
     const [workouts, setWorkouts] = useState([]);
+    const [workoutsPreview, setWorkoutsPreview] = useState([])
     const [creatingNewWorkout, setCreatingNewWorkout] = useState(false);
     const [addingNewExercise, setAddingNewExercise] = useState(false);
     const [deletingWorkout, setDeletingWorkout] = useState(false)
@@ -189,12 +190,27 @@ function getWorkoutData() {
     }
 }
 
+function createWorkoutsPreview(workouts) {
+    if(Array.isArray(workouts)) {
+        const previewWorkouts = [...workouts].splice(0, 10);
+        return previewWorkouts
+
+    }
+    
+}
+
 
 useEffect(() => {
 
     getWorkoutData()
+    
 
 },[])
+
+useEffect(()=> {
+    createWorkoutsPreview(workouts)
+
+},[workouts])
 
   return (
 
@@ -208,7 +224,8 @@ useEffect(() => {
                 <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Workout</Button>
             </div>
             <div className="workoutDataContainer overflow-hidden">
-                {workouts && workouts.length > 0 ? workouts.map(workout => <WorkoutComponent key={workout.id} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
+                {workouts && workouts.length > 0 ?
+                 createWorkoutsPreview(workouts).map(workout => <WorkoutComponent key={workout.id} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
             </div>  
             <Link to={`/firebase-exercise/workouts`}>View all workouts</Link>
         </Col>
@@ -228,3 +245,5 @@ useEffect(() => {
 }
 
 export default Dashboard
+
+//{workouts && workouts.length > 0 ? workouts.map(workout => <WorkoutComponent key={workout.id} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
