@@ -160,7 +160,6 @@ async function handleExerciseUpdate(e) {
 
     try {
         await update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
-        console.log(newWorkouts)
 
     } catch(error) {
         alert(error);
