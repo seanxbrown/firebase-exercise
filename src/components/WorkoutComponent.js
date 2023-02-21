@@ -3,7 +3,7 @@ import { CloseButton, Row, Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { AuthContext } from '../contexts/AuthContext'
 
-const WorkoutComponent = ({workout, selectWorkout, openWorkoutDeletionBox}) => {
+const WorkoutComponent = ({workout, selectWorkout, openWorkoutDeletionBox, editWorkout}) => {
   const user = useContext(AuthContext)
 
   function formatDate(dateString) {
@@ -19,9 +19,12 @@ const WorkoutComponent = ({workout, selectWorkout, openWorkoutDeletionBox}) => {
   return (
     <Row className="text-center workoutData" id={workout.id} onClick={(() => selectWorkout([workout.id]))}>
       <Col xs={5}>{workout.title}</Col>
-      <Col xs={4}>{formatDate(workout.date)}</Col>
+      <Col xs={3}>{formatDate(workout.date)}</Col>
       <Col xs={1}>
         <Link to={`/firebase-exercise/workouts/${workout.id}`}>View</Link>
+      </Col>
+      <Col xs={1}>
+        <p onClick={()=> editWorkout("workout", workout)}>Edit</p>
       </Col>
       <Col xs={2} className="gx-5">
         <CloseButton variant="white" onClick={() => openWorkoutDeletionBox(workout)}/>

@@ -12,6 +12,7 @@ import DeleteWorkout from './DeleteWorkout';
 import DeleteExercise from './DeleteExercise';
 import { Link } from "react-router-dom"
 import { AuthContext } from '../contexts/AuthContext';
+import EditBox from './EditBox';
 
 
 const Dashboard = () => {
@@ -22,6 +23,8 @@ const Dashboard = () => {
     const [deletingWorkout, setDeletingWorkout] = useState(false)
     const [deletingExercise, setDeletingExercise] = useState(false)
     const [selectedExercise, setSelectedExercise] = useState("")
+    const [editing, setEditing] = useState(false);
+    const [itemBeingEdited, setItemBeingEdited] = useState({type: null, item: null})
     const user = useContext(AuthContext)
 
 function selectWorkout(selectedID) {
@@ -144,17 +147,17 @@ function addExerciseToWorkout(e) {
 }
 
 //Identify correct workout. Return if no exercises, else remove selected exercise from the selected workout
-function removeExerciseFromWorkout(id) {
+function removeExerciseFromWorkout(selectedExercise) {
     const newWorkouts = [...workouts];
     for (let workout of newWorkouts) {
         if(selectedWorkout.id === workout.id) {
             if (!workout.exercises) {return}
-            workout.exercises = workout.exercises.filter(exercise => exercise.id !== id);
+            workout.exercises = workout.exercises.filter(exercise => exercise.id !== selectedExercise.id);
         }
     }
     //Also needs to be removed from selected workout, otherwise there will be a display error
     const newSelectedWorkout = {...selectedWorkout};
-    newSelectedWorkout.exercises = newSelectedWorkout.exercises.filter(exercise => exercise.id !== id);
+    newSelectedWorkout.exercises = newSelectedWorkout.exercises.filter(exercise => exercise.id !== selectedExercise.id);
     setSelectedWorkout(newSelectedWorkout);
     
     try {
@@ -198,6 +201,89 @@ function createWorkoutsPreview(workouts) {
     
 }
 
+function editItem(typeOfItem, selectedItem) {
+    setEditing(true)
+    setItemBeingEdited(
+        {
+            type: typeOfItem,
+            item: selectedItem
+
+        })
+}
+
+function closeEditBox() {
+    setEditing(false)
+}
+
+function handleWorkoutUpdate(e) {
+    e.preventDefault()
+    const newItem = {...itemBeingEdited.item}
+    newItem["date"] = document.querySelector("#workoutDate").value
+    newItem["title"] = document.querySelector("#workoutTitle").value
+ 
+    updateWorkout(newItem)
+
+}
+
+async function updateWorkout(item){
+
+    const newWorkouts = workouts.map(newWorkout => {
+        return newWorkout.id === item.id ?
+        newWorkout = {...item}
+        : newWorkout = {...newWorkout}
+        }
+    )
+
+     try {
+        await update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
+        } catch(e) {
+            alert(e)
+        }
+        setEditing(false)
+}
+
+async function handleExerciseUpdate(e) {
+    e.preventDefault()
+    if (selectedWorkout === undefined) {
+        alert("No workout selected"); 
+        return
+    }
+
+    const newExercise = {...selectedExercise};
+    newExercise["name"] = document.getElementById("exerciseName").value;
+    newExercise["sets"] = document.getElementById("exerciseSets").value;
+    newExercise["reps"] = document.getElementById("exerciseReps").value;
+    newExercise["weight"] = document.getElementById("exerciseWeight").value;
+    newExercise["target"] = document.getElementById("exercisetTarget").checked;
+    newExercise["notes"] = document.getElementById("exerciseNotes").value;
+    //console.log(newExercise)
+
+    const newWorkouts = [...workouts]
+    for (let newWorkout of newWorkouts) {
+        if (newWorkout.exercises) {
+            newWorkout.exercises = newWorkout.exercises.map(newWorkoutExercise => {
+                return newWorkoutExercise.id === newExercise.id ?
+                newWorkoutExercise = { ... newExercise}
+                : newWorkoutExercise = {...newWorkoutExercise}
+            })
+
+        }
+        
+    }
+
+
+    try {
+        await update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
+        console.log(newWorkouts)
+
+    } catch(error) {
+        alert(error);
+    }
+    setEditing(false)
+ 
+
+}
+
 
 useEffect(() => {
 
@@ -217,6 +303,7 @@ useEffect(()=> {
         {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
         {deletingExercise && <DeleteExercise selectedExercise={selectedExercise} removeExerciseFromWorkout={removeExerciseFromWorkout} closeExerciseDeletionBox={closeExerciseDeletionBox}/>}
+        {editing && <EditBox itemBeingEdited={itemBeingEdited} closeEditBox={closeEditBox} updateWorkout={updateWorkout} handleWorkoutUpdate={handleWorkoutUpdate} handleExerciseUpdate={handleExerciseUpdate}/>}
         <Col xs={12} sm={5} id="workoutDiv" className="border-end border-1 border-light p-1">
             <div className="d-flex flex-column" id="workoutColumnHeader">
                 <h2 className="text-center fw-bold">Workouts</h2>
@@ -224,7 +311,7 @@ useEffect(()=> {
             </div>
             <div className="workoutDataContainer overflow-hidden">
                 {workouts && workouts.length > 0 ?
-                 createWorkoutsPreview(workouts).map(workout => <WorkoutComponent key={workout.id} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
+                 createWorkoutsPreview(workouts).map(workout => <WorkoutComponent key={workout.id} editWorkout={editItem} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
             </div>  
             <Link to={`/firebase-exercise/workouts`}>View all workouts</Link>
         </Col>
@@ -235,7 +322,7 @@ useEffect(()=> {
                 <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Exercise</Button>
             </div>
             <div className="workoutDataContainer overflow-hidden">
-                {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.length > 0 ? selectedWorkout.exercises.map(exercise => <ExerciseComponent selectExercise={selectExercise} openExerciseDeletionBox={openExerciseDeletionBox} removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>) : <h3 className="fw-bold text-center">No exercise selected.</h3>}
+                {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.length > 0 ? selectedWorkout.exercises.map(exercise => <ExerciseComponent editExercise={editItem} selectExercise={selectExercise} openExerciseDeletionBox={openExerciseDeletionBox} removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>) : <h3 className="fw-bold text-center">No exercise selected.</h3>}
             </div>          
             
         </Col>

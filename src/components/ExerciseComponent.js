@@ -1,10 +1,10 @@
 import { CloseButton, Row, Col } from "react-bootstrap";
 
-const ExerciseComponent = ({ exercise, openExerciseDeletionBox, selectExercise }) => {
+const ExerciseComponent = ({ exercise, openExerciseDeletionBox, selectExercise, editExercise }) => {
 
     return (
         <>
-            <Row xs={3}className="justify-content-center text-center workoutData" id={exercise.id} onClick={() => selectExercise(exercise.id)}>
+            <Row xs={3}className="justify-content-center text-center workoutData" id={exercise.id} onClick={() => selectExercise(exercise)}>
                 <Col sm={2}>
                     <p>{exercise.name}</p>
                 </Col>
@@ -20,8 +20,11 @@ const ExerciseComponent = ({ exercise, openExerciseDeletionBox, selectExercise }
                 <Col sm={2}>       
                     <p>Target hit? {exercise.target? "Yes" : "No" }</p>
                 </Col>
-                <Col sm={4}>        
+                <Col sm={3}>        
                     <p>Notes: {exercise.notes}</p>
+                </Col>
+                <Col sm={1}>        
+                    <p onClick={()=> editExercise("Exercise", exercise)}>Edit</p>
                 </Col>
                 <Col sm={1}>
                     <CloseButton variant="white" className="border border-1 border-light" onClick={() => openExerciseDeletionBox(exercise)} />
