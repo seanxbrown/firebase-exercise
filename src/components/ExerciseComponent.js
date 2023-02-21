@@ -1,6 +1,6 @@
 import { CloseButton, Row, Col } from "react-bootstrap";
 
-const ExerciseComponent = ({ exercise, openExerciseDeletionBox, selectExercise, openEditBox }) => {
+const ExerciseComponent = ({ preview, exercise, openExerciseDeletionBox, selectExercise, openEditBox }) => {
 
     return (
         <>
@@ -24,7 +24,7 @@ const ExerciseComponent = ({ exercise, openExerciseDeletionBox, selectExercise, 
                     <p>Notes: {exercise.notes}</p>
                 </Col>
                 <Col sm={1}>        
-                    <p onClick={openEditBox}>Edit</p>
+                    {!preview && <p onClick={openEditBox}>Edit</p>}
                 </Col>
                 <Col sm={1}>
                     <CloseButton variant="white" className="border border-1 border-light" onClick={() => openExerciseDeletionBox(exercise)} />
