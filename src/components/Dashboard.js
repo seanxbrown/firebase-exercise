@@ -266,11 +266,8 @@ async function handleExerciseUpdate(e) {
                 newWorkoutExercise = { ... newExercise}
                 : newWorkoutExercise = {...newWorkoutExercise}
             })
-
         }
-        
     }
-
 
     try {
         await update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
@@ -280,8 +277,6 @@ async function handleExerciseUpdate(e) {
         alert(error);
     }
     setEditing(false)
- 
-
 }
 
 
@@ -311,7 +306,7 @@ useEffect(()=> {
             </div>
             <div className="workoutDataContainer overflow-hidden">
                 {workouts && workouts.length > 0 ?
-                 createWorkoutsPreview(workouts).map(workout => <WorkoutComponent key={workout.id} editWorkout={editItem} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
+                 createWorkoutsPreview(workouts).map(workout => <WorkoutComponent key={workout.id} preview="true" editWorkout={editItem} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
             </div>  
             <Link to={`/firebase-exercise/workouts`}>View all workouts</Link>
         </Col>

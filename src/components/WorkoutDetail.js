@@ -8,14 +8,16 @@ import AddNewExercise from './AddNewExercise';
 import { v4 as uuidv4 } from "uuid";
 import Exercise from './Exercise';
 import DeleteExercise from './DeleteExercise';
-import { Button } from "react-bootstrap"
+import { Button } from "react-bootstrap";
+import EditExercise from "./EditExercise";
 
 const WorkoutDetail = () => {
     const [selectedUserWorkout, setSelectedUserWorkout] = useState({})
     const [allUserWorkouts, setAllUserWorkouts] = useState([])
     const [deletingExercise, setDeletingExercise] = useState(false);
     const [selectedExercise, setSelectedExercise] = useState("")
-    const [addingNewExercise, setAddingNewExercise] = useState(false)
+    const [addingNewExercise, setAddingNewExercise] = useState(false);
+    const [editing, setEditing] = useState(false)
     const {workoutid} = useParams();
     const user = useContext(AuthContext)
 
@@ -49,6 +51,14 @@ const WorkoutDetail = () => {
         setDeletingExercise(false)
     
     }
+    function openEditBox() {
+        setEditing(true)
+      }
+      
+      function closeEditBox() {
+        setEditing(false)
+      }
+      
 
     function selectExercise(id) {
         setSelectedExercise(id)
@@ -121,6 +131,44 @@ function toggleNewExerciseStatus() {
     setAddingNewExercise(addingNewExercise => !addingNewExercise);
 }
 
+async function handleExerciseUpdate(e) {
+    e.preventDefault()
+    if (workoutid === undefined) {
+        alert("No workout selected"); 
+        return
+    }
+
+    const newExercise = {...selectedExercise};
+    newExercise["name"] = document.getElementById("exerciseName").value;
+    newExercise["sets"] = document.getElementById("exerciseSets").value;
+    newExercise["reps"] = document.getElementById("exerciseReps").value;
+    newExercise["weight"] = document.getElementById("exerciseWeight").value;
+    newExercise["target"] = document.getElementById("exercisetTarget").checked;
+    newExercise["notes"] = document.getElementById("exerciseNotes").value;
+    //console.log(newExercise)
+
+    const newWorkouts = [...allUserWorkouts]
+    for (let newWorkout of newWorkouts) {
+        if (newWorkout.exercises) {
+            newWorkout.exercises = newWorkout.exercises.map(newWorkoutExercise => {
+                return newWorkoutExercise.id === newExercise.id ?
+                newWorkoutExercise = { ... newExercise}
+                : newWorkoutExercise = {...newWorkoutExercise}
+            })
+        }
+    }
+
+    try {
+        await update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
+        console.log(newWorkouts)
+
+    } catch(error) {
+        alert(error);
+    }
+    setEditing(false)
+}
+
+
     useEffect(() => {
 
         getDataForOneWorkout()
@@ -136,12 +184,15 @@ function toggleNewExerciseStatus() {
          </div>
         {addingNewExercise && <AddNewExercise selectedWorkout={selectedUserWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
         {deletingExercise && <DeleteExercise selectedExercise={selectedExercise} removeExerciseFromWorkout={removeExerciseFromWorkout} closeExerciseDeletionBox={closeExerciseDeletionBox}/>}
+        {editing && <EditExercise selectedExercise={selectedExercise} closeEditBox={closeEditBox} handleExerciseUpdate={handleExerciseUpdate}/>}
         {selectedUserWorkout && selectedUserWorkout.exercises && selectedUserWorkout.exercises.length > 0 ? 
             selectedUserWorkout.exercises.map(exercise => 
             <ExerciseComponent 
                 selectExercise={selectExercise} 
                 openExerciseDeletionBox={openExerciseDeletionBox} 
-                removeExerciseFromWorkout={removeExerciseFromWorkout} 
+                removeExerciseFromWorkout={removeExerciseFromWorkout}
+                handleExerciseUpdate={handleExerciseUpdate} 
+                openEditBox={openEditBox}
                 key={exercise.id} exercise={exercise}/>) 
                 : <h3 className="fw-bold text-center">No exercise selected.</h3>
         }

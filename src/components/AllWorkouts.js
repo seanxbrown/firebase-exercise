@@ -7,13 +7,15 @@ import { v4 as uuidv4 } from "uuid";
 import Workout from "./Workout";
 import AddNewWorkout from "./AddNewWorkout";
 import { Button } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import EditWorkout from "./EditWorkout";
 
 const AllWorkouts = () => {
   const [workouts, setWorkouts] = useState([])
   const [deletingWorkout, setDeletingWorkout] = useState(false);
   const [selectedWorkout, setSelectedWorkout] = useState();
   const [creatingNewWorkout, setCreatingNewWorkout] = useState(false);
+  const [editing, setEditing] = useState(false)
 
   const user = useContext(AuthContext)
 
@@ -102,6 +104,41 @@ function toggleNewWorkoutStatus(e) {
     }
 }
 
+function openEditBox() {
+  setEditing(true)
+}
+
+function closeEditBox() {
+  setEditing(false)
+}
+
+function handleWorkoutUpdate(e) {
+  e.preventDefault()
+  const newItem = {...selectedWorkout}
+  newItem["date"] = document.querySelector("#workoutDate").value
+  newItem["title"] = document.querySelector("#workoutTitle").value
+
+  updateWorkout(newItem)
+
+}
+
+async function updateWorkout(item){
+
+  const newWorkouts = workouts.map(newWorkout => {
+      return newWorkout.id === item.id ?
+      newWorkout = {...item}
+      : newWorkout = {...newWorkout}
+      }
+  )
+
+   try {
+      await update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
+      } catch(e) {
+          alert(e)
+      }
+      setEditing(false)
+}
+
 
 useEffect(() => {
 
@@ -118,7 +155,8 @@ useEffect(() => {
         </div>
         {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
         {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
-        {workouts && workouts.length > 0 ? workouts.map(workout => <WorkoutComponent key={workout.id} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
+        {editing && <EditWorkout selectedWorkout={selectedWorkout} closeEditBox={closeEditBox} updateWorkout={updateWorkout} handleWorkoutUpdate={handleWorkoutUpdate} />}
+        {workouts && workouts.length > 0 ? workouts.map(workout => <WorkoutComponent key={workout.id} openEditBox={openEditBox} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
         <Link to={`/firebase-exercise/dashboard`} >Return to dashboard </Link>
       </div>
   
