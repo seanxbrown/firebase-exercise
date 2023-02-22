@@ -11,8 +11,15 @@ const AddNewExercise = ({ toggleNewExerciseStatus, addExerciseToWorkout, selecte
                 <Form.Control required id="exerciseName" type="text" placeholder="Bench Press" maxLength="30"/>
             </Form.Group>
             <Form.Group>
-                <Form.Label>Weight (kg)</Form.Label>
+                <Form.Label>Weight</Form.Label>
                 <Form.Control required id="exerciseWeight" type="number" min="0" max="999"/>
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Unit</Form.Label>
+                <Form.Select id="exerciseUom">
+                <option value="kg">kg</option>
+                <option value="lb">lb</option>
+                </Form.Select>
             </Form.Group>
             <Form.Group>
                 <Form.Label>Sets</Form.Label>

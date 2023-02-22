@@ -117,9 +117,10 @@ function addExerciseToWorkout(e) {
     const exerciseSets = document.getElementById("exerciseSets").value;
     const exerciseReps = document.getElementById("exerciseReps").value;
     const exerciseWeight = document.getElementById("exerciseWeight").value;
+    const exerciseUnit = document.getElementById("exerciseUom").value;
     const exercisetTarget = document.getElementById("exercisetTarget").checked;
     const exerciseNotes = document.getElementById("exerciseNotes").value;
-    const newExercise = new Exercise(exerciseID, exerciseName, exerciseSets, exerciseReps,`${exerciseWeight}kg`, exercisetTarget, exerciseNotes)
+    const newExercise = new Exercise(exerciseID, exerciseName, exerciseSets, exerciseReps,exerciseWeight, exerciseUnit, exercisetTarget, exerciseNotes)
 
     for (let key of newWorkouts) {
         if (key.id === selectedWorkout.id) {
@@ -243,5 +244,3 @@ useEffect(()=> {
 }
 
 export default Dashboard
-
-//{workouts && workouts.length > 0 ? workouts.map(workout => <WorkoutComponent key={workout.id} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}

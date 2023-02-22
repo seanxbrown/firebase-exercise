@@ -9,7 +9,7 @@ const ExerciseComponent = ({ preview, exercise, openExerciseDeletionBox, selectE
                     <p>{exercise.name}</p>
                 </Col>
                 <Col sm={1}>
-                    <p>{exercise.weight}</p>
+                    <p>{exercise.weight}{!exercise.uom ? "kg" : exercise.uom}</p>
                 </Col>
                 <Col sm={1}>
                     <p>Sets: {exercise.sets}</p>
