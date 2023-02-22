@@ -46,12 +46,23 @@ function closeWorkoutDeletionBox(workout) {
   setDeletingWorkout(false)
 }
 
+function formatDate(dateString) {
+  if (typeof dateString === "string" && dateString.includes("-")) {
+      const day = dateString.slice(8)
+      const month = dateString.slice(5, 7)
+      const year = dateString.slice(0, 4)
+      return `${day}/${month}/${year}`
+    
+  } 
+}
+
+
 function addWorkout() {
   const newWorkouts = [...workouts];
   const workoutTitle = document.getElementById("workoutTitle").value || new Date(Date.now()).toString();
   const workoutDate = document.getElementById("workoutDate").value;
   const workoutID = uuidv4();
-  const newWorkout = new Workout(workoutID, workoutTitle, workoutDate);
+  const newWorkout = new Workout(workoutID, workoutTitle, formatDate(workoutDate));
   newWorkouts.push(newWorkout);
 
   try {
@@ -115,7 +126,7 @@ function closeEditBox() {
 function handleWorkoutUpdate(e) {
   e.preventDefault()
   const newItem = {...selectedWorkout}
-  newItem["date"] = document.querySelector("#workoutDate").value
+  newItem["date"] = formatDate(document.querySelector("#workoutDate").value)
   newItem["title"] = document.querySelector("#workoutTitle").value
 
   updateWorkout(newItem)
