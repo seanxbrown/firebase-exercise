@@ -144,6 +144,7 @@ async function handleExerciseUpdate(e) {
     newExercise["name"] = document.getElementById("exerciseName").value;
     newExercise["sets"] = document.getElementById("exerciseSets").value;
     newExercise["reps"] = document.getElementById("exerciseReps").value;
+    newExercise["uom"] = document.getElementById("exerciseUom").value;
     newExercise["weight"] = document.getElementById("exerciseWeight").value;
     newExercise["target"] = document.getElementById("exercisetTarget").checked;
     newExercise["notes"] = document.getElementById("exerciseNotes").value;

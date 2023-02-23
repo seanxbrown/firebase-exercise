@@ -7,13 +7,20 @@ const EditExercise = ({ selectedExercise, closeEditBox, handleExerciseUpdate }) 
         <h2>Editing {selectedExercise && selectedExercise.name}</h2>
         <CloseButton className="float-end" onClick={closeEditBox}/>
         <Form onSubmit={handleExerciseUpdate}>
-            <Form.Group>
+        <Form.Group>
                 <Form.Label>Exercise</Form.Label>
                 <Form.Control required id="exerciseName" type="text" placeholder="Bench Press" maxLength="30" defaultValue={selectedExercise.name}/>
             </Form.Group>
             <Form.Group>
-                <Form.Label>Weight (kg)</Form.Label>
+                <Form.Label>Weight</Form.Label>
                 <Form.Control required id="exerciseWeight" type="number" min="0" max="999" defaultValue={selectedExercise.weight}/>
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Unit</Form.Label>
+                <Form.Select id="exerciseUom" defaultValue={selectedExercise.uom}>
+                <option value="kg">kg</option>
+                <option value="lb">lb</option>
+                </Form.Select>
             </Form.Group>
             <Form.Group>
                 <Form.Label>Sets</Form.Label>
@@ -25,7 +32,7 @@ const EditExercise = ({ selectedExercise, closeEditBox, handleExerciseUpdate }) 
             </Form.Group>
             
             <Form.Group>
-                <Form.Check id="exercisetTarget" type="checkbox" label="Target achieved?" maxLength="30" defaultValue={selectedExercise.checked}/>
+                <Form.Check id="exercisetTarget" type="checkbox" label="Target achieved?" maxLength="30" defaultValue={selectedExercise.target}/>
             </Form.Group>
             <Form.Group>
                 <Form.Label>Notes</Form.Label>
