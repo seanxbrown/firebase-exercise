@@ -208,7 +208,8 @@ useEffect(() => {
 },[])
 
   return (
-
+    <>
+    <h2 className="py-3 text-center fw-bold">Dashboard</h2>
     <Row id="dashboard" className="p-4 position-relative">
         {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         {deletingWorkout && <DeleteWorkout workout={selectedWorkout} formatDate={formatDate} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
@@ -217,6 +218,9 @@ useEffect(() => {
         <WorkoutsPreview toggleNewWorkoutStatus={toggleNewWorkoutStatus} workouts={workouts} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout}/>
         <ExercisePreview toggleNewExerciseStatus={toggleNewExerciseStatus} selectedWorkout={selectedWorkout} selectExercise={selectExercise} openExerciseDeletionBox={openExerciseDeletionBox} removeExerciseFromWorkout={removeExerciseFromWorkout} />
     </Row>
+    </>
+
+    
   )
 }
 
