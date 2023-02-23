@@ -35,7 +35,7 @@ const AddNewExercise = ({ toggleNewExerciseStatus, addExerciseToWorkout, selecte
             </Form.Group>
             <Form.Group>
                 <Form.Label>Notes</Form.Label>
-                <Form.Control as="textarea" id="exerciseNotes" />
+                <Form.Control as="textarea" id="exerciseNotes"/>
             </Form.Group>
             <Button type="submit" className="btn btn-primary rounded-pill mt-4">Add Exercise</Button>
         </Form>

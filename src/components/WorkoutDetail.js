@@ -77,9 +77,10 @@ const WorkoutDetail = () => {
         const exerciseSets = document.getElementById("exerciseSets").value;
         const exerciseReps = document.getElementById("exerciseReps").value;
         const exerciseWeight = document.getElementById("exerciseWeight").value;
+        const exerciseUnit = document.getElementById("exerciseUom").value;
         const exercisetTarget = document.getElementById("exercisetTarget").checked;
         const exerciseNotes = document.getElementById("exerciseNotes").value;
-        const newExercise = new Exercise(exerciseID, exerciseName, exerciseSets, exerciseReps,`${exerciseWeight}kg`, exercisetTarget, exerciseNotes)
+        const newExercise = new Exercise(exerciseID, exerciseName, exerciseSets, exerciseReps,exerciseWeight, exerciseUnit, exercisetTarget, exerciseNotes)
     
         for (let key of newWorkouts) {
             if (key.id === selectedUserWorkout.id) {
@@ -93,6 +94,7 @@ const WorkoutDetail = () => {
     
         try {
             update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
+            
             getDataForOneWorkout();
     
         } catch(error) {
