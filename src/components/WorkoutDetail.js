@@ -197,7 +197,11 @@ async function handleExerciseUpdate(e) {
                 key={exercise.id} exercise={exercise}/>) 
                 : <h3 className="fw-bold text-center">No exercise selected.</h3>
         }
-        <Link to={`/firebase-exercise/dashboard`}>Return to dashboard</Link>
+        <div id="workoutDetailLinkContainer" className="d-flex justify-content-around">
+            <Link to={`/firebase-exercise/dashboard`}>Return to dashboard</Link>
+            <Link to={`/firebase-exercise/workouts`}>Return to workouts overview</Link>
+        </div>
+        
     </div>
   )
 }
