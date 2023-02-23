@@ -12,6 +12,7 @@ import DeleteWorkout from './DeleteWorkout';
 import DeleteExercise from './DeleteExercise';
 import { Link } from "react-router-dom"
 import { AuthContext } from '../contexts/AuthContext';
+import WorkoutsPreview from './WorkoutsPreview';
 
 const Dashboard = () => {
     const [selectedWorkout, setSelectedWorkout] = useState();
@@ -202,14 +203,6 @@ function getWorkoutData() {
     }
 }
 
-function createWorkoutsPreview(workouts) {
-    if(Array.isArray(workouts)) {
-        const previewWorkouts = [...workouts].splice(0, 10);
-        return previewWorkouts
-
-    }
-    
-}
 
 
 useEffect(() => {
@@ -219,10 +212,7 @@ useEffect(() => {
 
 },[])
 
-useEffect(()=> {
-    createWorkoutsPreview(workouts)
 
-},[workouts])
 
   return (
 
@@ -230,17 +220,7 @@ useEffect(()=> {
         {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
         {deletingExercise && <DeleteExercise selectedExercise={selectedExercise} removeExerciseFromWorkout={removeExerciseFromWorkout} closeExerciseDeletionBox={closeExerciseDeletionBox}/>}
-        <Col xs={12} sm={5} id="workoutDiv" className="border-end border-1 border-light p-1">
-            <div className="d-flex flex-column" id="workoutColumnHeader">
-                <h2 className="text-center fw-bold">Workouts</h2>
-                <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Workout</Button>
-            </div>
-            <div className="workoutDataContainer overflow-hidden">
-                {workouts && workouts.length > 0 ?
-                 createWorkoutsPreview(workouts).map(workout => <WorkoutComponent key={workout.id} preview="true" openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
-            </div>  
-            <Link to={`/firebase-exercise/workouts`}>View all workouts</Link>
-        </Col>
+        <WorkoutsPreview toggleNewWorkoutStatus={toggleNewWorkoutStatus} workouts={workouts} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout}/>
         <Col xs={12} sm={7} id="exerciseDiv" className="p-0">
             {addingNewExercise && <AddNewExercise selectedWorkout={selectedWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
             <div className="d-flex flex-column" id="exerciseColumnHeader">
