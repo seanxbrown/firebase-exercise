@@ -1,18 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, Row, Col } from "react-bootstrap";
-import ExerciseComponent from "./ExerciseComponent";
+import { Row } from "react-bootstrap";
 import AddNewWorkout from "./AddNewWorkout";
 import { v4 as uuidv4 } from "uuid";
-import WorkoutComponent from './WorkoutComponent';
 import AddNewExercise from "./AddNewExercise";
 import { database, set, ref, onValue, update } from "../firebase";
 import Workout from "./Workout";
 import Exercise from './Exercise';
 import DeleteWorkout from './DeleteWorkout';
 import DeleteExercise from './DeleteExercise';
-import { Link } from "react-router-dom"
 import { AuthContext } from '../contexts/AuthContext';
 import WorkoutsPreview from './WorkoutsPreview';
+import ExercisePreview from './ExercisePreview';
 
 const Dashboard = () => {
     const [selectedWorkout, setSelectedWorkout] = useState();
@@ -203,16 +201,11 @@ function getWorkoutData() {
     }
 }
 
-
-
 useEffect(() => {
 
     getWorkoutData()
     
-
 },[])
-
-
 
   return (
 
@@ -220,18 +213,9 @@ useEffect(() => {
         {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
         {deletingExercise && <DeleteExercise selectedExercise={selectedExercise} removeExerciseFromWorkout={removeExerciseFromWorkout} closeExerciseDeletionBox={closeExerciseDeletionBox}/>}
+        {addingNewExercise && <AddNewExercise selectedWorkout={selectedWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
         <WorkoutsPreview toggleNewWorkoutStatus={toggleNewWorkoutStatus} workouts={workouts} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout}/>
-        <Col xs={12} sm={7} id="exerciseDiv" className="p-0">
-            {addingNewExercise && <AddNewExercise selectedWorkout={selectedWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
-            <div className="d-flex flex-column" id="exerciseColumnHeader">
-                <h2 className="text-center fw-bold">Exercises {selectedWorkout ? `(${selectedWorkout.title})` : null}</h2>
-                <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Exercise</Button>
-            </div>
-            <div className="workoutDataContainer overflow-hidden">
-                {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.length > 0 ? selectedWorkout.exercises.map(exercise => <ExerciseComponent preview="true" selectExercise={selectExercise} openExerciseDeletionBox={openExerciseDeletionBox} removeExerciseFromWorkout={removeExerciseFromWorkout} key={exercise.id} exercise={exercise}/>) : <h3 className="fw-bold text-center">No exercise selected.</h3>}
-            </div>          
-            
-        </Col>
+        <ExercisePreview toggleNewExerciseStatus={toggleNewExerciseStatus} selectedWorkout={selectedWorkout} selectExercise={selectExercise} openExerciseDeletionBox={openExerciseDeletionBox} removeExerciseFromWorkout={removeExerciseFromWorkout} />
     </Row>
   )
 }
