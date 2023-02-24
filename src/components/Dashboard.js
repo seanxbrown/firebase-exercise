@@ -48,25 +48,13 @@ function toggleNewExerciseStatus() {
     setAddingNewExercise(addingNewExercise => !addingNewExercise);
 }
 
-function formatDate(dateString) {
-    if (typeof dateString === "string" && dateString.includes("-")) {
-        const day = dateString.slice(8)
-        const month = dateString.slice(5, 7)
-        const year = dateString.slice(0, 4)
-        return `${day}/${month}/${year}`
-      
-    } else {
-      return dateString
-    }
-}
-
 
 function addWorkout() {
     const newWorkouts = [...workouts];
     const workoutTitle = document.getElementById("workoutTitle").value || new Date(Date.now()).toString();
     const workoutDate = document.getElementById("workoutDate").value;
     const workoutID = uuidv4();
-    const newWorkout = new Workout(workoutID, workoutTitle, formatDate(workoutDate));
+    const newWorkout = new Workout(workoutID, workoutTitle, workoutDate);
     newWorkouts.push(newWorkout);
 
     try {
@@ -212,7 +200,7 @@ useEffect(() => {
     <h2 className="py-3 text-center fw-bold">Dashboard</h2>
     <Row id="dashboard" className="p-4 position-relative">
         {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
-        {deletingWorkout && <DeleteWorkout workout={selectedWorkout} formatDate={formatDate} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
+        {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
         {deletingExercise && <DeleteExercise selectedExercise={selectedExercise} removeExerciseFromWorkout={removeExerciseFromWorkout} closeExerciseDeletionBox={closeExerciseDeletionBox}/>}
         {addingNewExercise && <AddNewExercise selectedWorkout={selectedWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
         <WorkoutsPreview toggleNewWorkoutStatus={toggleNewWorkoutStatus} workouts={workouts} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout}/>
