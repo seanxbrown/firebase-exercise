@@ -1,4 +1,4 @@
-import { CloseButton, Row, Col, Badge } from "react-bootstrap";
+import { CloseButton, Row, Col } from "react-bootstrap";
 
 const ExerciseComponent = ({ preview, exercise, openExerciseDeletionBox, selectExercise, openEditBox }) => {
 
@@ -24,7 +24,7 @@ const ExerciseComponent = ({ preview, exercise, openExerciseDeletionBox, selectE
                     <p>Notes: {exercise.notes}</p>
                 </Col>
                 <Col sm={1}>        
-                    {!preview && <Badge pill bg="info" onClick={openEditBox}>Edit</Badge>}
+                    {!preview && <i className="bi-pencil-fill ms-3" onClick={openEditBox}></i>}
                 </Col>
                 <Col sm={1}>
                     <CloseButton variant="white" className="border border-1 border-light" onClick={() => openExerciseDeletionBox(exercise)} />
