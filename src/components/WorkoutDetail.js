@@ -196,7 +196,7 @@ async function handleExerciseUpdate(e) {
                 handleExerciseUpdate={handleExerciseUpdate} 
                 openEditBox={openEditBox}
                 key={exercise.id} exercise={exercise}/>) 
-                : <h3 className="fw-bold text-center">No exercise selected.</h3>
+                : <h3 className="fw-bold text-center">No exercise information found.</h3>
         }
         <div id="workoutDetailLinkContainer" className="d-flex justify-content-around">
             <Link to={`/firebase-exercise/dashboard`}>Return to dashboard</Link>
