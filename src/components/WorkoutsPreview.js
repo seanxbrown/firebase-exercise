@@ -23,7 +23,7 @@ const WorkoutsPreview = ({ toggleNewWorkoutStatus, workouts, openWorkoutDeletion
             <h2 className="text-center">Workouts</h2>
             <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Workout</Button>
         </div>
-        <div className="workoutDataContainer overflow-hidden">
+        <div className="workoutDataContainer overflow-hidden mb-4">
             {workouts && workouts.length > 0 ?
                 createWorkoutsPreview(workouts).map(workout => <WorkoutComponent key={workout.id} preview="true" openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
         </div>  

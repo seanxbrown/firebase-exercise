@@ -207,7 +207,6 @@ useEffect(() => {
         <ExercisePreview toggleNewExerciseStatus={toggleNewExerciseStatus} selectedWorkout={selectedWorkout} selectExercise={selectExercise} openExerciseDeletionBox={openExerciseDeletionBox} removeExerciseFromWorkout={removeExerciseFromWorkout} />
     </Row>
     </>
-
     
   )
 }
