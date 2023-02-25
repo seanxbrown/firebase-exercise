@@ -1,16 +1,9 @@
-import { Container, Button } from "react-bootstrap"
+import { Container, Button } from "react-bootstrap";
+import { formatDate } from "../utils/utils"
 
 const DeleteWorkout = ({workout, closeWorkoutDeletionBox, removeWorkoutFromList }) => {
 
-  function formatDate(dateString) {
-    if (typeof dateString === "string") {
-        const day = dateString.slice(8)
-        const month = dateString.slice(5, 7)
-        const year = dateString.slice(0, 4)
-        return `${day}/${month}/${year}`
-      
-    } 
-}
+ 
   return (
     <Container className="bg-danger bg-gradient rounded border border-1 border-white p-4 position-absolute top-50 start-50 translate-middle w-50" id="deleteWorkoutBox">
         <p className="text-dark text-center">Delete "{workout.title}"" (created on {formatDate(workout.date)})?</p>

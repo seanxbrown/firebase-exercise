@@ -9,6 +9,7 @@ import AddNewWorkout from "./AddNewWorkout";
 import { Button } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import EditWorkout from "./EditWorkout";
+import { formatDate } from "../utils/utils"
 
 const AllWorkouts = () => {
   const [workouts, setWorkouts] = useState([])
@@ -45,17 +46,6 @@ function closeWorkoutDeletionBox(workout) {
   //This opens the div to confirm deletion of workout
   setDeletingWorkout(false)
 }
-
-function formatDate(dateString) {
-  if (typeof dateString === "string") {
-      const day = dateString.slice(8)
-      const month = dateString.slice(5, 7)
-      const year = dateString.slice(0, 4)
-      return `${day}/${month}/${year}`
-    
-  } 
-}
-
 
 function addWorkout() {
   const newWorkouts = [...workouts];
