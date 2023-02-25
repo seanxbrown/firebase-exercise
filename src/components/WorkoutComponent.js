@@ -5,7 +5,6 @@ import { AuthContext } from '../contexts/AuthContext'
 import { formatDate } from "../utils/utils"
 
 const WorkoutComponent = ({workout, selectWorkout, openWorkoutDeletionBox, openEditBox, preview}) => {
-  const user = useContext(AuthContext)
 
   return (
     <Row className=" workoutData align-items-center" id={workout.id} onClick={(() => selectWorkout([workout.id]))}>

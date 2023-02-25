@@ -17,7 +17,6 @@ export default function Login() {
 
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-      const userID = response.user.uid
       navigate(`/firebase-exercise/dashboard`);
     } catch(e) {
       alert(e);
