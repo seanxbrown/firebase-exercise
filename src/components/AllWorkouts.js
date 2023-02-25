@@ -9,7 +9,6 @@ import AddNewWorkout from "./AddNewWorkout";
 import { Button, Form } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import EditWorkout from "./EditWorkout";
-import { formatDate } from "../utils/utils"
 
 const AllWorkouts = () => {
   const [workouts, setWorkouts] = useState([])
@@ -155,11 +154,11 @@ useEffect(() => {
   return (
 
       <div className="workoutDataContainer overflow-hidden position-relative">
-        <div className="d-flex gap-4">
+        <div className="d-flex gap-4 justify-content-center">
           <h2 className="text-center fw-bold py-5">All workouts</h2>
           <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Workout</Button>    
         </div>
-        <Form.Control type="text" id="workoutSearchBar" placeholder="Search" onChange={searchChangeHandler}/>
+        <Form.Control type="text" className="mb-4" id="workoutSearchBar" placeholder="Search" onChange={searchChangeHandler}/>
         {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
         {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         {editing && <EditWorkout selectedWorkout={selectedWorkout} closeEditBox={closeEditBox} updateWorkout={updateWorkout} handleWorkoutUpdate={handleWorkoutUpdate} />}
