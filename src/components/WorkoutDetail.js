@@ -179,9 +179,8 @@ async function handleExerciseUpdate(e) {
 
   return (
     <div className="text-dark position-relative">
-        <h2 className="fw-bold py-4 text-center">{selectedUserWorkout && selectedUserWorkout.title}</h2>
-        <div className="d-flex gap-4 mb-3" id="exerciseTitleButtonContainer">
-            <h3 className="fw-bold">Exercises</h3>
+        <h2 className="fw-bold py-4 text-center">Workout: {selectedUserWorkout && selectedUserWorkout.title}</h2>
+        <div className="d-flex gap-4 mb-3 justify-content-center" id="exerciseTitleButtonContainer">
             <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary align-self-center mb-3 rounded-pill text-center">Add New Exercise</Button>
          </div>
         {addingNewExercise && <AddNewExercise selectedWorkout={selectedUserWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
