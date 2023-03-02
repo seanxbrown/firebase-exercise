@@ -11,6 +11,7 @@ import DeleteExercise from './DeleteExercise';
 import { AuthContext } from '../contexts/AuthContext';
 import WorkoutsPreview from './WorkoutsPreview';
 import ExercisePreview from './ExercisePreview';
+import TemplatesPreview from './TemplatesPreview';
 
 const Dashboard = () => {
     const [selectedWorkout, setSelectedWorkout] = useState();
@@ -19,7 +20,8 @@ const Dashboard = () => {
     const [addingNewExercise, setAddingNewExercise] = useState(false);
     const [deletingWorkout, setDeletingWorkout] = useState(false)
     const [deletingExercise, setDeletingExercise] = useState(false)
-    const [selectedExercise, setSelectedExercise] = useState("")
+    const [selectedExercise, setSelectedExercise] = useState("");
+    const [templates, setTemplates] = useState([])
     const user = useContext(AuthContext)
 
 function selectWorkout(selectedID) {
@@ -69,7 +71,11 @@ function addWorkout() {
 
 function handleWorkoutSubmit(e) {
     e.preventDefault();
-    addWorkout();
+    const templateInput = document.getElementById("templateInput").value
+    templateInput === "noTemplate" ? addWorkout() : createWorkoutFromTemplate(templateInput)
+    
+    //Add conditional = if the value of the template option isn't "noTemplate", call add workout, else use template function
+    //addWorkout();
 }
 
 function openWorkoutDeletionBox(workout) {
@@ -172,12 +178,40 @@ function selectExercise(id) {
     setSelectedExercise(id)
 }
 
+async function createWorkoutFromTemplate(id) {
+    const newWorkouts = [...workouts];
+    const selectedTemplate = [...templates].filter(template => template.id ===id)[0]
+    const workoutTitle = document.getElementById("workoutTitle").value || new Date(Date.now()).toString();
+    const workoutDate = document.getElementById("workoutDate").value;
+    const workoutID = uuidv4();
+    const newWorkout = new Workout(workoutID, workoutTitle, workoutDate);
+    newWorkout.exercises = []
+
+    //loop through template exercises and push them to workout
+    for (let templateExercise of selectedTemplate.exercises) {
+        templateExercise.weight = "";
+        templateExercise.uom = "kg"
+        newWorkout.exercises.push({...templateExercise})
+    }
+    newWorkouts.push(newWorkout);
+
+    try {
+        set(ref(database, `${user.uid}/workouts/`), newWorkouts);
+        getWorkoutData();
+
+    } catch(error) {
+        alert(error);
+    }
+    setCreatingNewWorkout(creatingNewWorkout => !creatingNewWorkout);
+
+}
+
 function getWorkoutData() {
     const dbRef = ref(database, `${user.uid}`);
     
     try {
         onValue(dbRef, snapshot => {
-            if (snapshot.val()) {
+            if (snapshot.val() && snapshot.val().workouts) {
                 setWorkouts(workouts => workouts = snapshot.val().workouts.sort((a, b) => b.date > a.date))
                 } else {
                 setWorkouts(workouts => workouts = [])
@@ -189,9 +223,27 @@ function getWorkoutData() {
     }
 }
 
+function getTemplateData() {
+    const dbRef = ref(database, `${user.uid}`);
+    
+    try {
+        onValue(dbRef, snapshot => {
+            if (snapshot.val()) {
+                setTemplates(snapshot.val().templates)
+                } else {
+                setTemplates([])
+            }       
+        }
+            )
+    } catch(error) {
+        alert(error)
+    }
+}
+
 useEffect(() => {
 
     getWorkoutData()
+    getTemplateData()
     
 },[])
 
@@ -199,12 +251,13 @@ useEffect(() => {
     <>
     <h2 className="py-3 text-center fw-bold">Dashboard</h2>
     <Row id="dashboard" className="p-4 position-relative">
-        {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
+        {creatingNewWorkout && <AddNewWorkout templates={templates} handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
         {deletingExercise && <DeleteExercise selectedExercise={selectedExercise} removeExerciseFromWorkout={removeExerciseFromWorkout} closeExerciseDeletionBox={closeExerciseDeletionBox}/>}
         {addingNewExercise && <AddNewExercise selectedWorkout={selectedWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
         <WorkoutsPreview toggleNewWorkoutStatus={toggleNewWorkoutStatus} workouts={workouts} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout}/>
         <ExercisePreview toggleNewExerciseStatus={toggleNewExerciseStatus} selectedWorkout={selectedWorkout} selectExercise={selectExercise} openExerciseDeletionBox={openExerciseDeletionBox} removeExerciseFromWorkout={removeExerciseFromWorkout} />
+        <TemplatesPreview />
     </Row>
     </>
     

@@ -16,8 +16,8 @@ const AllWorkouts = () => {
   const [selectedWorkout, setSelectedWorkout] = useState();
   const [creatingNewWorkout, setCreatingNewWorkout] = useState(false);
   const [editing, setEditing] = useState(false);
-  const [search, setSearch] = useState("")
-
+  const [search, setSearch] = useState("");
+  const [templates, setTemplates] = useState([])
   const user = useContext(AuthContext)
 
   function selectWorkout(selectedID) {
@@ -80,7 +80,9 @@ function removeWorkoutFromList(id) {
 
 function handleWorkoutSubmit(e) {
   e.preventDefault();
-  addWorkout();
+  const templateInput = document.getElementById("templateInput").value
+  templateInput === "noTemplate" ? addWorkout() : createWorkoutFromTemplate(templateInput)
+  
 }
 
 function toggleNewWorkoutStatus(e) {
@@ -93,7 +95,7 @@ function toggleNewWorkoutStatus(e) {
     
     try {
         onValue(dbRef, snapshot => {
-            if (snapshot.val()) {
+            if (snapshot.val() && snapshot.val().workouts) {
                 setWorkouts(workouts => workouts = snapshot.val().workouts.sort((a, b) => b.date > a.date))
                 } else {
                 setWorkouts(workouts => workouts = [])
@@ -144,12 +146,65 @@ function searchChangeHandler(e) {
   setSearch(search => e.target.value)
 }
 
+function getTemplateData() {
+  const dbRef = ref(database, `${user.uid}`);
+  
+  try {
+      onValue(dbRef, snapshot => {
+          if (snapshot.val()) {
+              setTemplates(snapshot.val().templates)
+              } else {
+              setTemplates([])
+          }       
+      }
+          )
+  } catch(error) {
+      alert(error)
+  }
+}
+
+async function createWorkoutFromTemplate(id) {
+  const newWorkouts = [...workouts];
+  const selectedTemplate = [...templates].filter(template => template.id ===id)[0]
+
+
+  const workoutTitle = document.getElementById("workoutTitle").value || new Date(Date.now()).toString();
+  const workoutDate = document.getElementById("workoutDate").value;
+  const workoutID = uuidv4();
+  const newWorkout = new Workout(workoutID, workoutTitle, workoutDate);
+  newWorkout.exercises = []
+
+  //loop through template exercises and push them to workout
+  for (let templateExercise of selectedTemplate.exercises) {
+      templateExercise.weight = "";
+      templateExercise.uom = "kg"
+      newWorkout.exercises.push({...templateExercise})
+  }
+  newWorkouts.push(newWorkout);
+
+  try {
+      set(ref(database, `${user.uid}/workouts/`), newWorkouts);
+      getWorkoutData();
+
+  } catch(error) {
+      alert(error);
+  }
+  setCreatingNewWorkout(creatingNewWorkout => !creatingNewWorkout);
+
+}
+
 
 useEffect(() => {
 
     if(user) {getWorkoutData()}
 
 },[user])
+
+useEffect(() => {
+
+  getTemplateData()
+  
+},[])
    
   return (
 
@@ -160,7 +215,7 @@ useEffect(() => {
         </div>
         <Form.Control type="text" className="mb-4" id="workoutSearchBar" placeholder="Search" onChange={searchChangeHandler}/>
         {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
-        {creatingNewWorkout && <AddNewWorkout handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
+        {creatingNewWorkout && <AddNewWorkout templates={templates} handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         {editing && <EditWorkout selectedWorkout={selectedWorkout} closeEditBox={closeEditBox} updateWorkout={updateWorkout} handleWorkoutUpdate={handleWorkoutUpdate} />}
         {workouts && workouts.length > 0 ? workouts.filter(workout => {
           if (search === "") {

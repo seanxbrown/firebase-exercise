@@ -1,6 +1,6 @@
 import { Form, Container, Button, CloseButton } from "react-bootstrap"
 
-const AddNewWorkout = ({toggleNewWorkoutStatus, handleWorkoutSubmit}) => {
+const AddNewWorkout = ({toggleNewWorkoutStatus, handleWorkoutSubmit, templates}) => {
   return (
     <Container className="border border-1 border-secondary p-5 bg-light" id="addWorkoutDiv">
         <CloseButton onClick={toggleNewWorkoutStatus} className="float-end"/>
@@ -20,6 +20,13 @@ const AddNewWorkout = ({toggleNewWorkoutStatus, handleWorkoutSubmit}) => {
                 <option value="Back" />
                 <option value="Arms" />
                 </datalist>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Create from Template</Form.Label>
+              <Form.Select id="templateInput">
+                <option value="noTemplate">--</option>
+                {templates && templates.map(template => <option key={template.id} value={template.id}>{template.name}</option>)}
+              </Form.Select>
             </Form.Group>
             <Form.Group>
                 <Form.Label>Date</Form.Label>

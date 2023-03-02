@@ -105,18 +105,19 @@ const WorkoutDetail = () => {
     }
 
     //Identify correct workout. Return if no exercises, else remove selected exercise from the selected workout
-function removeExerciseFromWorkout(id) {
+function removeExerciseFromWorkout(selectedExercise) {
     const newWorkouts = [...allUserWorkouts];
     for (let workout of newWorkouts) {
         if(selectedUserWorkout.id === workout.id) {
             if (!workout.exercises) {return}
-            workout.exercises = workout.exercises.filter(exercise => exercise.id !== id);
+            workout.exercises = workout.exercises.filter(exercise => exercise.id !== selectedExercise.id);
         }
     }
     //Also needs to be removed from selected workout, otherwise there will be a display error
     const newSelectedWorkout = {...selectedUserWorkout};
-    newSelectedWorkout.exercises = newSelectedWorkout.exercises.filter(exercise => exercise.id !== id);
+    newSelectedWorkout.exercises = newSelectedWorkout.exercises.filter(exercise => exercise.id !== selectedExercise.id);
     setSelectedUserWorkout(newSelectedWorkout);
+    console.log(newWorkouts)
     
     try {
         update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
@@ -148,7 +149,6 @@ async function handleExerciseUpdate(e) {
     newExercise["weight"] = document.getElementById("exerciseWeight").value;
     newExercise["target"] = document.getElementById("exercisetTarget").checked;
     newExercise["notes"] = document.getElementById("exerciseNotes").value;
-    //console.log(newExercise)
 
     const newWorkouts = [...allUserWorkouts]
     for (let newWorkout of newWorkouts) {

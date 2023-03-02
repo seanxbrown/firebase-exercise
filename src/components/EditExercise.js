@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Form, CloseButton, Button } from "react-bootstrap"
 
-const EditExercise = ({ selectedExercise, closeEditBox, handleExerciseUpdate }) => {
+const EditTemplateExercise = ({ selectedExercise, closeEditBox, handleExerciseUpdate }) => {
   return (
     <Container className="border border-1 border-secondary p-5 bg-light" id="addExerciseDiv">
         <h2>Editing {selectedExercise && selectedExercise.name}</h2>
@@ -44,4 +44,4 @@ const EditExercise = ({ selectedExercise, closeEditBox, handleExerciseUpdate }) 
   )
 }
 
-export default EditExercise
+export default EditTemplateExercise

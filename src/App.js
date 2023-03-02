@@ -15,6 +15,8 @@ import AllWorkouts from "./components/AllWorkouts";
 import Home from "./components/Home";
 import { AuthContext } from "./contexts/AuthContext"
 import WorkoutDetail from "./components/WorkoutDetail";
+import AllTemplates from "./components/AllTemplates";
+import TemplateDetail from "./components/TemplateDetail"
  
 function App() {
   const [user, setUser] = useState();
@@ -48,6 +50,8 @@ function App() {
               <Route path="/firebase-exercise/profile" element={<Profile /> }/>
               <Route path="/firebase-exercise/workouts" element={<AllWorkouts />}/>
               <Route path="/firebase-exercise/workouts/:workoutid" element={<WorkoutDetail />}/>
+              <Route path="/firebase-exercise/templates" element={<AllTemplates />} />
+              <Route path="/firebase-exercise/templates/:templateid" element={<TemplateDetail />} />
             </Route>
           </Routes>
         </Container>

@@ -7,7 +7,7 @@ import { formatDate } from "../utils/utils"
 const WorkoutComponent = ({workout, selectWorkout, openWorkoutDeletionBox, openEditBox, preview}) => {
 
   return (
-    <Row className=" workoutData align-items-center" id={workout.id} onClick={(() => selectWorkout([workout.id]))}>
+    <Row className=" workoutData align-items-center" id={workout.id} onClick={(() => selectWorkout(workout.id))}>
       <Col xs={5}>{workout.title}</Col>
       <Col xs={3}>{formatDate(workout.date)}</Col>
       <Col xs={1}>

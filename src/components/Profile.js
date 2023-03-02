@@ -14,9 +14,8 @@ const Profile = () => {
        try {
         await updateProfile(auth.currentUser, {displayName: newDisplayName})
         setUpdating(false)
-        console.log(user)
        } catch(e) {
-        console.log(e)
+        alert(e)
        }
 
     }
