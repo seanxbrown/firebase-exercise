@@ -22,6 +22,9 @@ const Dashboard = () => {
     const [deletingExercise, setDeletingExercise] = useState(false)
     const [selectedExercise, setSelectedExercise] = useState("");
     const [templates, setTemplates] = useState([])
+    const [selectedTemplate, setSelectedTemplate] = useState({});
+    const [deletingTemplate, setDeletingTemplate] = useState(false)
+    const [editingTemplate, setEditingTemplate] = useState(false);
     const user = useContext(AuthContext)
 
 function selectWorkout(selectedID) {
@@ -206,6 +209,29 @@ async function createWorkoutFromTemplate(id) {
 
 }
 
+function openDeleteTemplateModal() {
+    setDeletingTemplate(true)
+}
+
+function selectTemplate(selectedID) {
+    const selection = [...templates].filter(template => selectedID == template.id);
+    setSelectedTemplate(selection[0]);
+
+    const templateComponents = [...document.getElementsByClassName("workoutData")]
+    for (let component of templateComponents) {
+        if (component.id == selectedID) {
+            component.classList.add("selected")
+        } else {
+            if (component.classList.contains("selected")) {
+                component.classList.remove("selected")
+            }
+        }
+    } 
+
+}
+
+
+
 function getWorkoutData() {
     const dbRef = ref(database, `${user.uid}`);
     
@@ -257,7 +283,7 @@ useEffect(() => {
         {addingNewExercise && <AddNewExercise selectedWorkout={selectedWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
         <WorkoutsPreview toggleNewWorkoutStatus={toggleNewWorkoutStatus} workouts={workouts} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout}/>
         <ExercisePreview toggleNewExerciseStatus={toggleNewExerciseStatus} selectedWorkout={selectedWorkout} selectExercise={selectExercise} openExerciseDeletionBox={openExerciseDeletionBox} removeExerciseFromWorkout={removeExerciseFromWorkout} />
-        <TemplatesPreview />
+        <TemplatesPreview templates={templates} openDeleteTemplateModal={openDeleteTemplateModal} selectTemplate={selectTemplate}/>
     </Row>
     </>
     
