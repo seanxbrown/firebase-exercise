@@ -1,12 +1,10 @@
 import { useState, useEffect, useContext } from 'react'
 import { Link } from "react-router-dom"
 import { Button } from "react-bootstrap"
-import AddNewTemplate from "../../components/AddNewTemplate"
 import { set, ref, database, onValue, update } from "../../firebase"
 import { AuthContext } from '../../contexts/AuthContext'
 import { v4 as uuidv4 } from "uuid";
 import TemplateComponent from '../../components/TemplateComponent'
-import EditTemplate from "../../components/EditTemplate"
 import DeletionModal from "../../components/DeletionModal"
 import WorkoutModal from "../../components/WorkoutModal"
 import EditWorkoutModal from "../../components/EditWorkoutModal"

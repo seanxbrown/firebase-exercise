@@ -4,10 +4,8 @@ import { database, set, ref, onValue, update } from "../../firebase";
 import WorkoutComponent from "../../components/WorkoutComponent";
 import { v4 as uuidv4 } from "uuid";
 import Workout from "../../components/Workout";
-import AddNewWorkout from "../../components/AddNewWorkout";
 import { Button, Form } from "react-bootstrap"
 import { Link } from "react-router-dom";
-import EditWorkout from "../../components/EditWorkout";
 import DeletionModal from "../../components/DeletionModal"
 import WorkoutModal from "../../components/WorkoutModal"
 import EditWorkoutModal from "../../components/EditWorkoutModal"
@@ -175,12 +173,16 @@ async function createWorkoutFromTemplate(id) {
   const newWorkout = new Workout(workoutID, workoutTitle, workoutDate);
   newWorkout.exercises = []
 
-  //loop through template exercises and push them to workout
-  for (let templateExercise of selectedTemplate.exercises) {
+  if (selectedTemplate.exercises) {
+     //loop through template exercises and push them to workout
+    for (let templateExercise of selectedTemplate.exercises) {
       templateExercise.weight = "";
       templateExercise.uom = "kg"
       newWorkout.exercises.push({...templateExercise})
   }
+
+  }
+ 
   newWorkouts.push(newWorkout);
 
   try {

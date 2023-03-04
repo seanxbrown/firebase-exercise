@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Row } from "react-bootstrap";
-import AddNewWorkout from "../../components/AddNewWorkout";
 import { v4 as uuidv4 } from "uuid";
 import AddNewExercise from "../../components/AddNewExercise";
 import { database, set, ref, onValue, update } from "../../firebase";
@@ -273,7 +272,6 @@ useEffect(() => {
     <>
     <h2 className="py-3 text-center fw-bold">Dashboard</h2>
     <Row id="dashboard" className="p-4 position-relative">
-        {creatingNewWorkout && <AddNewWorkout templates={templates} handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         {addingNewExercise && <AddNewExercise selectedWorkout={selectedWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
         <WorkoutsPreview toggleNewWorkoutStatus={toggleNewWorkoutStatus} workouts={workouts} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout}/>
         <ExercisePreview toggleNewExerciseStatus={toggleNewExerciseStatus} selectedWorkout={selectedWorkout} selectExercise={selectExercise} openExerciseDeletionBox={openExerciseDeletionBox} removeExerciseFromWorkout={removeExerciseFromWorkout} />
