@@ -1,11 +1,10 @@
 import { useContext } from 'react'
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Navbar, Container, Nav } from "react-bootstrap"
 import { AuthContext } from '../contexts/AuthContext';
 
 const Header = ({ logOut }) => {
-
-  const user = useContext(AuthContext)
+const user = useContext(AuthContext)
   
   return (
     <Navbar expand="lg" id="header">
@@ -24,7 +23,7 @@ const Header = ({ logOut }) => {
           </Nav>
 
           <Nav>
-            <Nav.Link className="text-decoration-none text-light" id="logout-text" onClick={() => {logOut()}}>Log Out</Nav.Link>
+            <Nav.Link className="text-decoration-none text-light" id="logout-text" onClick={() => { logOut() }}>Log Out</Nav.Link>
           </Nav>
 
         </Navbar.Collapse>

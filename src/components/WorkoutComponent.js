@@ -1,7 +1,5 @@
-import { useContext } from 'react'
 import { CloseButton, Row, Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import { AuthContext } from '../contexts/AuthContext'
 import { formatDate } from "../utils/utils"
 
 const WorkoutComponent = ({workout, selectWorkout, openWorkoutDeletionBox, openEditBox, preview}) => {

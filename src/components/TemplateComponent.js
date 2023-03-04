@@ -1,8 +1,7 @@
-import React from 'react'
 import { CloseButton, Row, Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
-const TemplateComponent = ({ preview, template, deleteTemplate, openDeleteTemplateModal, selectTemplate, openEditBox }) => {
+const TemplateComponent = ({ preview, template, openDeleteTemplateModal, selectTemplate, openEditBox }) => {
   return (
         <Row className=" workoutData align-items-center" id={template.id} onClick={()=> selectTemplate(template.id)}>
         <Col xs={5}>{template.name}</Col>

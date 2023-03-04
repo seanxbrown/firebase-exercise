@@ -30,7 +30,6 @@ const EditTemplateExercise = ({ selectedExercise, closeEditBox, handleExerciseUp
                 <Form.Label>Reps</Form.Label>
                 <Form.Control required id="exerciseReps" type="number" min="0" max="99" defaultValue={selectedExercise.reps}/>
             </Form.Group>
-            
             <Form.Group>
                 <Form.Check id="exercisetTarget" type="checkbox" label="Target achieved?" maxLength="30" defaultValue={selectedExercise.target}/>
             </Form.Group>

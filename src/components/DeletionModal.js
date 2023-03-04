@@ -1,8 +1,6 @@
-import React from 'react'
 import { Container, Button } from "react-bootstrap";
 
-
-const DeletionModal = ({ type, item, closeModal, removalFunction}) => {
+const DeletionModal = ({ type, item, closeModal, removalFunction }) => {
   return (
     <Container className="bg-danger bg-gradient border-dark rounded p-4 w-50 shadow-lg position-absolute top-50 start-50 translate-middle" id="deleteExerciseBox">
         <p className="text-dark text-center">Delete this {type}?</p>
