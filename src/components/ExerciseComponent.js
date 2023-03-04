@@ -23,12 +23,12 @@ const ExerciseComponent = ({ preview, exercise, openExerciseDeletionBox, selectE
                 <Col sm={3}>        
                     <p>Notes: {exercise.notes}</p>
                 </Col>
-                <Col sm={1}>        
-                    {!preview && <i className="bi-pencil-fill ms-3" onClick={openEditBox}></i>}
-                </Col>
-                <Col sm={1}>
+                {!preview && <Col sm={1}>        
+                  <i className="bi-pencil-fill ms-3" onClick={openEditBox}></i>
+                </Col> }
+                {!preview && <Col sm={1}>
                     <CloseButton variant="white" className="border border-1 border-light" onClick={() => openExerciseDeletionBox(exercise)} />
-                </Col>
+                </Col>}
             </Row>
         </>
     )

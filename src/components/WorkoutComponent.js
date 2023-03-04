@@ -16,9 +16,9 @@ const WorkoutComponent = ({workout, selectWorkout, openWorkoutDeletionBox, openE
       <Col xs={1}>
         {!preview && <i className="bi-pencil-fill ms-3" onClick={openEditBox}></i>}
       </Col>
-      <Col xs={1} className="gx-5">
+      {!preview && <Col xs={1} className="gx-5">
         <CloseButton variant="white" onClick={() => openWorkoutDeletionBox(workout)}/>
-      </Col>
+      </Col> }
     </Row>
   )
 }

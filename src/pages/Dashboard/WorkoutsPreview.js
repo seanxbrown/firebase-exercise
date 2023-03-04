@@ -24,7 +24,7 @@ const WorkoutsPreview = ({ toggleNewWorkoutStatus, workouts, openWorkoutDeletion
         </div>
         <div className="workoutDataContainer overflow-hidden mb-4">
             {workouts && workouts.length > 0 ?
-                createWorkoutsPreview(workouts).map(workout => <WorkoutComponent key={workout.id} preview="true" openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
+                createWorkoutsPreview(workouts).map(workout => <WorkoutComponent key={workout.id} preview={true} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
         </div>  
         <Link to={`/firebase-exercise/workouts`}>View all workouts</Link>
     </Col>

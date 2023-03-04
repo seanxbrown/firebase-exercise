@@ -12,9 +12,9 @@ const TemplateComponent = ({ preview, template, deleteTemplate, openDeleteTempla
         {!preview && <Col xs={1}>
           <i className="bi-pencil-fill ms-3" onClick={openEditBox}></i>
         </Col> }
-        <Col xs={1} className="gx-5">
+        {!preview && <Col xs={1} className="gx-5">
           <CloseButton variant="white" onClick={openDeleteTemplateModal}/>
-        </Col>
+        </Col> }
       </Row>
   )
 }
