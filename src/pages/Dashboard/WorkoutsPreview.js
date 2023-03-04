@@ -3,7 +3,7 @@ import { Col, Button } from "react-bootstrap"
 import WorkoutComponent from '../../components/WorkoutComponent';
 import { Link } from "react-router-dom"
 
-const WorkoutsPreview = ({ toggleNewWorkoutStatus, workouts, openWorkoutDeletionBox, selectWorkout }) => {
+const WorkoutsPreview = ({ workouts, openWorkoutDeletionBox, selectWorkout }) => {
 
     function createWorkoutsPreview(workouts) {
         if(Array.isArray(workouts)) {
