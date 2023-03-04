@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import EditWorkout from "../../components/EditWorkout";
 import DeletionModal from "../../components/DeletionModal"
 import WorkoutModal from "../../components/WorkoutModal"
+import EditWorkoutModal from "../../components/EditWorkoutModal"
 
 const AllWorkouts = () => {
   const [workouts, setWorkouts] = useState([])
@@ -216,7 +217,7 @@ useEffect(() => {
         <Form.Control type="text" className="mb-4" id="workoutSearchBar" placeholder="Search" onChange={searchChangeHandler}/>
         {deletingWorkout && <DeletionModal type="workout" item={selectedWorkout} closeModal={closeWorkoutDeletionBox} removalFunction={removeWorkoutFromList}/>}
         {creatingNewWorkout && <WorkoutModal isTemplate={false} templates={templates} updateFunction={handleWorkoutSubmit} closeModal={toggleNewWorkoutStatus} /> }
-        {editing && <EditWorkout selectedWorkout={selectedWorkout} closeEditBox={closeEditBox} updateWorkout={updateWorkout} handleWorkoutUpdate={handleWorkoutUpdate} />}
+        {editing && <EditWorkoutModal isTemplate={false} item={selectedWorkout} closeModal={closeEditBox} updateFunction={handleWorkoutUpdate} />}
         {workouts && workouts.length > 0 ? workouts.filter(workout => {
           if (search === "") {
             return workout

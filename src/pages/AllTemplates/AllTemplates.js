@@ -9,6 +9,7 @@ import TemplateComponent from '../../components/TemplateComponent'
 import EditTemplate from "../../components/EditTemplate"
 import DeletionModal from "../../components/DeletionModal"
 import WorkoutModal from "../../components/WorkoutModal"
+import EditWorkoutModal from "../../components/EditWorkoutModal"
 
 const AllTemplates = () => {
     const [creatingNewTemplate, setCreatingNewTemplate] = useState(false)
@@ -145,7 +146,7 @@ function openEditBox() {
   return (
     <div>
         {deletingTemplate && <DeletionModal type="template" item={selectedTemplate} closeModal={closeDeleteTemplateModal} removalFunction={deleteTemplate}/>}
-        {editingTemplate && <EditTemplate selectedTemplate={selectedTemplate} closeEditBox={closeEditBox} updateTemplate={updateTemplate} handleTemplateUpdate={handleTemplateUpdate} />}
+        {editingTemplate && <EditWorkoutModal isTemplate={true} item={selectedTemplate} closeModal={closeEditBox} updateFunction={handleTemplateUpdate} />}
         {creatingNewTemplate && <WorkoutModal isTemplate={true} closeModal={closeNewTemplateBox} updateFunction={createNewTemplate}/>}
         <h2>Templates</h2>
         <Button type="button" onClick={openNewTemplateBox}>Create New Template</Button>
