@@ -1,22 +1,22 @@
 import Container from "react-bootstrap/Container";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Signup from "./components/Signup"
-import Login from './components/Login';
+import Signup from "./pages/Signup/Signup"
+import Login from './pages/Login/Login';
 import { auth } from "./firebase"
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import PrivateRoute from "./components/PrivateRoute";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import Header from "./components/Header"
 import "./App.css"
 import Footer from "./components/Footer"
-import Profile from "./components/Profile"
-import AllWorkouts from "./components/AllWorkouts";
-import Home from "./components/Home";
+import Profile from "./pages/Profile/Profile"
+import AllWorkouts from "./pages/AllWorkouts/AllWorkouts";
+import Home from "./pages/Home/Home";
 import { AuthContext } from "./contexts/AuthContext"
-import WorkoutDetail from "./components/WorkoutDetail";
-import AllTemplates from "./components/AllTemplates";
-import TemplateDetail from "./components/TemplateDetail"
+import WorkoutDetail from "./pages/WorkoutDetail/WorkoutDetail";
+import AllTemplates from "./pages/AllTemplates/AllTemplates";
+import TemplateDetail from "./pages/TemplateDetail/TemplateDetail"
  
 function App() {
   const [user, setUser] = useState();

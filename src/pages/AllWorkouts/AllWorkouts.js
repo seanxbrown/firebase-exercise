@@ -1,14 +1,14 @@
 import { useState, useEffect, useContext } from "react"
-import { AuthContext } from "../contexts/AuthContext";
-import { database, set, ref, onValue, update } from "../firebase";
-import WorkoutComponent from "./WorkoutComponent";
-import DeleteWorkout from "./DeleteWorkout";
+import { AuthContext } from "../../contexts/AuthContext";
+import { database, set, ref, onValue, update } from "../../firebase";
+import WorkoutComponent from "../../components/WorkoutComponent";
+import DeleteWorkout from "../../components/DeleteWorkout";
 import { v4 as uuidv4 } from "uuid";
-import Workout from "./Workout";
-import AddNewWorkout from "./AddNewWorkout";
+import Workout from "../../components/Workout";
+import AddNewWorkout from "../../components/AddNewWorkout";
 import { Button, Form } from "react-bootstrap"
 import { Link } from "react-router-dom";
-import EditWorkout from "./EditWorkout";
+import EditWorkout from "../../components/EditWorkout";
 
 const AllWorkouts = () => {
   const [workouts, setWorkouts] = useState([])

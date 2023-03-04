@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Col, Button } from "react-bootstrap"
-import WorkoutComponent from './WorkoutComponent';
+import WorkoutComponent from '../../components/WorkoutComponent';
 import { Link } from "react-router-dom"
 
 const WorkoutsPreview = ({ toggleNewWorkoutStatus, workouts, openWorkoutDeletionBox, selectWorkout }) => {

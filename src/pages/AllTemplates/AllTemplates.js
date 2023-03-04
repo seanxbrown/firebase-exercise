@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from 'react'
 import { Link } from "react-router-dom"
 import { Button } from "react-bootstrap"
-import AddNewTemplate from "./AddNewTemplate"
-import { set, ref, database, onValue, update } from "../firebase"
-import { AuthContext } from '../contexts/AuthContext'
+import AddNewTemplate from "../../components/AddNewTemplate"
+import { set, ref, database, onValue, update } from "../../firebase"
+import { AuthContext } from '../../contexts/AuthContext'
 import { v4 as uuidv4 } from "uuid";
-import TemplateComponent from './TemplateComponent'
-import DeleteTemplateModal from "./DeleteTemplateModal"
-import EditTemplate from "./EditTemplate"
+import TemplateComponent from '../../components/TemplateComponent'
+import DeleteTemplateModal from "../../components/DeleteTemplateModal"
+import EditTemplate from "../../components/EditTemplate"
 
 const AllTemplates = () => {
     const [creatingNewTemplate, setCreatingNewTemplate] = useState(false)

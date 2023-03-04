@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import TemplateComponent from './TemplateComponent'
+import TemplateComponent from '../../components/TemplateComponent'
 
 const TemplatesPreview = ({ templates, openDeleteTemplateModa, selectTemplate }) => {
 

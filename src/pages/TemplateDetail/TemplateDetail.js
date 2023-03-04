@@ -1,14 +1,14 @@
 import { useState, useContext, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { onValue, ref, database, update } from '../firebase';
-import { AuthContext } from '../contexts/AuthContext';
+import { onValue, ref, database, update } from '../../firebase';
+import { AuthContext } from '../../contexts/AuthContext';
 import { Button } from "react-bootstrap"
-import AddTemplateExercise from "./AddTemplateExercise"
+import AddTemplateExercise from "../../components/AddTemplateExercise"
 import { v4 as uuidv4 } from "uuid";
-import TemplateExercise from './TemplateExercise';
-import TemplateExerciseComponent from "./TemplateExerciseComponent"
-import DeleteTemplateExerciseModal from "./DeleteTemplateExerciseModal"
-import EditTemplateExercise from "./EditTemplateExercise"
+import TemplateExercise from '../../components/TemplateExercise';
+import TemplateExerciseComponent from "../../components/TemplateExerciseComponent"
+import DeleteTemplateExerciseModal from "../../components/DeleteTemplateExerciseModal"
+import EditTemplateExercise from "../../components/EditTemplateExercise"
 
 
 const TemplateDetail = () => {

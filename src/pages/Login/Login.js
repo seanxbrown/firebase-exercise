@@ -1,9 +1,9 @@
 import { Container, Form, Button } from 'react-bootstrap';
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useContext } from "react";
-import { AuthContext } from '../contexts/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
  
 export default function Login() {
   const navigate = useNavigate();

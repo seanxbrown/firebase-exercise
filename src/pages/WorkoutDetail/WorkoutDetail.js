@@ -1,15 +1,15 @@
 import { useState, useEffect, useContext } from "react"
 import { useParams, Link } from "react-router-dom"
-import { AuthContext } from '../contexts/AuthContext'
+import { AuthContext } from '../../contexts/AuthContext'
 import { ref, onValue, update} from "firebase/database";
-import { database } from '../firebase';
-import ExerciseComponent from './ExerciseComponent';
-import AddNewExercise from './AddNewExercise';
+import { database } from '../../firebase';
+import ExerciseComponent from '../../components/ExerciseComponent';
+import AddNewExercise from '../../components/AddNewExercise';
 import { v4 as uuidv4 } from "uuid";
-import Exercise from './Exercise';
-import DeleteExercise from './DeleteExercise';
+import Exercise from '../../components/Exercise';
+import DeleteExercise from '../../components/DeleteExercise';
 import { Button } from "react-bootstrap";
-import EditExercise from "./EditExercise";
+import EditExercise from "../../components/EditExercise";
 
 const WorkoutDetail = () => {
     const [selectedUserWorkout, setSelectedUserWorkout] = useState({})

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Button } from "react-bootstrap"
-import ExerciseComponent from './ExerciseComponent'
+import ExerciseComponent from '../../components/ExerciseComponent'
 
 const ExercisePreview = ( { selectedWorkout, selectExercise, openExerciseDeletionBox, removeExerciseFromWorkout, toggleNewExerciseStatus}) => {
   return (
