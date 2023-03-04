@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import TemplateComponent from '../../components/TemplateComponent'
 import EditTemplate from "../../components/EditTemplate"
 import DeletionModal from "../../components/DeletionModal"
+import WorkoutModal from "../../components/WorkoutModal"
 
 const AllTemplates = () => {
     const [creatingNewTemplate, setCreatingNewTemplate] = useState(false)
@@ -28,7 +29,7 @@ const AllTemplates = () => {
     async function createNewTemplate() {
         const newTemplateWorkout = {
             id: uuidv4(),
-            name: document.getElementById("templateName").value,
+            name: document.getElementById("workoutTitle").value,
             date: new Date(Date.now()).toString()
         }
         const newTemplates = [...templates]
@@ -145,7 +146,7 @@ function openEditBox() {
     <div>
         {deletingTemplate && <DeletionModal type="template" item={selectedTemplate} closeModal={closeDeleteTemplateModal} removalFunction={deleteTemplate}/>}
         {editingTemplate && <EditTemplate selectedTemplate={selectedTemplate} closeEditBox={closeEditBox} updateTemplate={updateTemplate} handleTemplateUpdate={handleTemplateUpdate} />}
-        {creatingNewTemplate && <AddNewTemplate closeNewTemplateBox={closeNewTemplateBox} createNewTemplate={createNewTemplate}/>}
+        {creatingNewTemplate && <WorkoutModal isTemplate={true} closeModal={closeNewTemplateBox} updateFunction={createNewTemplate}/>}
         <h2>Templates</h2>
         <Button type="button" onClick={openNewTemplateBox}>Create New Template</Button>
         {templates && templates.map((template, key) => <TemplateComponent key={key} template={template} openEditBox={openEditBox} selectTemplate={selectTemplate} openDeleteTemplateModal={openDeleteTemplateModal} deleteTemplate={deleteTemplate}/>)}

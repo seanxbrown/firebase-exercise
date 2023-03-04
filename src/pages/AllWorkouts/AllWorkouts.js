@@ -9,6 +9,7 @@ import { Button, Form } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import EditWorkout from "../../components/EditWorkout";
 import DeletionModal from "../../components/DeletionModal"
+import WorkoutModal from "../../components/WorkoutModal"
 
 const AllWorkouts = () => {
   const [workouts, setWorkouts] = useState([])
@@ -78,8 +79,7 @@ function removeWorkoutFromList(id) {
   }
 }
 
-function handleWorkoutSubmit(e) {
-  e.preventDefault();
+function handleWorkoutSubmit() {
   const templateInput = document.getElementById("templateInput").value
   templateInput === "noTemplate" ? addWorkout() : createWorkoutFromTemplate(templateInput)
   
@@ -215,7 +215,7 @@ useEffect(() => {
         </div>
         <Form.Control type="text" className="mb-4" id="workoutSearchBar" placeholder="Search" onChange={searchChangeHandler}/>
         {deletingWorkout && <DeletionModal type="workout" item={selectedWorkout} closeModal={closeWorkoutDeletionBox} removalFunction={removeWorkoutFromList}/>}
-        {creatingNewWorkout && <AddNewWorkout templates={templates} handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
+        {creatingNewWorkout && <WorkoutModal isTemplate={false} templates={templates} updateFunction={handleWorkoutSubmit} closeModal={toggleNewWorkoutStatus} /> }
         {editing && <EditWorkout selectedWorkout={selectedWorkout} closeEditBox={closeEditBox} updateWorkout={updateWorkout} handleWorkoutUpdate={handleWorkoutUpdate} />}
         {workouts && workouts.length > 0 ? workouts.filter(workout => {
           if (search === "") {
