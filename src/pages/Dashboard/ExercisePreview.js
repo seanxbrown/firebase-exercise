@@ -4,7 +4,7 @@ import ExerciseComponent from '../../components/ExerciseComponent'
 
 const ExercisePreview = ( { selectedWorkout, selectExercise, openExerciseDeletionBox, removeExerciseFromWorkout, toggleNewExerciseStatus}) => {
   return (
-    <Col xs={12} sm={7} id="exerciseDiv" className="p-0">
+    <Col xs={12} sm={7} id="exerciseDiv" className="border border-1 border-dark rounded p-2">
         <div className="d-flex flex-column" id="exerciseColumnHeader">
             <h2 className="text-center">Exercises {selectedWorkout ? `(${selectedWorkout.title})` : null}</h2>
         </div>

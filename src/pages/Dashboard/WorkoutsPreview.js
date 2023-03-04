@@ -18,7 +18,7 @@ const WorkoutsPreview = ({ workouts, openWorkoutDeletionBox, selectWorkout }) =>
     },[workouts])
     
   return (
-    <Col xs={12} sm={5} id="workoutDiv" className="border-end border-1 border-light p-1">
+    <Col xs={12} sm={5} id="workoutDiv" className="border border-1 border-dark rounded p-2">
         <div className="d-flex flex-column" id="workoutColumnHeader">
             <h2 className="text-center">Workouts</h2>
         </div>

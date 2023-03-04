@@ -161,6 +161,8 @@ useEffect(() => {
     <Row id="dashboard" className="p-4 position-relative">
         <WorkoutsPreview toggleNewWorkoutStatus={toggleNewWorkoutStatus} workouts={workouts} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout}/>
         <ExercisePreview toggleNewExerciseStatus={toggleNewExerciseStatus} selectedWorkout={selectedWorkout} selectExercise={selectExercise} openExerciseDeletionBox={openExerciseDeletionBox} removeExerciseFromWorkout={removeExerciseFromWorkout} />
+    </Row>
+    <Row className="p-4 position-relative">
         <TemplatesPreview templates={templates} openDeleteTemplateModal={openDeleteTemplateModal} selectTemplate={selectTemplate}/>
     </Row>
     </>

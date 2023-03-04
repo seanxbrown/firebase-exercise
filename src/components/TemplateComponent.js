@@ -5,7 +5,7 @@ const TemplateComponent = ({ preview, template, openDeleteTemplateModal, selectT
   return (
         <Row className=" workoutData align-items-center" id={template.id} onClick={()=> selectTemplate(template.id)}>
         <Col xs={5}>{template.name}</Col>
-        <Col xs={1}>
+        <Col xs={5}>
           <Link to={`/firebase-exercise/templates/${template.id}`}>View</Link>
         </Col>
         {!preview && <Col xs={1}>

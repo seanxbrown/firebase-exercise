@@ -18,10 +18,13 @@ useEffect(()=> {
 },[templates])
 
   return (
-    <Col xs={12} className="text-dark">
-        <h2>Templates Preview</h2>
+    <Col xs={12} className="border border-1 border-dark rounded px-5 py-4">
+        <h2 className="text-center">Templates</h2>
+        <div  className="mb-4">
         {templates && templates.length > 0 ?
                 createTemplatesPreview(templates).map(template => <TemplateComponent key={template.id} preview={true} openDeleteTemplateModa={openDeleteTemplateModa} selectTemplate={selectTemplate} template={template}/> ) : <h3 className="fw-bold text-center">No templates saved.</h3>}
+
+        </div>        
         <Link to="/firebase-exercise/templates">View all templates</Link>
     </Col>
   )
