@@ -7,7 +7,6 @@ import ExerciseComponent from '../../components/ExerciseComponent';
 import AddNewExercise from '../../components/AddNewExercise';
 import { v4 as uuidv4 } from "uuid";
 import Exercise from '../../components/Exercise';
-import DeleteExercise from '../../components/DeleteExercise';
 import { Button } from "react-bootstrap";
 import EditExercise from "../../components/EditExercise";
 import DeletionModal from "../../components/DeletionModal"

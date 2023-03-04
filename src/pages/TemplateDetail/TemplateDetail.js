@@ -7,7 +7,6 @@ import AddTemplateExercise from "../../components/AddTemplateExercise"
 import { v4 as uuidv4 } from "uuid";
 import TemplateExercise from '../../components/TemplateExercise';
 import TemplateExerciseComponent from "../../components/TemplateExerciseComponent"
-import DeleteTemplateExerciseModal from "../../components/DeleteTemplateExerciseModal"
 import EditTemplateExercise from "../../components/EditTemplateExercise"
 import DeletionModal from "../../components/DeletionModal"
 

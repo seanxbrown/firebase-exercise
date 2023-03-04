@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from "react"
 import { AuthContext } from "../../contexts/AuthContext";
 import { database, set, ref, onValue, update } from "../../firebase";
 import WorkoutComponent from "../../components/WorkoutComponent";
-import DeleteWorkout from "../../components/DeleteWorkout";
 import { v4 as uuidv4 } from "uuid";
 import Workout from "../../components/Workout";
 import AddNewWorkout from "../../components/AddNewWorkout";

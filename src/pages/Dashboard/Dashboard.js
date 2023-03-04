@@ -6,8 +6,6 @@ import AddNewExercise from "../../components/AddNewExercise";
 import { database, set, ref, onValue, update } from "../../firebase";
 import Workout from "../../components/Workout";
 import Exercise from '../../components/Exercise';
-import DeleteWorkout from '../../components/DeleteWorkout';
-import DeleteExercise from '../../components/DeleteExercise';
 import { AuthContext } from '../../contexts/AuthContext';
 import WorkoutsPreview from './WorkoutsPreview';
 import ExercisePreview from './ExercisePreview';
@@ -77,8 +75,6 @@ function handleWorkoutSubmit(e) {
     const templateInput = document.getElementById("templateInput").value
     templateInput === "noTemplate" ? addWorkout() : createWorkoutFromTemplate(templateInput)
     
-    //Add conditional = if the value of the template option isn't "noTemplate", call add workout, else use template function
-    //addWorkout();
 }
 
 function openWorkoutDeletionBox(workout) {
@@ -278,8 +274,6 @@ useEffect(() => {
     <h2 className="py-3 text-center fw-bold">Dashboard</h2>
     <Row id="dashboard" className="p-4 position-relative">
         {creatingNewWorkout && <AddNewWorkout templates={templates} handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
-        {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
-        {deletingExercise && <DeleteExercise selectedExercise={selectedExercise} removeExerciseFromWorkout={removeExerciseFromWorkout} closeExerciseDeletionBox={closeExerciseDeletionBox}/>}
         {addingNewExercise && <AddNewExercise selectedWorkout={selectedWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
         <WorkoutsPreview toggleNewWorkoutStatus={toggleNewWorkoutStatus} workouts={workouts} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout}/>
         <ExercisePreview toggleNewExerciseStatus={toggleNewExerciseStatus} selectedWorkout={selectedWorkout} selectExercise={selectExercise} openExerciseDeletionBox={openExerciseDeletionBox} removeExerciseFromWorkout={removeExerciseFromWorkout} />
