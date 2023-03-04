@@ -9,7 +9,7 @@ import TemplateExercise from '../../components/TemplateExercise';
 import TemplateExerciseComponent from "../../components/TemplateExerciseComponent"
 import DeleteTemplateExerciseModal from "../../components/DeleteTemplateExerciseModal"
 import EditTemplateExercise from "../../components/EditTemplateExercise"
-
+import DeletionModal from "../../components/DeletionModal"
 
 const TemplateDetail = () => {
     const {templateid: templateID} = useParams();
@@ -19,8 +19,6 @@ const TemplateDetail = () => {
     const [selectedTemplateExercise, setSelectedTemplateExercise] = useState({})
     const [deletingExercise, setDeletingExercise] = useState(false);
     const [editing, setEditing] = useState(false)
-
-
     const user = useContext(AuthContext)
 
     function getDataForOneTemplate() {
@@ -179,7 +177,7 @@ function closeEditBox() {
   return (
     <div className="text-dark">
       {addingNewExercise && <AddTemplateExercise addExerciseToTemplate={addExerciseToTemplate} closeNewExerciseBox={closeNewExerciseBox} selectedUserTemplate={selectedUserTemplate} /> }
-      {deletingExercise && <DeleteTemplateExerciseModal selectedTemplateExercise={selectedTemplateExercise} removeExerciseFromTemplate={removeExerciseFromTemplate} closeTemplateExerciseDeletionBox={closeTemplateExerciseDeletionBox}/>}
+      {deletingExercise && <DeletionModal type="exercise" item={selectedTemplateExercise} removalFunction={removeExerciseFromTemplate} closeModal={closeTemplateExerciseDeletionBox}/>}
       {editing && <EditTemplateExercise selectedTemplateExercise={selectedTemplateExercise} closeEditBox={closeEditBox} handleTemplateExerciseUpdate={handleTemplateExerciseUpdate}/>}
 
       <h2>{selectedUserTemplate.name}</h2>
@@ -202,5 +200,3 @@ function closeEditBox() {
 }
 
 export default TemplateDetail
-
-//Next steps: Add ability to delete template exercises, add ability to update template workouts/ exercises, add ability to use template workouts

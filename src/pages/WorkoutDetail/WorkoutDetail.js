@@ -10,6 +10,7 @@ import Exercise from '../../components/Exercise';
 import DeleteExercise from '../../components/DeleteExercise';
 import { Button } from "react-bootstrap";
 import EditExercise from "../../components/EditExercise";
+import DeletionModal from "../../components/DeletionModal"
 
 const WorkoutDetail = () => {
     const [selectedUserWorkout, setSelectedUserWorkout] = useState({})
@@ -105,19 +106,18 @@ const WorkoutDetail = () => {
     }
 
     //Identify correct workout. Return if no exercises, else remove selected exercise from the selected workout
-function removeExerciseFromWorkout(selectedExercise) {
+function removeExerciseFromWorkout(id) {
     const newWorkouts = [...allUserWorkouts];
     for (let workout of newWorkouts) {
         if(selectedUserWorkout.id === workout.id) {
             if (!workout.exercises) {return}
-            workout.exercises = workout.exercises.filter(exercise => exercise.id !== selectedExercise.id);
+            workout.exercises = workout.exercises.filter(exercise => exercise.id !== id);
         }
     }
     //Also needs to be removed from selected workout, otherwise there will be a display error
     const newSelectedWorkout = {...selectedUserWorkout};
-    newSelectedWorkout.exercises = newSelectedWorkout.exercises.filter(exercise => exercise.id !== selectedExercise.id);
+    newSelectedWorkout.exercises = newSelectedWorkout.exercises.filter(exercise => exercise.id !== id);
     setSelectedUserWorkout(newSelectedWorkout);
-    console.log(newWorkouts)
     
     try {
         update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
@@ -184,7 +184,7 @@ async function handleExerciseUpdate(e) {
             <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary align-self-center mb-3 rounded-pill text-center">Add New Exercise</Button>
          </div>
         {addingNewExercise && <AddNewExercise selectedWorkout={selectedUserWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
-        {deletingExercise && <DeleteExercise selectedExercise={selectedExercise} removeExerciseFromWorkout={removeExerciseFromWorkout} closeExerciseDeletionBox={closeExerciseDeletionBox}/>}
+        {deletingExercise && <DeletionModal type="exercise" item={selectedExercise} removalFunction={removeExerciseFromWorkout} closeModal={closeExerciseDeletionBox}/>}
         {editing && <EditExercise selectedExercise={selectedExercise} closeEditBox={closeEditBox} handleExerciseUpdate={handleExerciseUpdate}/>}
         {selectedUserWorkout && selectedUserWorkout.exercises && selectedUserWorkout.exercises.length > 0 ? 
             selectedUserWorkout.exercises.map(exercise => 

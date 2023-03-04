@@ -9,6 +9,7 @@ import AddNewWorkout from "../../components/AddNewWorkout";
 import { Button, Form } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import EditWorkout from "../../components/EditWorkout";
+import DeletionModal from "../../components/DeletionModal"
 
 const AllWorkouts = () => {
   const [workouts, setWorkouts] = useState([])
@@ -214,7 +215,7 @@ useEffect(() => {
           <Button type="button" onClick={toggleNewWorkoutStatus} className="btn btn-primary align-self-center mb-3 rounded-pill">Add New Workout</Button>    
         </div>
         <Form.Control type="text" className="mb-4" id="workoutSearchBar" placeholder="Search" onChange={searchChangeHandler}/>
-        {deletingWorkout && <DeleteWorkout workout={selectedWorkout} closeWorkoutDeletionBox={closeWorkoutDeletionBox} removeWorkoutFromList={removeWorkoutFromList}/>}
+        {deletingWorkout && <DeletionModal type="workout" item={selectedWorkout} closeModal={closeWorkoutDeletionBox} removalFunction={removeWorkoutFromList}/>}
         {creatingNewWorkout && <AddNewWorkout templates={templates} handleWorkoutSubmit={handleWorkoutSubmit} toggleNewWorkoutStatus={toggleNewWorkoutStatus} /> }
         {editing && <EditWorkout selectedWorkout={selectedWorkout} closeEditBox={closeEditBox} updateWorkout={updateWorkout} handleWorkoutUpdate={handleWorkoutUpdate} />}
         {workouts && workouts.length > 0 ? workouts.filter(workout => {
