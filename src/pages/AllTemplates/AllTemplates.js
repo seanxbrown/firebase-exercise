@@ -148,8 +148,10 @@ function openEditBox() {
         :  creatingNewTemplate ? <WorkoutModal isEdit={false} isTemplate={true} closeModal={closeNewTemplateBox} updateFunction={createNewTemplate}/>
         : null 
         }
-        <h2>Templates</h2>
-        <Button type="button" onClick={openNewTemplateBox}>Create New Template</Button>
+        <div className="d-flex gap-4 justify-content-center">
+            <h2 className="text-center fw-bold py-5">My templates</h2>
+            <Button type="button" className="btn btn-primary align-self-center mb-3 rounded-pill" onClick={openNewTemplateBox}>Create New Template</Button>
+        </div>
         {templates && templates.map((template, key) => <TemplateComponent key={key} template={template} openEditBox={openEditBox} selectTemplate={selectTemplate} openDeleteTemplateModal={openDeleteTemplateModal} deleteTemplate={deleteTemplate}/>)}
         <Link to="/firebase-exercise/dashboard">Return to dashboard</Link>
     </div>
