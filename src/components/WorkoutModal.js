@@ -1,7 +1,8 @@
-import { Form, Container, Button, CloseButton } from "react-bootstrap"
+import React from 'react'
+import { Container, Form, Button, CloseButton } from "react-bootstrap"
 
-const WorkoutModal = ( { isTemplate, closeModal, updateFunction, templates = []}) => {
 
+const WorkoutModal = ({ item = {}, isEdit, isTemplate, closeModal, updateFunction, templates = []}) => {
     function handleSubmit(e) {
         e.preventDefault()
         updateFunction()
@@ -13,7 +14,7 @@ const WorkoutModal = ( { isTemplate, closeModal, updateFunction, templates = []}
         <Form onSubmit={handleSubmit}>
             <Form.Group>
                 <Form.Label>Title</Form.Label>
-                <Form.Control id="workoutTitle" type="text" list="datalistOptions" placeholder="Select or enter a workout" maxLength="30" />
+                <Form.Control id="workoutTitle" type="text" list="datalistOptions" placeholder="Select or enter a workout" maxLength="30" defaultValue={isEdit && item.title || isEdit && item.name || ""}/>
                 <datalist id="datalistOptions">
                 <option value="Upper Body" />
                 <option value="Lower Body" />
@@ -27,7 +28,7 @@ const WorkoutModal = ( { isTemplate, closeModal, updateFunction, templates = []}
                 <option value="Arms" />
                 </datalist>
             </Form.Group>
-            {!isTemplate && <Form.Group>
+            {!isTemplate && !isEdit && <Form.Group>
               <Form.Label>Create from Template</Form.Label>
               <Form.Select id="templateInput">
                 <option value="noTemplate">--</option>
@@ -36,7 +37,7 @@ const WorkoutModal = ( { isTemplate, closeModal, updateFunction, templates = []}
             </Form.Group> }
             {!isTemplate && <Form.Group>
                 <Form.Label>Date</Form.Label>
-                <Form.Control required id="workoutDate" type="date"/>
+                <Form.Control required id="workoutDate" type="date" defaultValue={isEdit && item && item.date || ""}/>
             </Form.Group> }
             <Button type="submit" className="btn btn-primary rounded-pill mt-3">Create Workout or Template</Button>
         </Form>

@@ -7,8 +7,6 @@ import { v4 as uuidv4 } from "uuid";
 import TemplateComponent from '../../components/TemplateComponent'
 import DeletionModal from "../../components/DeletionModal"
 import WorkoutModal from "../../components/WorkoutModal"
-import EditWorkoutModal from "../../components/EditWorkoutModal"
-import NewWorkoutModal from "../../components/NewWorkoutModal"
 
 
 const AllTemplates = () => {
@@ -146,8 +144,8 @@ function openEditBox() {
   return (
     <div>
         {deletingTemplate && <DeletionModal type="template" item={selectedTemplate} closeModal={closeDeleteTemplateModal} removalFunction={deleteTemplate}/>}
-        {editingTemplate ? <NewWorkoutModal isEdit={true} isTemplate={true} item={selectedTemplate} closeModal={closeEditBox} updateFunction={handleTemplateUpdate} />
-        :  creatingNewTemplate ? <NewWorkoutModal isEdit={false} isTemplate={true} closeModal={closeNewTemplateBox} updateFunction={createNewTemplate}/>
+        {editingTemplate ? <WorkoutModal isEdit={true} isTemplate={true} item={selectedTemplate} closeModal={closeEditBox} updateFunction={handleTemplateUpdate} />
+        :  creatingNewTemplate ? <WorkoutModal isEdit={false} isTemplate={true} closeModal={closeNewTemplateBox} updateFunction={createNewTemplate}/>
         : null 
         }
         <h2>Templates</h2>

@@ -8,8 +8,6 @@ import { Button, Form } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import DeletionModal from "../../components/DeletionModal"
 import WorkoutModal from "../../components/WorkoutModal"
-import EditWorkoutModal from "../../components/EditWorkoutModal"
-import NewWorkoutModal from "../../components/NewWorkoutModal"
 
 const AllWorkouts = () => {
   const [workouts, setWorkouts] = useState([])
@@ -218,8 +216,8 @@ useEffect(() => {
         </div>
         <Form.Control type="text" className="mb-4" id="workoutSearchBar" placeholder="Search" onChange={searchChangeHandler}/>
         {deletingWorkout && <DeletionModal type="workout" item={selectedWorkout} closeModal={closeWorkoutDeletionBox} removalFunction={removeWorkoutFromList}/>}
-        {creatingNewWorkout ?  <NewWorkoutModal isEdit={false} isTemplate={false} templates={templates} updateFunction={handleWorkoutSubmit} closeModal={toggleNewWorkoutStatus} /> 
-        : editing ? <NewWorkoutModal isEdit={true} isTemplate={false} item={selectedWorkout} closeModal={closeEditBox} updateFunction={handleWorkoutUpdate} /> 
+        {creatingNewWorkout ?  <WorkoutModal isEdit={false} isTemplate={false} templates={templates} updateFunction={handleWorkoutSubmit} closeModal={toggleNewWorkoutStatus} /> 
+        : editing ? <WorkoutModal isEdit={true} isTemplate={false} item={selectedWorkout} closeModal={closeEditBox} updateFunction={handleWorkoutUpdate} /> 
         : null
         }
         {workouts && workouts.length > 0 ? workouts.filter(workout => {
