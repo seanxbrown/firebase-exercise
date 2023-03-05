@@ -4,7 +4,7 @@ const ExerciseComponent = ({ preview, exercise, openExerciseDeletionBox, selectE
 
     return (
         <>
-            <Row xs={3}className="justify-content-center workoutData align-items-center pb-0" id={exercise.id} onClick={() => selectExercise(exercise)}>
+            <Row xs={3}className="justify-content-center workoutData align-items-center pb-1" id={exercise.id} onClick={() => selectExercise(exercise)}>
                 <Col sm={2}>
                     <p>{exercise.name}</p>
                 </Col>
