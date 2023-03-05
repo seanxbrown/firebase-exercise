@@ -9,6 +9,7 @@ import TemplateExercise from '../../components/TemplateExercise';
 import TemplateExerciseComponent from "../../components/TemplateExerciseComponent"
 import EditTemplateExercise from "../../components/EditTemplateExercise"
 import DeletionModal from "../../components/DeletionModal"
+import ExerciseModal from "../../components/ExerciseModal"
 
 const TemplateDetail = () => {
     const {templateid: templateID} = useParams();
@@ -175,7 +176,7 @@ function closeEditBox() {
 
   return (
     <div className="text-dark">
-      {addingNewExercise && <AddTemplateExercise addExerciseToTemplate={addExerciseToTemplate} closeNewExerciseBox={closeNewExerciseBox} selectedUserTemplate={selectedUserTemplate} /> }
+      {addingNewExercise && <ExerciseModal isEdit={false} isTemplate={true} updateFunction={addExerciseToTemplate} closeModal={closeNewExerciseBox} workoutItem={selectedUserTemplate} exerciseItem={selectedTemplateExercise}/> }
       {deletingExercise && <DeletionModal type="exercise" item={selectedTemplateExercise} removalFunction={removeExerciseFromTemplate} closeModal={closeTemplateExerciseDeletionBox}/>}
       {editing && <EditTemplateExercise selectedTemplateExercise={selectedTemplateExercise} closeEditBox={closeEditBox} handleTemplateExerciseUpdate={handleTemplateExerciseUpdate}/>}
 

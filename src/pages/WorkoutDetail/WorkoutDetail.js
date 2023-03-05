@@ -10,6 +10,7 @@ import Exercise from '../../components/Exercise';
 import { Button } from "react-bootstrap";
 import EditExercise from "../../components/EditExercise";
 import DeletionModal from "../../components/DeletionModal"
+import ExerciseModal from "../../components/ExerciseModal"
 
 const WorkoutDetail = () => {
     const [selectedUserWorkout, setSelectedUserWorkout] = useState({})
@@ -53,6 +54,7 @@ const WorkoutDetail = () => {
     }
     function openEditBox() {
         setEditing(true)
+        setAddingNewExercise(false)
       }
       
       function closeEditBox() {
@@ -129,8 +131,13 @@ function removeExerciseFromWorkout(id) {
     setDeletingExercise(false)
 }
 
-function toggleNewExerciseStatus() {
-    setAddingNewExercise(addingNewExercise => !addingNewExercise);
+function openNewExerciseBox() {
+    setAddingNewExercise(true);
+}
+
+function closeNewExerciseBox() {
+    setAddingNewExercise(false);
+    setEditing(false)
 }
 
 async function handleExerciseUpdate(e) {
@@ -180,11 +187,15 @@ async function handleExerciseUpdate(e) {
     <div className="text-dark position-relative">
         <h2 className="fw-bold py-4 text-center">Workout: {selectedUserWorkout && selectedUserWorkout.title}</h2>
         <div className="d-flex gap-4 mb-3 justify-content-center" id="exerciseTitleButtonContainer">
-            <Button type="button" onClick={toggleNewExerciseStatus} className="btn btn-primary align-self-center mb-3 rounded-pill text-center">Add New Exercise</Button>
+            <Button type="button" onClick={openNewExerciseBox} className="btn btn-primary align-self-center mb-3 rounded-pill text-center">Add New Exercise</Button>
          </div>
-        {addingNewExercise && <AddNewExercise selectedWorkout={selectedUserWorkout} addExerciseToWorkout={addExerciseToWorkout} toggleNewExerciseStatus={toggleNewExerciseStatus}/> }
+        {addingNewExercise ?
+         <ExerciseModal isEdit={false} isTemplate={false} workoutItem={selectedUserWorkout} updateFunction={addExerciseToWorkout} closeModal={closeNewExerciseBox}/> 
+         : editing ? <ExerciseModal isEdit={true} isTemplate={false} workoutItem={selectedUserWorkout} exerciseItem={selectedExercise} closeModal={closeEditBox} updateFunction={handleExerciseUpdate}/>
+        : null
+        }
+
         {deletingExercise && <DeletionModal type="exercise" item={selectedExercise} removalFunction={removeExerciseFromWorkout} closeModal={closeExerciseDeletionBox}/>}
-        {editing && <EditExercise selectedExercise={selectedExercise} closeEditBox={closeEditBox} handleExerciseUpdate={handleExerciseUpdate}/>}
         {selectedUserWorkout && selectedUserWorkout.exercises && selectedUserWorkout.exercises.length > 0 ? 
             selectedUserWorkout.exercises.map(exercise => 
             <ExerciseComponent 
