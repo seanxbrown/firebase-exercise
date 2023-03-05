@@ -5,7 +5,6 @@ const ExerciseModal = ({ isTemplate, isEdit, closeModal, updateFunction, workout
   return (
     <Container className="border border-1 border-secondary p-5 bg-light" id="addExerciseDiv">
         <h2>Add Exercise to {workoutItem && workoutItem.title || workoutItem && workoutItem.name}</h2>
-        <p>{isEdit ? "Editing" : "No editing"}</p>
         <CloseButton onClick={closeModal} className="float-end"/>
         <Form onSubmit={updateFunction}>
             <Form.Group>
