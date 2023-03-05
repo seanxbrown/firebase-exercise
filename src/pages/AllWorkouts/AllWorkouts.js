@@ -8,7 +8,7 @@ import { Button, Form } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import DeletionModal from "../../components/DeletionModal"
 import WorkoutModal from "../../components/WorkoutModal"
-import Header from "../../components/Header"
+import Header from "../../components/layouts/Header"
 
 const AllWorkouts = () => {
   const [workouts, setWorkouts] = useState([])

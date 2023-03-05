@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 import TemplateComponent from '../../components/TemplateComponent'
 import DeletionModal from "../../components/DeletionModal"
 import WorkoutModal from "../../components/WorkoutModal"
-import Header from '../../components/Header'
+import Header from '../../components/layouts/Header'
 
 
 const AllTemplates = () => {

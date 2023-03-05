@@ -7,9 +7,9 @@ import { auth } from "./firebase"
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import Navigation from "./components/Navigation"
+import Navigation from "./components/layouts/Navigation"
 import "./App.css"
-import Footer from "./components/Footer"
+import Footer from "./components/layouts/Footer"
 import Profile from "./pages/Profile/Profile"
 import AllWorkouts from "./pages/AllWorkouts/AllWorkouts";
 import Home from "./pages/Home/Home";
