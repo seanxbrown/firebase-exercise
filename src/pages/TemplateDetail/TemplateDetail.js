@@ -8,6 +8,8 @@ import TemplateExercise from '../../utils/templateexercise';
 import TemplateExerciseComponent from "../../components/TemplateExerciseComponent"
 import DeletionModal from "../../components/DeletionModal"
 import ExerciseModal from "../../components/ExerciseModal"
+import Header from "../../components/layouts/Header"
+
 
 const TemplateDetail = () => {
     const {templateid: templateID} = useParams();
@@ -174,14 +176,13 @@ function closeEditBox() {
 
   return (
     <div className="text-dark">
+      <Header title={selectedUserTemplate.name} buttonFunction={openNewExerciseBox} buttonText="Add Exercise"/>
+
       {addingNewExercise ? <ExerciseModal isEdit={false} isTemplate={true} updateFunction={addExerciseToTemplate} closeModal={closeNewExerciseBox} workoutItem={selectedUserTemplate} exerciseItem={selectedTemplateExercise}/> 
       : editing ? <ExerciseModal isEdit={true} isTemplate={true} workoutItem={selectedUserTemplate} exerciseItem={selectedTemplateExercise} closeModal={closeEditBox} updateFunction={handleTemplateExerciseUpdate}/>
     : null}
       {deletingExercise && <DeletionModal type="exercise" item={selectedTemplateExercise} removalFunction={removeExerciseFromTemplate} closeModal={closeTemplateExerciseDeletionBox}/>}
       
-
-      <h2>{selectedUserTemplate.name}</h2>
-      <Button type="button" onClick={openNewExerciseBox}>Add Exercise</Button>
       {selectedUserTemplate && selectedUserTemplate.exercises && selectedUserTemplate.exercises.length > 0 ? 
             selectedUserTemplate.exercises.map(exercise => 
             <TemplateExerciseComponent 

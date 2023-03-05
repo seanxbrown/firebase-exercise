@@ -9,6 +9,7 @@ import Exercise from '../../utils/exercise';
 import { Button } from "react-bootstrap";
 import DeletionModal from "../../components/DeletionModal"
 import ExerciseModal from "../../components/ExerciseModal"
+import Header from "../../components/layouts/Header"
 
 const WorkoutDetail = () => {
     const [selectedUserWorkout, setSelectedUserWorkout] = useState({})
@@ -183,10 +184,7 @@ async function handleExerciseUpdate(e) {
 
   return (
     <div className="text-dark position-relative">
-        <h2 className="fw-bold py-4 text-center">Workout: {selectedUserWorkout && selectedUserWorkout.title}</h2>
-        <div className="d-flex gap-4 mb-3 justify-content-center" id="exerciseTitleButtonContainer">
-            <Button type="button" onClick={openNewExerciseBox} className="btn btn-primary align-self-center mb-3 rounded-pill text-center">Add New Exercise</Button>
-         </div>
+        <Header title={selectedUserWorkout.title} buttonFunction={openNewExerciseBox} buttonText="Add New Exercise"/>
         {addingNewExercise ?
          <ExerciseModal isEdit={false} isTemplate={false} workoutItem={selectedUserWorkout} updateFunction={addExerciseToWorkout} closeModal={closeNewExerciseBox}/> 
          : editing ? <ExerciseModal isEdit={true} isTemplate={false} workoutItem={selectedUserWorkout} exerciseItem={selectedExercise} closeModal={closeEditBox} updateFunction={handleExerciseUpdate}/>
