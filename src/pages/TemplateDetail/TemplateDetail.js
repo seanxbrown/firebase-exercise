@@ -4,7 +4,7 @@ import { onValue, ref, database, update } from '../../firebase';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Button } from "react-bootstrap"
 import { v4 as uuidv4 } from "uuid";
-import TemplateExercise from '../../components/TemplateExercise';
+import TemplateExercise from '../../utils/templateexercise';
 import TemplateExerciseComponent from "../../components/TemplateExerciseComponent"
 import DeletionModal from "../../components/DeletionModal"
 import ExerciseModal from "../../components/ExerciseModal"
