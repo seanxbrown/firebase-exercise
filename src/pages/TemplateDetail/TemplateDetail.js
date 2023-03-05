@@ -176,9 +176,11 @@ function closeEditBox() {
 
   return (
     <div className="text-dark">
-      {addingNewExercise && <ExerciseModal isEdit={false} isTemplate={true} updateFunction={addExerciseToTemplate} closeModal={closeNewExerciseBox} workoutItem={selectedUserTemplate} exerciseItem={selectedTemplateExercise}/> }
+      {addingNewExercise ? <ExerciseModal isEdit={false} isTemplate={true} updateFunction={addExerciseToTemplate} closeModal={closeNewExerciseBox} workoutItem={selectedUserTemplate} exerciseItem={selectedTemplateExercise}/> 
+      : editing ? <ExerciseModal isEdit={true} isTemplate={true} workoutItem={selectedUserTemplate} exerciseItem={selectedTemplateExercise} closeModal={closeEditBox} updateFunction={handleTemplateExerciseUpdate}/>
+    : null}
       {deletingExercise && <DeletionModal type="exercise" item={selectedTemplateExercise} removalFunction={removeExerciseFromTemplate} closeModal={closeTemplateExerciseDeletionBox}/>}
-      {editing && <EditTemplateExercise selectedTemplateExercise={selectedTemplateExercise} closeEditBox={closeEditBox} handleTemplateExerciseUpdate={handleTemplateExerciseUpdate}/>}
+      
 
       <h2>{selectedUserTemplate.name}</h2>
       <Button type="button" onClick={openNewExerciseBox}>Add Exercise</Button>
