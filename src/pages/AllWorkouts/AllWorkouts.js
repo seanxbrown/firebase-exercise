@@ -141,7 +141,7 @@ async function updateWorkout(item){
 }
 
 function searchChangeHandler(e) {
-  setSearch(search => e.target.value)
+  setSearch(e.target.value.toLowerCase())
 }
 
 function getTemplateData() {
@@ -222,7 +222,7 @@ useEffect(() => {
           if (search === "") {
             return workout
           } else {
-            return workout.title.includes(search) || workout.date.includes(search)
+            return workout.title.toLowerCase().includes(search) || workout.date.includes(search)
           }
         })
         .map(workout => 
