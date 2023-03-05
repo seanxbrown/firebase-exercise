@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 import TemplateComponent from '../../components/TemplateComponent'
 import DeletionModal from "../../components/DeletionModal"
 import WorkoutModal from "../../components/WorkoutModal"
+import Header from '../../components/Header'
 
 
 const AllTemplates = () => {
@@ -143,15 +144,12 @@ function openEditBox() {
     
   return (
     <div>
+        <Header title="My templates" buttonFunction={openNewTemplateBox} buttonText="Create New Template" />
         {deletingTemplate && <DeletionModal type="template" item={selectedTemplate} closeModal={closeDeleteTemplateModal} removalFunction={deleteTemplate}/>}
         {editingTemplate ? <WorkoutModal isEdit={true} isTemplate={true} item={selectedTemplate} closeModal={closeEditBox} updateFunction={handleTemplateUpdate} />
         :  creatingNewTemplate ? <WorkoutModal isEdit={false} isTemplate={true} closeModal={closeNewTemplateBox} updateFunction={createNewTemplate}/>
         : null 
         }
-        <div className="d-flex gap-4 justify-content-center">
-            <h2 className="text-center fw-bold py-5">My templates</h2>
-            <Button type="button" className="btn btn-primary align-self-center mb-3 rounded-pill" onClick={openNewTemplateBox}>Create New Template</Button>
-        </div>
         {templates && templates.map((template, key) => <TemplateComponent key={key} template={template} openEditBox={openEditBox} selectTemplate={selectTemplate} openDeleteTemplateModal={openDeleteTemplateModal} deleteTemplate={deleteTemplate}/>)}
         <Link to="/firebase-exercise/dashboard">Return to dashboard</Link>
     </div>

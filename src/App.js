@@ -7,7 +7,7 @@ import { auth } from "./firebase"
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import Header from "./components/Header"
+import Navigation from "./components/Navigation"
 import "./App.css"
 import Footer from "./components/Footer"
 import Profile from "./pages/Profile/Profile"
@@ -39,7 +39,7 @@ function App() {
   return (
     <AuthContext.Provider value={user}>
       <BrowserRouter>
-        <Header logOut={logOut} />
+        <Navigation logOut={logOut} />
         <Container fluid className="App min-vh-100 text-light overflow-scroll position-relative">
           <Routes>
             <Route path="/firebase-exercise/signup" element={<Signup />} />
