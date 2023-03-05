@@ -4,11 +4,9 @@ import { AuthContext } from '../../contexts/AuthContext'
 import { ref, onValue, update} from "firebase/database";
 import { database } from '../../firebase';
 import ExerciseComponent from '../../components/ExerciseComponent';
-import AddNewExercise from '../../components/AddNewExercise';
 import { v4 as uuidv4 } from "uuid";
 import Exercise from '../../components/Exercise';
 import { Button } from "react-bootstrap";
-import EditExercise from "../../components/EditExercise";
 import DeletionModal from "../../components/DeletionModal"
 import ExerciseModal from "../../components/ExerciseModal"
 

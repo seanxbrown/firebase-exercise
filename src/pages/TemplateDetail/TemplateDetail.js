@@ -3,11 +3,9 @@ import { useParams, Link } from 'react-router-dom'
 import { onValue, ref, database, update } from '../../firebase';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Button } from "react-bootstrap"
-import AddTemplateExercise from "../../components/AddTemplateExercise"
 import { v4 as uuidv4 } from "uuid";
 import TemplateExercise from '../../components/TemplateExercise';
 import TemplateExerciseComponent from "../../components/TemplateExerciseComponent"
-import EditTemplateExercise from "../../components/EditTemplateExercise"
 import DeletionModal from "../../components/DeletionModal"
 import ExerciseModal from "../../components/ExerciseModal"
 
