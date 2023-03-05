@@ -8,6 +8,8 @@ import TemplateComponent from '../../components/TemplateComponent'
 import DeletionModal from "../../components/DeletionModal"
 import WorkoutModal from "../../components/WorkoutModal"
 import EditWorkoutModal from "../../components/EditWorkoutModal"
+import NewWorkoutModal from "../../components/NewWorkoutModal"
+
 
 const AllTemplates = () => {
     const [creatingNewTemplate, setCreatingNewTemplate] = useState(false)
@@ -111,8 +113,8 @@ function openEditBox() {
     setEditingTemplate(false)
   }
 
-  function handleTemplateUpdate(e) {
-    e.preventDefault()
+  function handleTemplateUpdate() {
+    
     const newItem = {...selectedTemplate}
     newItem["name"] = document.querySelector("#workoutTitle").value
   
@@ -144,8 +146,10 @@ function openEditBox() {
   return (
     <div>
         {deletingTemplate && <DeletionModal type="template" item={selectedTemplate} closeModal={closeDeleteTemplateModal} removalFunction={deleteTemplate}/>}
-        {editingTemplate && <EditWorkoutModal isTemplate={true} item={selectedTemplate} closeModal={closeEditBox} updateFunction={handleTemplateUpdate} />}
-        {creatingNewTemplate && <WorkoutModal isTemplate={true} closeModal={closeNewTemplateBox} updateFunction={createNewTemplate}/>}
+        {editingTemplate ? <NewWorkoutModal isEdit={true} isTemplate={true} item={selectedTemplate} closeModal={closeEditBox} updateFunction={handleTemplateUpdate} />
+        :  creatingNewTemplate ? <NewWorkoutModal isEdit={false} isTemplate={true} closeModal={closeNewTemplateBox} updateFunction={createNewTemplate}/>
+        : null 
+        }
         <h2>Templates</h2>
         <Button type="button" onClick={openNewTemplateBox}>Create New Template</Button>
         {templates && templates.map((template, key) => <TemplateComponent key={key} template={template} openEditBox={openEditBox} selectTemplate={selectTemplate} openDeleteTemplateModal={openDeleteTemplateModal} deleteTemplate={deleteTemplate}/>)}
