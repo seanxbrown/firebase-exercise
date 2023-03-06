@@ -11,13 +11,14 @@ const Profile = () => {
 
     async function updateUserProfile() {
         const newDisplayName = document.getElementById("displayNameInput").value;
-       try {
-        await updateProfile(auth.currentUser, {displayName: newDisplayName})
-        setUpdating(false)
-       } catch(e) {
-        alert(e)
-       }
-
+        if (typeof newDisplayName === "string") {
+          try {
+            await updateProfile(auth.currentUser, {displayName: newDisplayName})
+            setUpdating(false)
+           } catch(e) {
+            alert(e)
+           }
+        }
     }
 
   return (

@@ -17,6 +17,7 @@ export default function Signup() {
         const passwordConf = document.getElementById("signupPasswordConf").value;
     
         if(password !== passwordConf) {
+          alert("Passwords do not match");
           return
         }
     

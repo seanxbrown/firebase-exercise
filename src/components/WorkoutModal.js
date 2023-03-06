@@ -16,16 +16,16 @@ const WorkoutModal = ({ item = {}, isEdit, isTemplate, closeModal, updateFunctio
                 <Form.Label>Title</Form.Label>
                 <Form.Control id="workoutTitle" type="text" list="datalistOptions" placeholder="Select or enter a workout" maxLength="30" defaultValue={isEdit && item.title || isEdit && item.name || ""}/>
                 <datalist id="datalistOptions">
-                <option value="Upper Body" />
-                <option value="Lower Body" />
-                <option value="Full Body" />
-                <option value="Push" />
-                <option value="Pull" />
-                <option value="Legs" />
-                <option value="Abs" />
-                <option value="Chest" />
-                <option value="Back" />
-                <option value="Arms" />
+                  <option value="Upper Body" />
+                  <option value="Lower Body" />
+                  <option value="Full Body" />
+                  <option value="Push" />
+                  <option value="Pull" />
+                  <option value="Legs" />
+                  <option value="Abs" />
+                  <option value="Chest" />
+                  <option value="Back" />
+                  <option value="Arms" />
                 </datalist>
             </Form.Group>
             {!isTemplate && !isEdit && <Form.Group>

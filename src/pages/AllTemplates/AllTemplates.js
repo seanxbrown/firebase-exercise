@@ -49,7 +49,7 @@ const AllTemplates = () => {
         try {
             onValue(dbRef, snapshot => {
                 const {templates: templatesFromDatabase} = snapshot.val()
-                if (templatesFromDatabase) {
+                if (templatesFromDatabase && typeof templatesFromDatabase === "object") {
                     templatesFromDatabase.sort((a, b) => b.date > a.date)
                     setTemplates([...templatesFromDatabase])
                 } else {
@@ -88,8 +88,9 @@ const AllTemplates = () => {
 
     function selectTemplate(selectedID) {
         const selection = [...templates].filter(template => selectedID == template.id);
-        setSelectedTemplate(selection[0]);
-    
+
+        if (typeof selection === "object") { setSelectedTemplate(selection[0]); }
+        
         const templateComponents = [...document.getElementsByClassName("workoutData")]
         for (let component of templateComponents) {
             if (component.id == selectedID) {
