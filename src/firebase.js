@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, updateProfile } from "firebase/auth";
+import { getAuth, updateProfile, signInAnonymously } from "firebase/auth";
 import { getDatabase, set, ref, onValue, update } from "firebase/database";
 
 
@@ -19,4 +19,4 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase(app);
 
-export {app, auth, database, set, ref, onValue, update, updateProfile} 
+export {app, auth, database, signInAnonymously , set, ref, onValue, update, updateProfile} 
