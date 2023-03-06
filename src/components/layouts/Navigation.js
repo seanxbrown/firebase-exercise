@@ -14,7 +14,7 @@ const user = useContext(AuthContext)
         <Navbar.Collapse>
 
           <Nav className="me-auto">
-            <Navbar.Text className="text-light">{user && user.displayName || user && user.email}</Navbar.Text>
+            <Navbar.Text className="text-light">{user && user.displayName || user && user.email || user && "Guest User"}</Navbar.Text>
           </Nav>
 
           <Nav>
