@@ -210,7 +210,7 @@ useEffect(() => {
 
       <div className="workoutDataContainer position-relative">
         <Header title="My workouts" buttonFunction={toggleNewWorkoutStatus} buttonText="Add New Workout" />
-        <Form.Control type="text" className="mb-4" id="workoutSearchBar" placeholder="Search" onChange={searchChangeHandler}/>
+        <Form.Control type="search" className="mb-4" id="workoutSearchBar" placeholder="Search" onChange={searchChangeHandler}/>
         {deletingWorkout && <DeletionModal type="workout" item={selectedWorkout} closeModal={closeWorkoutDeletionBox} removalFunction={removeWorkoutFromList}/>}
         {creatingNewWorkout ?  <WorkoutModal isEdit={false} isTemplate={false} templates={templates} updateFunction={handleWorkoutSubmit} closeModal={toggleNewWorkoutStatus} /> 
         : editing ? <WorkoutModal isEdit={true} isTemplate={false} item={selectedWorkout} closeModal={closeEditBox} updateFunction={handleWorkoutUpdate} /> 
