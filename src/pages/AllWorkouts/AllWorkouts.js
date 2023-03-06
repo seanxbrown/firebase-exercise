@@ -164,8 +164,6 @@ function getTemplateData() {
 async function createWorkoutFromTemplate(id) {
   const newWorkouts = [...workouts];
   const selectedTemplate = [...templates].filter(template => template.id ===id)[0]
-
-
   const workoutTitle = document.getElementById("workoutTitle").value || new Date(Date.now()).toString();
   const workoutDate = document.getElementById("workoutDate").value;
   const workoutID = uuidv4();
@@ -210,7 +208,7 @@ useEffect(() => {
    
   return (
 
-      <div className="workoutDataContainer overflow-hidden position-relative">
+      <div className="workoutDataContainer position-relative">
         <Header title="My workouts" buttonFunction={toggleNewWorkoutStatus} buttonText="Add New Workout" />
         <Form.Control type="text" className="mb-4" id="workoutSearchBar" placeholder="Search" onChange={searchChangeHandler}/>
         {deletingWorkout && <DeletionModal type="workout" item={selectedWorkout} closeModal={closeWorkoutDeletionBox} removalFunction={removeWorkoutFromList}/>}

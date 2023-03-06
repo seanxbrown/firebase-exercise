@@ -85,7 +85,7 @@ button.btn-close {
 
 #addWorkoutDiv, #addExerciseDiv {
   color: var(--primary);
-  z-index: 1;
+  z-index: 10;
   position: absolute;
   top: 0;
   left: 0;
@@ -104,6 +104,8 @@ button.btn-close {
 #deleteWorkoutBox, #deleteExerciseBox {
   z-index: 20;
 }
+
+
 
 @media only screen and (min-width: 992px) {
   #addWorkoutDiv, #addExerciseDiv {
