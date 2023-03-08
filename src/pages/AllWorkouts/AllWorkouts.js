@@ -52,6 +52,7 @@ function addWorkout() {
   const workoutTitle = document.getElementById("workoutTitle").value || new Date(Date.now()).toString();
   const workoutDate = document.getElementById("workoutDate").value;
   const workoutID = uuidv4();
+  
   const newWorkout = new Workout(workoutID, workoutTitle, workoutDate);
   newWorkouts.push(newWorkout);
 
