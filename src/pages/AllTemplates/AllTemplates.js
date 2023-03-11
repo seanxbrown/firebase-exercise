@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
 import { Link } from "react-router-dom"
-import { Button } from "react-bootstrap"
 import { set, ref, database, onValue, update } from "../../firebase"
 import { AuthContext } from '../../contexts/AuthContext'
 import { v4 as uuidv4 } from "uuid";

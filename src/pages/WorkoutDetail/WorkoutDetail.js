@@ -6,7 +6,6 @@ import { database } from '../../firebase';
 import ExerciseComponent from '../../components/ExerciseComponent';
 import { v4 as uuidv4 } from "uuid";
 import Exercise from '../../utils/exercise';
-import { Button } from "react-bootstrap";
 import DeletionModal from "../../components/DeletionModal"
 import ExerciseModal from "../../components/ExerciseModal"
 import Header from "../../components/layouts/Header"

@@ -2,7 +2,6 @@ import { useState, useContext, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { onValue, ref, database, update } from '../../firebase';
 import { AuthContext } from '../../contexts/AuthContext';
-import { Button } from "react-bootstrap"
 import { v4 as uuidv4 } from "uuid";
 import TemplateExercise from '../../utils/templateexercise';
 import TemplateExerciseComponent from "../../components/TemplateExerciseComponent"

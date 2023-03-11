@@ -3,7 +3,7 @@ import { Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import TemplateComponent from '../../components/TemplateComponent'
 
-const TemplatesPreview = ({ templates, openDeleteTemplateModa, selectTemplate }) => {
+const TemplatesPreview = ({ templates, selectTemplate }) => {
 
   function createTemplatesPreview(templates) {
     if(Array.isArray(templates)) {
@@ -22,7 +22,7 @@ useEffect(()=> {
         <h2 className="text-center">Templates</h2>
         <div  className="mb-4">
         {templates && templates.length > 0 ?
-                createTemplatesPreview(templates).map(template => <TemplateComponent key={template.id} preview={true} openDeleteTemplateModa={openDeleteTemplateModa} selectTemplate={selectTemplate} template={template}/> ) : <h3 className="fw-bold text-center">No templates saved.</h3>}
+                createTemplatesPreview(templates).map(template => <TemplateComponent key={template.id} preview={true} selectTemplate={selectTemplate} template={template}/> ) : <h3 className="fw-bold text-center">No templates saved.</h3>}
 
         </div>        
         <Link to="/firebase-exercise/templates">View all templates</Link>

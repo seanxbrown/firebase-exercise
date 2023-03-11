@@ -4,7 +4,7 @@ import { database, set, ref, onValue, update } from "../../firebase";
 import WorkoutComponent from "../../components/WorkoutComponent";
 import { v4 as uuidv4 } from "uuid";
 import Workout from "../../utils/workout";
-import { Button, Form } from "react-bootstrap"
+import { Form } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import DeletionModal from "../../components/DeletionModal"
 import WorkoutModal from "../../components/WorkoutModal"

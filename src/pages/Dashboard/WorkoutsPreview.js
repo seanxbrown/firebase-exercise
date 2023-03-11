@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
-import { Col, Button } from "react-bootstrap"
+import { Col } from "react-bootstrap"
 import WorkoutComponent from '../../components/WorkoutComponent';
 import { Link } from "react-router-dom"
 
-const WorkoutsPreview = ({ workouts, openWorkoutDeletionBox, selectWorkout }) => {
+const WorkoutsPreview = ({ workouts, selectWorkout }) => {
 
     function createWorkoutsPreview(workouts) {
         if(Array.isArray(workouts)) {
@@ -24,7 +24,7 @@ const WorkoutsPreview = ({ workouts, openWorkoutDeletionBox, selectWorkout }) =>
         </div>
         <div className="workoutDataContainer overflow-hidden mb-4">
             {workouts && workouts.length > 0 ?
-                createWorkoutsPreview(workouts).map(workout => <WorkoutComponent key={workout.id} preview={true} openWorkoutDeletionBox={openWorkoutDeletionBox} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
+                createWorkoutsPreview(workouts).map(workout => <WorkoutComponent key={workout.id} preview={true} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
         </div>  
         <Link to={`/firebase-exercise/workouts`}>View all workouts</Link>
     </Col>
