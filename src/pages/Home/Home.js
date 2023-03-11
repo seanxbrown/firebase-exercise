@@ -21,6 +21,8 @@ const Home = () => {
       <div id="homeLinkContainer" className="d-flex justify-content-center align-items-center h-25">
         <Link to="/firebase-exercise/signup" className="btn btn-lg homeLinkButton mx-1">Sign Up</Link>
         <Link to="/firebase-exercise/login" className="btn btn-lg homeLinkButton mx-1">Log in</Link>
+      </div>
+      <div className="text-center">
         <a onClick={signInAsGuest} className="link-primary" id="guestSignInLink">Continue as guest</a>
       </div>
     </div>
