@@ -79,8 +79,9 @@ const WorkoutDetail = () => {
         const exerciseWeight = document.getElementById("exerciseWeight").value;
         const exerciseUnit = document.getElementById("exerciseUom").value;
         const exercisetTarget = document.getElementById("exercisetTarget").checked;
+        const exercisetBest = document.getElementById("exerciseBest").checked;
         const exerciseNotes = document.getElementById("exerciseNotes").value;
-        const newExercise = new Exercise(exerciseID, exerciseName, exerciseSets, exerciseReps,exerciseWeight, exerciseUnit, exercisetTarget, exerciseNotes)
+        const newExercise = new Exercise(exerciseID, exerciseName, exerciseSets, exerciseReps,exerciseWeight, exerciseUnit, exercisetTarget, exercisetBest, exerciseNotes)
     
         for (let key of newWorkouts) {
             if (key.id === selectedUserWorkout.id) {

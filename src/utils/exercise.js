@@ -1,5 +1,5 @@
 class Exercise {
-    constructor(id, name, sets, reps, weight, uom, target, notes){
+    constructor(id, name, sets, reps, weight, uom, target, best, notes){
         this.id = id;
         this.name = name;
         this.sets = sets;
@@ -7,6 +7,7 @@ class Exercise {
         this.weight = weight;
         this.uom = uom;
         this.target = target;
+        this.best = best;
         this.notes = notes;
     }
 }
