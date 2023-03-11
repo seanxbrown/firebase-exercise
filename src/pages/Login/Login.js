@@ -16,7 +16,7 @@ export default function Login() {
     const password = document.getElementById("loginPassword").value;
 
     try {
-      const response = await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
       navigate(`/firebase-exercise/dashboard`);
     } catch(e) {
       alert(e);
