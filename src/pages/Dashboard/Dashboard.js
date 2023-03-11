@@ -5,6 +5,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import WorkoutsPreview from './WorkoutsPreview';
 import ExercisePreview from './ExercisePreview';
 import TemplatesPreview from './TemplatesPreview';
+import PersonalBest from './PersonalBest';
 
 const Dashboard = () => {
     const [selectedWorkout, setSelectedWorkout] = useState();
@@ -164,6 +165,9 @@ useEffect(() => {
     </Row>
     <Row className="p-4 position-relative">
         <TemplatesPreview templates={templates} openDeleteTemplateModal={openDeleteTemplateModal} selectTemplate={selectTemplate}/>
+    </Row>
+    <Row className="p-4 position-relative">
+        <PersonalBest />
     </Row>
     </>
     
