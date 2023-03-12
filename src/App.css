@@ -105,6 +105,13 @@ button.btn-close {
   z-index: 20;
 }
 
+#deleteWorkoutBox, #deleteExerciseBox {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%)
+}
+
 #guestSignInLink:hover {
   cursor: pointer
 
