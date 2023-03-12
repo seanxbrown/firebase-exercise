@@ -1,13 +1,15 @@
 import { Container, Form, Button } from 'react-bootstrap';
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useContext } from "react";
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import { useContext, useState } from "react";
 import { AuthContext } from '../../contexts/AuthContext';
+import PasswordReset from './PasswordReset';
  
 export default function Login() {
   const navigate = useNavigate();
   const user = useContext(AuthContext)
+  const [resetting, setResetting] = useState(false)
 
   async function logUserIn(e) {
     e.preventDefault();
@@ -24,7 +26,32 @@ export default function Login() {
     
   }
 
+  function openResetModal() {
+    setResetting(true)
+  }
+
+  function closeResetModal() {
+    setResetting(false)
+  }
+
+  async function resetPassword() {
+    
+    try {
+      const email = document.getElementById("resetEmail").value;
+
+      sendPasswordResetEmail(auth, email)
+      alert("You have been emailed a link with password reset instructions")
+      setResetting(false)
+    } catch(e) {
+      alert(e)
+    }
+
+  }
+
+
   return (
+    <>
+    {resetting && <PasswordReset closeResetModal={closeResetModal} resetPassword={resetPassword} /> }
     <Container className="border border-1 border-secondary mt-5 py-5 rounded">
         <h2 className="text-center">Log In</h2>
         <Form className="w-75 mx-auto" onSubmit={logUserIn}>
@@ -38,8 +65,14 @@ export default function Login() {
             </Form.Group>
             <Button disabled={user} type="submit" className="w-100 mt-5 rounded-pill">Log in</Button>
         </Form>
-        <p className="text-center text-muted">Don't have an account? <Link to="/firebase-exercise/signup">Sign up</Link></p>
+        <div className="d-flex flex-column">
+          <p className="text-center text-muted">Don't have an account? <Link to="/firebase-exercise/signup">Sign up</Link></p>
+          <p onClick={openResetModal} className="text-center align-self-center" id="passwordChange">Click here to reset your password</p>
+        </div>
+        
     </Container>
+    </>
+    
   )
 }
 

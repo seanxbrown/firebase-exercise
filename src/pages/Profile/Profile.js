@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from '../../contexts/AuthContext';
 import {Button, Form} from "react-bootstrap";
-import { auth, updateProfile } from "../../firebase";
+import { auth, updateProfile, sendPasswordResetEmail } from "../../firebase";
 import { Link } from "react-router-dom"
 
 
@@ -16,9 +16,19 @@ const Profile = () => {
             await updateProfile(auth.currentUser, {displayName: newDisplayName})
             setUpdating(false)
            } catch(e) {
-            alert(e)
+            alert(e.code, e.message)
            }
         }
+    }
+
+    async function resetPassword() {
+      try {
+        sendPasswordResetEmail(auth, user.email)
+        alert("You have been emailed a link with password reset instructions")
+      } catch(e) {
+        alert(e)
+      }
+
     }
 
   return (
@@ -36,6 +46,8 @@ const Profile = () => {
               {updating && <Button type="button" className="btn" onClick={updateUserProfile}>Save</Button>}
           </div>
           <p id="userEmail"><span className="fw-bold">Email Address: </span>{user.email}</p>
+          <p className="d-inline" id="passwordChange" onClick={resetPassword}>Change password</p>
+
         </div>
         
         <Link to={`/firebase-exercise/dashboard`}>Return to dashboard</Link>

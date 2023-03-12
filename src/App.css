@@ -113,7 +113,7 @@ button.btn-close {
 
 
 
-#guestSignInLink:hover {
+#guestSignInLink:hover, #passwordChange:hover {
   cursor: pointer
 
 }
