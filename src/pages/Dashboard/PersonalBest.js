@@ -1,12 +1,24 @@
-import React from 'react'
-import { Col, Row } from "react-bootstrap"
+import { useState } from 'react'
+import { Col, Row, Form } from "react-bootstrap"
 import { formatDate } from '../../utils/utils'
 
+
 const PersonalBest = ({ bestExcercises }) => {
+  const [search, setSearch] = useState("")
+
+  function handlehange(e) {
+
+    setSearch(e.target.value.toLowerCase())
+    
+  }
+
+
   return (
     <Col xs={12} className="border border-1 border-dark rounded px-5 py-4 text-dark">
       <h2 className="text-center">Personal Bests</h2>
-        {bestExcercises && bestExcercises.length > 0 ? bestExcercises.map(bestExercise => {
+      <Form.Control type="search" placeholder="Search for an exercise (e.g. bench press)" className="mb-4" onChange={handlehange}/>
+        {bestExcercises && bestExcercises.length > 0 ? bestExcercises.filter(bestExercise => bestExercise.name.toLowerCase().includes(search))
+        .map(bestExercise => {
             return <Row key={bestExercise.id} className="mb-3">
                 <Col xs={12} md={2} className="text-center">{formatDate(bestExercise.date)}</Col>
                 <Col xs={7} md={2}>{bestExercise.workout}</Col>
