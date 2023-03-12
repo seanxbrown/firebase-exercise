@@ -12,6 +12,8 @@ const Dashboard = () => {
     const [workouts, setWorkouts] = useState([]);
     const [templates, setTemplates] = useState([])
     const [selectedTemplate, setSelectedTemplate] = useState({});
+    const [bestExercises, setBestExercises] = useState([])
+
     const user = useContext(AuthContext)
 
 function selectWorkout(selectedID) {
@@ -82,10 +84,29 @@ function getTemplateData() {
     }
 }
 
+function downloadBestExercises() {
+    const dbRef = ref(database, `${user.uid}`);
+
+    try {
+        onValue(dbRef, snapshot => {
+            if (snapshot.val()) {
+                const {bestexercises: downloadedBestExercises} = snapshot.val()
+                setBestExercises([...downloadedBestExercises])
+                } else {
+                    setBestExercises([])
+                }
+            }
+            )
+    } catch(error) {
+        alert(error)
+    }    
+}
+
 useEffect(() => {
 
     getWorkoutData()
     getTemplateData()
+    downloadBestExercises()
     
 },[])
 
@@ -100,7 +121,7 @@ useEffect(() => {
         <TemplatesPreview templates={templates} selectTemplate={selectTemplate}/>
     </Row>
     <Row className="p-4 position-relative">
-        <PersonalBest />
+        <PersonalBest bestExcercises={bestExercises}/>
     </Row>
     </>
     

@@ -210,7 +210,7 @@ async function addToBestExercises(exercise) {
             date: selectedUserWorkout.date,
             workout: selectedUserWorkout.title,
             workoutid: selectedUserWorkout.id,
-            exercise: exercise.name,
+            name: exercise.name,
             weight: exercise.weight,
             uom: exercise.uom,
             sets: exercise.sets,
@@ -229,11 +229,15 @@ async function addToBestExercises(exercise) {
     }
 }
 
-function removeFromBestExercises(exercise) {
+async function removeFromBestExercises(exercise) {
     const newBestExercises = [...bestExercises].filter(bestExercise => bestExercise.id !== exercise.id)
-    setBestExercises(newBestExercises)
 
+    try {
+        update(ref(database, `${user.uid}`), {"bestexercises": newBestExercises});
 
+    } catch(e) {
+        alert(e)
+    }
 
 }
 
