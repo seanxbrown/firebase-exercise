@@ -17,6 +17,7 @@ const WorkoutDetail = () => {
     const [selectedExercise, setSelectedExercise] = useState("")
     const [addingNewExercise, setAddingNewExercise] = useState(false);
     const [editing, setEditing] = useState(false)
+    const [bestExercises, setBestExercises] = useState([])
     const {workoutid} = useParams();
     const user = useContext(AuthContext)
 
@@ -35,6 +36,24 @@ const WorkoutDetail = () => {
                         setSelectedUserWorkout(selectedUserWorkout => selectedUserWorkout = {})
                 }       
             }
+                )
+        } catch(error) {
+            alert(error)
+        }    
+    }
+
+    function downloadBestExercises() {
+        const dbRef = ref(database, `${user.uid}`);
+    
+        try {
+            onValue(dbRef, snapshot => {
+                if (snapshot.val()) {
+                    const {bestexercises: downloadedBestExercises} = snapshot.val()
+                    setBestExercises([...downloadedBestExercises])
+                    } else {
+                        setBestExercises([])
+                    }
+                }
                 )
         } catch(error) {
             alert(error)
@@ -79,9 +98,8 @@ const WorkoutDetail = () => {
         const exerciseWeight = document.getElementById("exerciseWeight").value;
         const exerciseUnit = document.getElementById("exerciseUom").value;
         const exercisetTarget = document.getElementById("exercisetTarget").checked;
-        const exercisetBest = document.getElementById("exerciseBest").checked;
         const exerciseNotes = document.getElementById("exerciseNotes").value;
-        const newExercise = new Exercise(exerciseID, exerciseName, exerciseSets, exerciseReps,exerciseWeight, exerciseUnit, exercisetTarget, exercisetBest, exerciseNotes)
+        const newExercise = new Exercise(exerciseID, exerciseName, exerciseSets, exerciseReps,exerciseWeight, exerciseUnit, exercisetTarget, exerciseNotes)
     
         for (let key of newWorkouts) {
             if (key.id === selectedUserWorkout.id) {
@@ -175,10 +193,55 @@ async function handleExerciseUpdate(e) {
     setEditing(false)
 }
 
+async function addToBestExercises(exercise) {
+    const newBestExercises = [...bestExercises]
+    
+    
+    //Compare the id of the new exercise to the ids of existing exercises in the best exercises array
+    const doesExerciseExist = newBestExercises.map(existingExercise => existingExercise.id).includes(exercise.id)
+
+    if(doesExerciseExist) {
+        alert("Exercise exists")
+        return
+    } else {
+
+        const newBestExercise = {
+            id: exercise.id,
+            date: selectedUserWorkout.date,
+            workout: selectedUserWorkout.title,
+            workoutid: selectedUserWorkout.id,
+            exercise: exercise.name,
+            weight: exercise.weight,
+            uom: exercise.uom,
+            sets: exercise.sets,
+            reps: exercise.reps
+        }
+        newBestExercises.push(newBestExercise)
+        
+        try {
+            update(ref(database, `${user.uid}`), {"bestexercises": newBestExercises});
+
+        } catch(e) {
+            alert(e)
+        }
+        
+
+    }
+}
+
+function removeFromBestExercises(exercise) {
+    const newBestExercises = [...bestExercises].filter(bestExercise => bestExercise.id !== exercise.id)
+    setBestExercises(newBestExercises)
+
+
+
+}
+
 
     useEffect(() => {
 
         getDataForOneWorkout()
+        downloadBestExercises()
 
     }, [])
 
@@ -200,6 +263,9 @@ async function handleExerciseUpdate(e) {
                 removeExerciseFromWorkout={removeExerciseFromWorkout}
                 handleExerciseUpdate={handleExerciseUpdate} 
                 openEditBox={openEditBox}
+                addToBestExercises={addToBestExercises}
+                removeFromBestExercises={removeFromBestExercises}
+                isBestExercise={bestExercises.map(bestExercise => bestExercise.id).includes(exercise.id)}
                 key={exercise.id} exercise={exercise}/>) 
                 : <h3 className="fw-bold text-center">No exercise information found.</h3>
         }

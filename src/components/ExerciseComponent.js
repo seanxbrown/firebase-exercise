@@ -1,6 +1,6 @@
 import { CloseButton, Row, Col } from "react-bootstrap";
 
-const ExerciseComponent = ({ preview, exercise, openExerciseDeletionBox, selectExercise, openEditBox }) => {
+const ExerciseComponent = ({ isBestExercise, preview, exercise, openExerciseDeletionBox, selectExercise, openEditBox, addToBestExercises, removeFromBestExercises }) => {
 
     return (
         <>
@@ -23,6 +23,11 @@ const ExerciseComponent = ({ preview, exercise, openExerciseDeletionBox, selectE
                 <Col sm={3}>        
                     <p>Notes: {exercise.notes}</p>
                 </Col>
+                {!preview && <Col sm={1}>
+                    {isBestExercise ?
+                     <i className="bi bi-star-fill ms-3" onClick={()=> removeFromBestExercises(exercise)}></i>
+                     : <i className="bi bi-star ms-3" onClick={()=> addToBestExercises(exercise)}></i> }
+                </Col> }
                 {!preview && <Col sm={1}>        
                   <i className="bi-pencil-fill ms-3" onClick={openEditBox}></i>
                 </Col> }

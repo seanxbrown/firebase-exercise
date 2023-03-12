@@ -32,8 +32,7 @@ const ExerciseModal = ({ isTemplate, isEdit, closeModal, updateFunction, workout
             </Form.Group>
             
             {!isTemplate && <Form.Group>
-                <Form.Check inline id="exercisetTarget" type="checkbox" label="Target achieved?" maxLength="30" defaultValue={isEdit && exerciseItem && exerciseItem.checked || ""}/>
-                <Form.Check inline id="exerciseBest" type="checkbox" label="Personal best" defaultValue={isEdit && exerciseItem && exerciseItem.checked || ""}/>
+                <Form.Check id="exercisetTarget" type="checkbox" label="Target achieved?" maxLength="30" defaultValue={isEdit && exerciseItem && exerciseItem.checked || ""}/>
             </Form.Group> }
 
             <Form.Group>
