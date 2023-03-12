@@ -101,16 +101,17 @@ button.btn-close {
   background-color: var(--button-hover);
 }
 
-#deleteWorkoutBox, #deleteExerciseBox {
-  z-index: 20;
-}
 
 #deleteWorkoutBox, #deleteExerciseBox {
   position: fixed;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
+  z-index: 20;
+
 }
+
+
 
 #guestSignInLink:hover {
   cursor: pointer

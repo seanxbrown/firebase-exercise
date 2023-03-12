@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Form, Button, CloseButton } from "react-bootstrap"
+import { Form, Button, Modal } from "react-bootstrap"
 
 
 const WorkoutModal = ({ item = {}, isEdit, isTemplate, closeModal, updateFunction, templates = []}) => {
@@ -9,8 +9,13 @@ const WorkoutModal = ({ item = {}, isEdit, isTemplate, closeModal, updateFunctio
     }
 
   return (
-    <Container className="border border-1 border-secondary p-5 bg-light" id="addWorkoutDiv">
-        <CloseButton onClick={closeModal} className="float-end"/>
+    <Modal show={true} onHide={closeModal} >
+      <Modal.Header closeButton>
+        <Modal.Title className="text-center">
+          {isEdit ? "Edit " : "Add "} {isTemplate ? "Template" : "Workout"}
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <Form onSubmit={handleSubmit}>
             <Form.Group>
                 <Form.Label>Title</Form.Label>
@@ -41,7 +46,8 @@ const WorkoutModal = ({ item = {}, isEdit, isTemplate, closeModal, updateFunctio
             </Form.Group> }
             <Button type="submit" className="btn btn-primary rounded-pill mt-3">Create Workout or Template</Button>
         </Form>
-    </Container>
+        </Modal.Body>
+    </Modal>
   )
 }
 
