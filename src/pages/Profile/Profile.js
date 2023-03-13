@@ -3,11 +3,14 @@ import { AuthContext } from '../../contexts/AuthContext';
 import {Button, Form} from "react-bootstrap";
 import { auth, updateProfile, sendPasswordResetEmail } from "../../firebase";
 import { Link } from "react-router-dom"
-
+import AlertModal from "../../components/AlertModal";
 
 const Profile = () => {
     const [updating, setUpdating] = useState(false);
     const user = useContext(AuthContext)
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("")
+  
 
     async function updateUserProfile() {
         const newDisplayName = document.getElementById("displayNameInput").value;
@@ -16,7 +19,8 @@ const Profile = () => {
             await updateProfile(auth.currentUser, {displayName: newDisplayName})
             setUpdating(false)
            } catch(e) {
-            alert(e.code, e.message)
+            setError(true)
+            setErrorMessage(e.message)
            }
         }
     }
@@ -26,13 +30,20 @@ const Profile = () => {
         sendPasswordResetEmail(auth, user.email)
         alert("You have been emailed a link with password reset instructions")
       } catch(e) {
-        alert(e)
+        setError(true)
+        setErrorMessage(e.message)
       }
 
     }
 
+    function closeErrorModal() {
+      setError(false);
+      setErrorMessage("")
+    }
+
   return (
     <>
+        {error && <AlertModal text={errorMessage} closeModal={closeErrorModal} />}
         <h2 className="fw-bold text-center py-3">Profile</h2>
         <div className="border border-3 border-secondary rounded p-5 mb-5 w-75 m-auto" id="profileDiv">
           <div className="d-flex align-items-center border-bottom border-1 border-secondary">
@@ -47,9 +58,7 @@ const Profile = () => {
           </div>
           <p id="userEmail"><span className="fw-bold">Email Address: </span>{user.email}</p>
           <p className="d-inline" id="passwordChange" onClick={resetPassword}>Change password</p>
-
         </div>
-        
         <Link to={`/firebase-exercise/dashboard`}>Return to dashboard</Link>
     </>
   )

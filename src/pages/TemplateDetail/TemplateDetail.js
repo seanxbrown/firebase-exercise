@@ -8,6 +8,7 @@ import TemplateExerciseComponent from "../../components/TemplateExerciseComponen
 import DeletionModal from "../../components/DeletionModal"
 import ExerciseModal from "../../components/ExerciseModal"
 import Header from "../../components/layouts/Header"
+import AlertModal from '../../components/AlertModal';
 
 
 const TemplateDetail = () => {
@@ -18,6 +19,8 @@ const TemplateDetail = () => {
     const [selectedTemplateExercise, setSelectedTemplateExercise] = useState({})
     const [deletingExercise, setDeletingExercise] = useState(false);
     const [editing, setEditing] = useState(false)
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("")
     const user = useContext(AuthContext)
 
     function getDataForOneTemplate() {
@@ -36,8 +39,9 @@ const TemplateDetail = () => {
               }       
           }
               )
-      } catch(error) {
-          alert(error)
+      } catch(e) {
+        setError(true)
+        setErrorMessage(e.message)
       }    
   }
 
@@ -52,7 +56,8 @@ const TemplateDetail = () => {
   function addExerciseToTemplate(e) {
     e.preventDefault();
     if (selectedUserTemplate === undefined) {
-        alert("No workout selected"); 
+      setError(true)
+      setErrorMessage("No workout selected") 
         return
     }
 
@@ -103,8 +108,9 @@ function removeExerciseFromTemplate(id) {
       update(ref(database, `${user.uid}`), {"templates": newTemplates});
       getDataForOneTemplate();
 
-  }catch(error) {
-      alert(error);
+  }catch(e) {
+    setError(true)
+    setErrorMessage(e.message)
   }
 
   closeTemplateExerciseDeletionBox()
@@ -114,7 +120,8 @@ function removeExerciseFromTemplate(id) {
 async function handleTemplateExerciseUpdate(e) {
   e.preventDefault()
   if (templateID === undefined) {
-      alert("No workout selected"); 
+    setError(true)
+    setErrorMessage("No workout selected"); 
       return
   }
 
@@ -138,8 +145,9 @@ async function handleTemplateExerciseUpdate(e) {
   try {
       await update(ref(database, `${user.uid}`), {"templates": newTemplates});
 
-  } catch(error) {
-      alert(error);
+  } catch(e) {
+    setError(true)
+    setErrorMessage(e.message)
   }
 
   setEditing(false)
@@ -167,6 +175,11 @@ function closeEditBox() {
   setEditing(false)
 }
 
+function closeErrorModal() {
+  setError(false);
+  setErrorMessage("")
+}
+
 
   useEffect(() => {
     getDataForOneTemplate()
@@ -174,28 +187,30 @@ function closeEditBox() {
   }, [])
 
   return (
-    <div className="text-dark">
-      <Header title={selectedUserTemplate.name} buttonFunction={openNewExerciseBox} buttonText="Add Exercise"/>
+    <>
+      {error && <AlertModal text={errorMessage} closeModal={closeErrorModal} />}
+      <div className="text-dark">
+        <Header title={selectedUserTemplate.name} buttonFunction={openNewExerciseBox} buttonText="Add Exercise"/>
 
-      {addingNewExercise ? <ExerciseModal isEdit={false} isTemplate={true} updateFunction={addExerciseToTemplate} closeModal={closeNewExerciseBox} workoutItem={selectedUserTemplate} exerciseItem={selectedTemplateExercise}/> 
-      : editing ? <ExerciseModal isEdit={true} isTemplate={true} workoutItem={selectedUserTemplate} exerciseItem={selectedTemplateExercise} closeModal={closeEditBox} updateFunction={handleTemplateExerciseUpdate}/>
-    : null}
-      {deletingExercise && <DeletionModal type="exercise" item={selectedTemplateExercise} removalFunction={removeExerciseFromTemplate} closeModal={closeTemplateExerciseDeletionBox}/>}
-      
-      {selectedUserTemplate && selectedUserTemplate.exercises && selectedUserTemplate.exercises.length > 0 ? 
-            selectedUserTemplate.exercises.map(exercise => 
-            <TemplateExerciseComponent 
-                key={exercise.id}
-                openEditBox={openEditBox}
-                openTemplateExerciseDeletionBox={openTemplateExerciseDeletionBox}
-                selectTemplateExercise={selectTemplateExercise}
-                removeExerciseFromTemplate={removeExerciseFromTemplate}
-                exercise={exercise}/>) 
-                : <h3 className="fw-bold text-center">No exercise information found.</h3>
-        }
-      <Link to="/firebase-exercise/templates">Return to templates</Link>
-
-    </div>
+        {addingNewExercise ? <ExerciseModal isEdit={false} isTemplate={true} updateFunction={addExerciseToTemplate} closeModal={closeNewExerciseBox} workoutItem={selectedUserTemplate} exerciseItem={selectedTemplateExercise}/> 
+        : editing ? <ExerciseModal isEdit={true} isTemplate={true} workoutItem={selectedUserTemplate} exerciseItem={selectedTemplateExercise} closeModal={closeEditBox} updateFunction={handleTemplateExerciseUpdate}/>
+      : null}
+        {deletingExercise && <DeletionModal type="exercise" item={selectedTemplateExercise} removalFunction={removeExerciseFromTemplate} closeModal={closeTemplateExerciseDeletionBox}/>}
+        
+        {selectedUserTemplate && selectedUserTemplate.exercises && selectedUserTemplate.exercises.length > 0 ? 
+              selectedUserTemplate.exercises.map(exercise => 
+              <TemplateExerciseComponent 
+                  key={exercise.id}
+                  openEditBox={openEditBox}
+                  openTemplateExerciseDeletionBox={openTemplateExerciseDeletionBox}
+                  selectTemplateExercise={selectTemplateExercise}
+                  removeExerciseFromTemplate={removeExerciseFromTemplate}
+                  exercise={exercise}/>) 
+                  : <h3 className="fw-bold text-center">No exercise information found.</h3>
+          }
+        <Link to="/firebase-exercise/templates">Return to templates</Link>
+      </div>
+      </>
   )
 }
 

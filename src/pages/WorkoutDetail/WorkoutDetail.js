@@ -9,6 +9,7 @@ import Exercise from '../../utils/exercise';
 import DeletionModal from "../../components/DeletionModal"
 import ExerciseModal from "../../components/ExerciseModal"
 import Header from "../../components/layouts/Header"
+import AlertModal from "../../components/AlertModal";
 
 const WorkoutDetail = () => {
     const [selectedUserWorkout, setSelectedUserWorkout] = useState({})
@@ -18,6 +19,8 @@ const WorkoutDetail = () => {
     const [addingNewExercise, setAddingNewExercise] = useState(false);
     const [editing, setEditing] = useState(false)
     const [bestExercises, setBestExercises] = useState([])
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("")
     const {workoutid} = useParams();
     const user = useContext(AuthContext)
 
@@ -55,8 +58,9 @@ const WorkoutDetail = () => {
                     }
                 }
                 )
-        } catch(error) {
-            alert(error)
+        } catch(e) {
+            setError(true)
+            setErrorMessage(e.message)
         }    
     }
 
@@ -86,7 +90,8 @@ const WorkoutDetail = () => {
     function addExerciseToWorkout(e) {
         e.preventDefault();
         if (selectedUserWorkout === undefined) {
-            alert("No workout selected"); 
+            setError(true)
+            setErrorMessage("No workout selected") 
             return
         }
     
@@ -116,8 +121,9 @@ const WorkoutDetail = () => {
             
             getDataForOneWorkout();
     
-        } catch(error) {
-            alert(error);
+        } catch(e) {
+            setError(true)
+            setErrorMessage(e.message)
         }
     
         setAddingNewExercise(addingNewExercise => !addingNewExercise)
@@ -141,8 +147,9 @@ function removeExerciseFromWorkout(id) {
         update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
         getDataForOneWorkout();
 
-    }catch(error) {
-        alert(error);
+    }catch(e) {
+        setError(true)
+        setErrorMessage(e.message)
     }
 
     setDeletingExercise(false)
@@ -160,7 +167,8 @@ function closeNewExerciseBox() {
 async function handleExerciseUpdate(e) {
     e.preventDefault()
     if (workoutid === undefined) {
-        alert("No workout selected"); 
+        setError(true)
+        setErrorMessage("No workout selected") 
         return
     }
 
@@ -187,8 +195,9 @@ async function handleExerciseUpdate(e) {
     try {
         await update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
 
-    } catch(error) {
-        alert(error);
+    } catch(e) {
+        setError(true)
+        setErrorMessage(e.message)
     }
     setEditing(false)
 }
@@ -222,7 +231,8 @@ async function addToBestExercises(exercise) {
             update(ref(database, `${user.uid}`), {"bestexercises": newBestExercises});
 
         } catch(e) {
-            alert(e)
+            setError(true)
+            setErrorMessage(e.message)
         }
         
 
@@ -236,10 +246,16 @@ async function removeFromBestExercises(exercise) {
         update(ref(database, `${user.uid}`), {"bestexercises": newBestExercises});
 
     } catch(e) {
-        alert(e)
+        setError(true)
+        setErrorMessage(e.message)
     }
 
 }
+
+function closeErrorModal() {
+    setError(false);
+    setErrorMessage("")
+  }
 
 
     useEffect(() => {
@@ -250,35 +266,37 @@ async function removeFromBestExercises(exercise) {
     }, [])
 
   return (
-    <div className="text-dark position-relative">
-        <Header title={selectedUserWorkout.title} buttonFunction={openNewExerciseBox} buttonText="Add New Exercise"/>
-        {addingNewExercise ?
-         <ExerciseModal isEdit={false} isTemplate={false} workoutItem={selectedUserWorkout} updateFunction={addExerciseToWorkout} closeModal={closeNewExerciseBox}/> 
-         : editing ? <ExerciseModal isEdit={true} isTemplate={false} workoutItem={selectedUserWorkout} exerciseItem={selectedExercise} closeModal={closeEditBox} updateFunction={handleExerciseUpdate}/>
-        : null
-        }
+    <>
+        {error && <AlertModal text={errorMessage} closeModal={closeErrorModal} />}
+        <div className="text-dark position-relative">
+            <Header title={selectedUserWorkout.title} buttonFunction={openNewExerciseBox} buttonText="Add New Exercise"/>
+            {addingNewExercise ?
+            <ExerciseModal isEdit={false} isTemplate={false} workoutItem={selectedUserWorkout} updateFunction={addExerciseToWorkout} closeModal={closeNewExerciseBox}/> 
+            : editing ? <ExerciseModal isEdit={true} isTemplate={false} workoutItem={selectedUserWorkout} exerciseItem={selectedExercise} closeModal={closeEditBox} updateFunction={handleExerciseUpdate}/>
+            : null
+            }
 
-        {deletingExercise && <DeletionModal type="exercise" item={selectedExercise} removalFunction={removeExerciseFromWorkout} closeModal={closeExerciseDeletionBox}/>}
-        {selectedUserWorkout && selectedUserWorkout.exercises && selectedUserWorkout.exercises.length > 0 ? 
-            selectedUserWorkout.exercises.map(exercise => 
-            <ExerciseComponent 
-                selectExercise={selectExercise} 
-                openExerciseDeletionBox={openExerciseDeletionBox} 
-                removeExerciseFromWorkout={removeExerciseFromWorkout}
-                handleExerciseUpdate={handleExerciseUpdate} 
-                openEditBox={openEditBox}
-                addToBestExercises={addToBestExercises}
-                removeFromBestExercises={removeFromBestExercises}
-                isBestExercise={bestExercises.map(bestExercise => bestExercise.id).includes(exercise.id)}
-                key={exercise.id} exercise={exercise}/>) 
-                : <h3 className="fw-bold text-center">No exercise information found.</h3>
-        }
-        <div id="workoutDetailLinkContainer" className="d-flex justify-content-around">
-            <Link to={`/firebase-exercise/dashboard`}>Return to dashboard</Link>
-            <Link to={`/firebase-exercise/workouts`}>Return to workouts overview</Link>
+            {deletingExercise && <DeletionModal type="exercise" item={selectedExercise} removalFunction={removeExerciseFromWorkout} closeModal={closeExerciseDeletionBox}/>}
+            {selectedUserWorkout && selectedUserWorkout.exercises && selectedUserWorkout.exercises.length > 0 ? 
+                selectedUserWorkout.exercises.map(exercise => 
+                <ExerciseComponent 
+                    selectExercise={selectExercise} 
+                    openExerciseDeletionBox={openExerciseDeletionBox} 
+                    removeExerciseFromWorkout={removeExerciseFromWorkout}
+                    handleExerciseUpdate={handleExerciseUpdate} 
+                    openEditBox={openEditBox}
+                    addToBestExercises={addToBestExercises}
+                    removeFromBestExercises={removeFromBestExercises}
+                    isBestExercise={bestExercises.map(bestExercise => bestExercise.id).includes(exercise.id)}
+                    key={exercise.id} exercise={exercise}/>) 
+                    : <h3 className="fw-bold text-center">No exercise information found.</h3>
+            }
+            <div id="workoutDetailLinkContainer" className="d-flex justify-content-around">
+                <Link to={`/firebase-exercise/dashboard`}>Return to dashboard</Link>
+                <Link to={`/firebase-exercise/workouts`}>Return to workouts overview</Link>
+            </div>
         </div>
-        
-    </div>
+    </>
   )
 }
 
