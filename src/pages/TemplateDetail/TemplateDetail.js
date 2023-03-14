@@ -19,8 +19,9 @@ const TemplateDetail = () => {
     const [selectedTemplateExercise, setSelectedTemplateExercise] = useState({})
     const [deletingExercise, setDeletingExercise] = useState(false);
     const [editing, setEditing] = useState(false)
-    const [error, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("")
+    const [alert, setAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("")
+    const [alertType, setAlertType] = useState("")
     const user = useContext(AuthContext)
 
     function getDataForOneTemplate() {
@@ -40,8 +41,9 @@ const TemplateDetail = () => {
           }
               )
       } catch(e) {
-        setError(true)
-        setErrorMessage(e.message)
+        setAlert(true)
+        setAlertMessage(e.message)
+        setAlertType("danger")
       }    
   }
 
@@ -56,8 +58,9 @@ const TemplateDetail = () => {
   function addExerciseToTemplate(e) {
     e.preventDefault();
     if (selectedUserTemplate === undefined) {
-      setError(true)
-      setErrorMessage("No workout selected") 
+      setAlert(true)
+      setAlertMessage("No workout selected") 
+      setAlertType("danger")
         return
     }
 
@@ -85,7 +88,9 @@ const TemplateDetail = () => {
         getDataForOneTemplate();
 
     } catch(error) {
-        alert(error);
+      setAlert(true)
+      setAlertMessage(error.message) 
+      setAlertType("danger")
     }
 
     setAddingNewExercise(addingNewExercise => !addingNewExercise)
@@ -109,8 +114,10 @@ function removeExerciseFromTemplate(id) {
       getDataForOneTemplate();
 
   }catch(e) {
-    setError(true)
-    setErrorMessage(e.message)
+    setAlert(true)
+    setAlertMessage(e.message)
+    setAlertType("danger")
+    
   }
 
   closeTemplateExerciseDeletionBox()
@@ -120,8 +127,9 @@ function removeExerciseFromTemplate(id) {
 async function handleTemplateExerciseUpdate(e) {
   e.preventDefault()
   if (templateID === undefined) {
-    setError(true)
-    setErrorMessage("No workout selected"); 
+    setAlert(true)
+    setAlertMessage("No workout selected"); 
+    setAlertType("danger")
       return
   }
 
@@ -146,8 +154,9 @@ async function handleTemplateExerciseUpdate(e) {
       await update(ref(database, `${user.uid}`), {"templates": newTemplates});
 
   } catch(e) {
-    setError(true)
-    setErrorMessage(e.message)
+    setAlert(true)
+    setAlertMessage(e.message)
+    setAlertType("danger")
   }
 
   setEditing(false)
@@ -176,8 +185,8 @@ function closeEditBox() {
 }
 
 function closeErrorModal() {
-  setError(false);
-  setErrorMessage("")
+  setAlert(false);
+  setAlertMessage("")
 }
 
 
@@ -188,7 +197,7 @@ function closeErrorModal() {
 
   return (
     <>
-      {error && <AlertModal type="danger" text={errorMessage} closeModal={closeErrorModal} />}
+      {alert && <AlertModal type={alertType} text={alertMessage} closeModal={closeErrorModal} />}
       <div className="text-dark">
         <Header title={selectedUserTemplate.name} buttonFunction={openNewExerciseBox} buttonText="Add Exercise"/>
 

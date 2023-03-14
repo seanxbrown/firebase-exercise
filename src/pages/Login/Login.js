@@ -11,8 +11,9 @@ export default function Login() {
   const navigate = useNavigate();
   const user = useContext(AuthContext)
   const [resetting, setResetting] = useState(false)
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("")
+  const [alert, setAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("")
+  const [alertType, setAlertType] = useState("")
 
   async function logUserIn(e) {
     e.preventDefault();
@@ -24,8 +25,10 @@ export default function Login() {
       await signInWithEmailAndPassword(auth, email, password);
       navigate(`/firebase-exercise/dashboard`);
     } catch(e) {
-      setError(true)
-      setErrorMessage(e.message)
+      setAlert(true)
+      setAlertMessage(e.message)
+      setAlertType("danger")
+      
     }
     
   }
@@ -44,24 +47,28 @@ export default function Login() {
       const email = document.getElementById("resetEmail").value;
 
       sendPasswordResetEmail(auth, email)
-      alert("You have been emailed a link with password reset instructions")
+      setAlert(true)
+      setAlertMessage("You have been emailed a link with password reset instructions")
+      setAlertType("success")
       setResetting(false)
+      
     } catch(e) {
-      setError(true)
-      setErrorMessage(e.message)
+      setAlert(true)
+      setAlertMessage(e.message)
+      setAlertType("danger")
     }
 
   }
 
   function closeErrorModal() {
-    setError(false);
-    setErrorMessage("")
+    setAlert(false);
+    setAlertMessage("")
   }
 
 
   return (
     <>
-      {error && <AlertModal type="danger" text={errorMessage} closeModal={closeErrorModal} />}
+      {alert && <AlertModal type={alertType} text={alertMessage} closeModal={closeErrorModal} />}
       {resetting && <PasswordReset closeResetModal={closeResetModal} resetPassword={resetPassword} /> }
       <Container className="border border-1 border-secondary mt-5 py-5 rounded">
           <h2 className="text-center">Log In</h2>

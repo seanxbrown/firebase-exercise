@@ -1,6 +1,6 @@
 import { Alert } from "react-bootstrap"
 
-const AlertModal = ({ type, text, closeModal}) => {
+const AlertModal = ({ type = "info", text, closeModal}) => {
   return (
     <Alert 
         variant={type} 

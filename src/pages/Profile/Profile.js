@@ -8,8 +8,9 @@ import AlertModal from "../../components/AlertModal";
 const Profile = () => {
     const [updating, setUpdating] = useState(false);
     const user = useContext(AuthContext)
-    const [error, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("")
+    const [alert, setAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("")
+    const [alertType, setAlertType] = useState("")
   
 
     async function updateUserProfile() {
@@ -19,8 +20,9 @@ const Profile = () => {
             await updateProfile(auth.currentUser, {displayName: newDisplayName})
             setUpdating(false)
            } catch(e) {
-            setError(true)
-            setErrorMessage(e.message)
+            setAlert(true)
+            setAlertMessage(e.message)
+            setAlertType("danger")
            }
         }
     }
@@ -28,22 +30,26 @@ const Profile = () => {
     async function resetPassword() {
       try {
         sendPasswordResetEmail(auth, user.email)
-        alert("You have been emailed a link with password reset instructions")
+        setAlert(true)
+        setAlertMessage("You have been emailed a link with password reset instructions")
+        setAlertType("success")
+      
       } catch(e) {
-        setError(true)
-        setErrorMessage(e.message)
+        setAlert(true)
+        setAlertMessage(e.message)
+        setAlertType("danger")
       }
 
     }
 
     function closeErrorModal() {
-      setError(false);
-      setErrorMessage("")
+      setAlert(false);
+      setAlertMessage("")
     }
 
   return (
     <>
-        {error && <AlertModal type="danger" text={errorMessage} closeModal={closeErrorModal} />}
+        {alert && <AlertModal type={alertType} text={alertMessage} closeModal={closeErrorModal} />}
         <h2 className="fw-bold text-center py-3">Profile</h2>
         <div className="border border-3 border-secondary rounded p-5 mb-5 w-75 m-auto" id="profileDiv">
           <div className="d-flex align-items-center border-bottom border-1 border-secondary">

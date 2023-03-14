@@ -19,8 +19,9 @@ const WorkoutDetail = () => {
     const [addingNewExercise, setAddingNewExercise] = useState(false);
     const [editing, setEditing] = useState(false)
     const [bestExercises, setBestExercises] = useState([])
-    const [error, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("")
+    const [alert, setAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("")
+    const [alertType, setAlertType] = useState("")
     const {workoutid} = useParams();
     const user = useContext(AuthContext)
 
@@ -41,8 +42,10 @@ const WorkoutDetail = () => {
             }
                 )
         } catch(error) {
-            alert(error)
-        }    
+            setAlert(true)
+            setAlertMessage(error.message)
+            setAlertType("danger")
+            }    
     }
 
     function downloadBestExercises() {
@@ -59,9 +62,10 @@ const WorkoutDetail = () => {
                 }
                 )
         } catch(e) {
-            setError(true)
-            setErrorMessage(e.message)
-        }    
+            setAlert(true)
+            setAlertMessage(e.message)
+            setAlertType("danger")
+            }    
     }
 
     function openExerciseDeletionBox(exercise) {
@@ -90,9 +94,10 @@ const WorkoutDetail = () => {
     function addExerciseToWorkout(e) {
         e.preventDefault();
         if (selectedUserWorkout === undefined) {
-            setError(true)
-            setErrorMessage("No workout selected") 
-            return
+            setAlert(true)
+            setAlertMessage("No workout selected")
+            setAlertType("danger")
+                return
         }
     
         const newWorkouts = [...allUserWorkouts];
@@ -122,9 +127,10 @@ const WorkoutDetail = () => {
             getDataForOneWorkout();
     
         } catch(e) {
-            setError(true)
-            setErrorMessage(e.message)
-        }
+            setAlert(true)
+            setAlertMessage(e.message)
+            setAlertType("danger")
+            }
     
         setAddingNewExercise(addingNewExercise => !addingNewExercise)
     }
@@ -148,8 +154,10 @@ function removeExerciseFromWorkout(id) {
         getDataForOneWorkout();
 
     }catch(e) {
-        setError(true)
-        setErrorMessage(e.message)
+        setAlert(true)
+        setAlertMessage(e.message)
+        setAlertType("danger")
+
     }
 
     setDeletingExercise(false)
@@ -167,8 +175,10 @@ function closeNewExerciseBox() {
 async function handleExerciseUpdate(e) {
     e.preventDefault()
     if (workoutid === undefined) {
-        setError(true)
-        setErrorMessage("No workout selected") 
+        setAlert(true)
+        setAlertMessage("No workout selected")
+        setAlertType("danger")
+ 
         return
     }
 
@@ -196,8 +206,9 @@ async function handleExerciseUpdate(e) {
         await update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
 
     } catch(e) {
-        setError(true)
-        setErrorMessage(e.message)
+        setAlert(true)
+        setAlertMessage(e.message)
+        setAlertType("danger")
     }
     setEditing(false)
 }
@@ -210,7 +221,10 @@ async function addToBestExercises(exercise) {
     const doesExerciseExist = newBestExercises.map(existingExercise => existingExercise.id).includes(exercise.id)
 
     if(doesExerciseExist) {
-        alert("Exercise exists")
+        setAlert(true)
+        setAlertMessage("Exercise already exists as a personal best")
+        setAlertType("info")
+
         return
     } else {
 
@@ -231,8 +245,9 @@ async function addToBestExercises(exercise) {
             update(ref(database, `${user.uid}`), {"bestexercises": newBestExercises});
 
         } catch(e) {
-            setError(true)
-            setErrorMessage(e.message)
+        setAlert(true)
+        setAlertMessage(e.message)
+        setAlertType("danger")
         }
         
 
@@ -246,15 +261,16 @@ async function removeFromBestExercises(exercise) {
         update(ref(database, `${user.uid}`), {"bestexercises": newBestExercises});
 
     } catch(e) {
-        setError(true)
-        setErrorMessage(e.message)
+        setAlert(true)
+        setAlertMessage(e.message)
+        setAlertType("danger")
     }
 
 }
 
 function closeErrorModal() {
-    setError(false);
-    setErrorMessage("")
+    setAlert(false);
+    setAlertMessage("")
   }
 
 
@@ -267,7 +283,7 @@ function closeErrorModal() {
 
   return (
     <>
-        {error && <AlertModal type="danger" text={errorMessage} closeModal={closeErrorModal} />}
+        {alert && <AlertModal type={setAlertType} text={alertMessage} closeModal={closeErrorModal} />}
         <div className="text-dark position-relative">
             <Header title={selectedUserWorkout.title} buttonFunction={openNewExerciseBox} buttonText="Add New Exercise"/>
             {addingNewExercise ?

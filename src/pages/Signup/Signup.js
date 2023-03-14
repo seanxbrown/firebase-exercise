@@ -9,8 +9,9 @@ import AlertModal from '../../components/AlertModal';
 export default function Signup() {
     const navigate = useNavigate()
     const user = useContext(AuthContext)
-    const [error, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("")
+    const [alert, setAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("")
+    const [alertType, setAlertType] = useState("")
 
 
     async function signUserUp(e) {
@@ -21,16 +22,19 @@ export default function Signup() {
         const passwordConf = document.getElementById("signupPasswordConf").value;
     
         if(password !== passwordConf) {
-          setError(true)
-          setErrorMessage("Passwords do not match")
+          setAlert(true)
+          setAlertMessage("Passwords do not match")
+          setAlertType("danger")
           return
         }
     
         try {
           await createUserWithEmailAndPassword(auth, email, password);
         } catch(e) {
-          setError(true)
-          setErrorMessage(e.message)
+          setAlert(true)
+          setAlertMessage(e.message)
+          setAlertType("danger")
+
         }
 
         navigate("/firebase-exercise/dashboard");
@@ -38,8 +42,8 @@ export default function Signup() {
       }
 
       function closeErrorModal() {
-        setError(false);
-        setErrorMessage("")
+        setAlert(false);
+        setAlertMessage("")
       }
 
 
@@ -52,7 +56,7 @@ export default function Signup() {
 
   return (
     <>
-      {error && <AlertModal type="danger" text={errorMessage} closeModal={closeErrorModal} />}
+      {alert && <AlertModal type={alertType} text={alertMessage} closeModal={closeErrorModal} />}
       <Container className="border border-1 border-secondary mt-5 py-5 rounded container-invisible" id="signupContainer">
           <h2 className="text-center">Sign Up</h2>
           <Form className="w-75 mx-auto" onSubmit={signUserUp}>
