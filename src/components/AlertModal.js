@@ -1,9 +1,9 @@
 import { Alert } from "react-bootstrap"
 
-const AlertModal = ({ text, closeModal}) => {
+const AlertModal = ({ type, text, closeModal}) => {
   return (
     <Alert 
-        variant="danger" 
+        variant={type} 
         className="text-center" 
         dismissible 
         onClose={closeModal}>

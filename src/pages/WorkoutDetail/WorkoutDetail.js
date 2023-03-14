@@ -267,7 +267,7 @@ function closeErrorModal() {
 
   return (
     <>
-        {error && <AlertModal text={errorMessage} closeModal={closeErrorModal} />}
+        {error && <AlertModal type="danger" text={errorMessage} closeModal={closeErrorModal} />}
         <div className="text-dark position-relative">
             <Header title={selectedUserWorkout.title} buttonFunction={openNewExerciseBox} buttonText="Add New Exercise"/>
             {addingNewExercise ?

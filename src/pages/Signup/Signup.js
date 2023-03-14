@@ -52,7 +52,7 @@ export default function Signup() {
 
   return (
     <>
-      {error && <AlertModal text={errorMessage} closeModal={closeErrorModal} />}
+      {error && <AlertModal type="danger" text={errorMessage} closeModal={closeErrorModal} />}
       <Container className="border border-1 border-secondary mt-5 py-5 rounded container-invisible" id="signupContainer">
           <h2 className="text-center">Sign Up</h2>
           <Form className="w-75 mx-auto" onSubmit={signUserUp}>

@@ -61,7 +61,7 @@ export default function Login() {
 
   return (
     <>
-      {error && <AlertModal text={errorMessage} closeModal={closeErrorModal} />}
+      {error && <AlertModal type="danger" text={errorMessage} closeModal={closeErrorModal} />}
       {resetting && <PasswordReset closeResetModal={closeResetModal} resetPassword={resetPassword} /> }
       <Container className="border border-1 border-secondary mt-5 py-5 rounded">
           <h2 className="text-center">Log In</h2>

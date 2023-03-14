@@ -29,7 +29,7 @@ const Home = () => {
 
   return (
     <>
-    {error && <AlertModal text={errorMessage} closeModal={closeErrorModal} />}
+    {error && <AlertModal type="danger" text={errorMessage} closeModal={closeErrorModal} />}
       <div className="vh-100 d-flex flex-column justify-content-center">
         <h2 className="text-center fw-bold ">The exercise tracker application</h2>
         <div id="homeLinkContainer" className="d-flex justify-content-center align-items-center h-25">
