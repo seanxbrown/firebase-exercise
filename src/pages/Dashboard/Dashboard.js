@@ -89,8 +89,8 @@ function downloadBestExercises() {
 
     try {
         onValue(dbRef, snapshot => {
-            if (snapshot.val()) {
-                const {bestexercises: downloadedBestExercises} = snapshot.val()
+            const {bestexercises: downloadedBestExercises} = snapshot.val()
+            if (downloadedBestExercises) {
                 setBestExercises([...downloadedBestExercises])
                 } else {
                     setBestExercises([])

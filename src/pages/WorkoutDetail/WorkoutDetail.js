@@ -53,8 +53,8 @@ const WorkoutDetail = () => {
     
         try {
             onValue(dbRef, snapshot => {
-                if (snapshot.val()) {
-                    const {bestexercises: downloadedBestExercises} = snapshot.val()
+                const {bestexercises: downloadedBestExercises} = snapshot.val() 
+                if (downloadedBestExercises) {         
                     setBestExercises([...downloadedBestExercises])
                     } else {
                         setBestExercises([])
@@ -271,6 +271,7 @@ async function removeFromBestExercises(exercise) {
 function closeErrorModal() {
     setAlert(false);
     setAlertMessage("")
+    setAlertType("")
   }
 
 
@@ -283,7 +284,7 @@ function closeErrorModal() {
 
   return (
     <>
-        {alert && <AlertModal type={setAlertType} text={alertMessage} closeModal={closeErrorModal} />}
+        {alert && <AlertModal type={alertType} text={alertMessage} closeModal={closeErrorModal} />}
         <div className="text-dark position-relative">
             <Header title={selectedUserWorkout.title} buttonFunction={openNewExerciseBox} buttonText="Add New Exercise"/>
             {addingNewExercise ?
