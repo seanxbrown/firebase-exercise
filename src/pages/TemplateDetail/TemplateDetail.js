@@ -200,22 +200,44 @@ function closeErrorModal() {
       {alert && <AlertModal type={alertType} text={alertMessage} closeModal={closeErrorModal} />}
       <div className="text-dark">
         <Header title={selectedUserTemplate.name} buttonFunction={openNewExerciseBox} buttonText="Add Exercise"/>
-
-        {addingNewExercise ? <ExerciseModal isEdit={false} isTemplate={true} updateFunction={addExerciseToTemplate} closeModal={closeNewExerciseBox} workoutItem={selectedUserTemplate} exerciseItem={selectedTemplateExercise}/> 
-        : editing ? <ExerciseModal isEdit={true} isTemplate={true} workoutItem={selectedUserTemplate} exerciseItem={selectedTemplateExercise} closeModal={closeEditBox} updateFunction={handleTemplateExerciseUpdate}/>
-      : null}
-        {deletingExercise && <DeletionModal type="exercise" item={selectedTemplateExercise} removalFunction={removeExerciseFromTemplate} closeModal={closeTemplateExerciseDeletionBox}/>}
+        {addingNewExercise ? 
+          <ExerciseModal 
+            isEdit={false} 
+            isTemplate={true} 
+            updateFunction={addExerciseToTemplate} 
+            closeModal={closeNewExerciseBox} 
+            workoutItem={selectedUserTemplate} 
+            exerciseItem={selectedTemplateExercise}
+          /> : editing ? 
+          <ExerciseModal 
+            isEdit={true} 
+            isTemplate={true} 
+            workoutItem={selectedUserTemplate} 
+            exerciseItem={selectedTemplateExercise} 
+            closeModal={closeEditBox} 
+            updateFunction={handleTemplateExerciseUpdate}
+          /> : null
+        }
+        {deletingExercise && 
+          <DeletionModal 
+            type="exercise" 
+            item={selectedTemplateExercise} 
+            removalFunction={removeExerciseFromTemplate} 
+            closeModal={closeTemplateExerciseDeletionBox}
+          />
+        }
         
         {selectedUserTemplate && selectedUserTemplate.exercises && selectedUserTemplate.exercises.length > 0 ? 
-              selectedUserTemplate.exercises.map(exercise => 
+          selectedUserTemplate.exercises.map(exercise => 
               <TemplateExerciseComponent 
                   key={exercise.id}
                   openEditBox={openEditBox}
                   openTemplateExerciseDeletionBox={openTemplateExerciseDeletionBox}
                   selectTemplateExercise={selectTemplateExercise}
                   removeExerciseFromTemplate={removeExerciseFromTemplate}
-                  exercise={exercise}/>) 
-                  : <h3 className="fw-bold text-center">No exercise information found.</h3>
+                  exercise={exercise}
+              />
+            ) : <h3 className="fw-bold text-center">No exercise information found.</h3>
           }
         <Link to="/firebase-exercise/templates">Return to templates</Link>
       </div>

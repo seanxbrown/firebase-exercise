@@ -23,8 +23,15 @@ const WorkoutsPreview = ({ workouts, selectWorkout }) => {
             <h2 className="text-center">Workouts</h2>
         </div>
         <div className="workoutDataContainer overflow-hidden mb-4">
-            {workouts && workouts.length > 0 ?
-                createWorkoutsPreview(workouts).map(workout => <WorkoutComponent key={workout.id} preview={true} selectWorkout={selectWorkout} workout={workout}/> ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
+            {workouts && workouts.length > 0 ? 
+                createWorkoutsPreview(workouts).map(workout => 
+                    <WorkoutComponent 
+                        key={workout.id} 
+                        preview={true} 
+                        selectWorkout={selectWorkout} 
+                        workout={workout}
+                    /> 
+                ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
         </div>  
         <Link to={`/firebase-exercise/workouts`}>View all workouts</Link>
     </Col>

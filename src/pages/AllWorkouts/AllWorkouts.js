@@ -213,12 +213,42 @@ useEffect(() => {
   return (
 
       <div className="workoutDataContainer position-relative">
-        <Header title="My workouts" buttonFunction={openWorkoutAdditionBox} buttonText="Add New Workout" />
-        <Form.Control type="search" className="mb-4" id="workoutSearchBar" placeholder="Search" onChange={searchChangeHandler}/>
-        {deletingWorkout && <DeletionModal type="workout" item={selectedWorkout} closeModal={closeWorkoutDeletionBox} removalFunction={removeWorkoutFromList}/>}
-        {creatingNewWorkout ?  <WorkoutModal isEdit={false} isTemplate={false} templates={templates} updateFunction={handleWorkoutSubmit} closeModal={closeWorkoutAdditionBox} /> 
-        : editing ? <WorkoutModal isEdit={true} isTemplate={false} item={selectedWorkout} closeModal={closeEditBox} updateFunction={handleWorkoutUpdate} /> 
-        : null
+        <Header 
+          title="My workouts" 
+          buttonFunction={openWorkoutAdditionBox} 
+          buttonText="Add New Workout" 
+        />
+        <Form.Control 
+          type="search" 
+          className="mb-4" 
+          id="workoutSearchBar" 
+          placeholder="Search" 
+          onChange={searchChangeHandler}
+        />
+        {deletingWorkout && 
+          <DeletionModal 
+            type="workout" 
+            item={selectedWorkout} 
+            closeModal={closeWorkoutDeletionBox} 
+            removalFunction={removeWorkoutFromList}
+          />
+        }
+        {creatingNewWorkout ?  
+          <WorkoutModal 
+            isEdit={false} 
+            isTemplate={false} 
+            templates={templates} 
+            updateFunction={handleWorkoutSubmit} 
+            closeModal={closeWorkoutAdditionBox} 
+          /> 
+          : editing ? 
+            <WorkoutModal 
+              isEdit={true} 
+              isTemplate={false} 
+              item={selectedWorkout} 
+              closeModal={closeEditBox} 
+              updateFunction={handleWorkoutUpdate} 
+            /> : null
         }
         {workouts && workouts.length > 0 ? workouts.filter(workout => {
           if (search === "") {

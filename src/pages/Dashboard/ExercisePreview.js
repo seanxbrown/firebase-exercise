@@ -9,7 +9,15 @@ const ExercisePreview = ( { selectedWorkout, selectExercise }) => {
             <h2 className="text-center">Exercises {selectedWorkout ? `(${selectedWorkout.title})` : null}</h2>
         </div>
         <div className="workoutDataContainer overflow-hidden">
-            {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.length > 0 ? selectedWorkout.exercises.map(exercise => <ExerciseComponent preview={true} selectExercise={selectExercise} key={exercise.id} exercise={exercise}/>) : <h3 className="fw-bold text-center">No exercise information found.</h3>}
+            {selectedWorkout && selectedWorkout.exercises && selectedWorkout.exercises.length > 0 ? 
+              selectedWorkout.exercises.map(exercise => 
+                <ExerciseComponent 
+                  preview={true} 
+                  selectExercise={selectExercise} 
+                  key={exercise.id} 
+                  exercise={exercise}
+                />
+              ) : <h3 className="fw-bold text-center">No exercise information found.</h3>}
         </div>          
     </Col>
   )

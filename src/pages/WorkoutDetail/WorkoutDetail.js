@@ -287,25 +287,44 @@ function closeErrorModal() {
         <div className="text-dark position-relative">
             <Header title={selectedUserWorkout.title} buttonFunction={openNewExerciseBox} buttonText="Add New Exercise"/>
             {addingNewExercise ?
-            <ExerciseModal isEdit={false} isTemplate={false} workoutItem={selectedUserWorkout} updateFunction={addExerciseToWorkout} closeModal={closeNewExerciseBox}/> 
-            : editing ? <ExerciseModal isEdit={true} isTemplate={false} workoutItem={selectedUserWorkout} exerciseItem={selectedExercise} closeModal={closeEditBox} updateFunction={handleExerciseUpdate}/>
-            : null
+                <ExerciseModal 
+                    isEdit={false} 
+                    isTemplate={false} 
+                    workoutItem={selectedUserWorkout} 
+                    updateFunction={addExerciseToWorkout} 
+                    closeModal={closeNewExerciseBox}
+                /> : editing ? 
+                    <ExerciseModal 
+                        isEdit={true} 
+                        isTemplate={false} 
+                        workoutItem={selectedUserWorkout} 
+                        exerciseItem={selectedExercise} 
+                        closeModal={closeEditBox} 
+                        updateFunction={handleExerciseUpdate}
+                    /> : null
             }
-
-            {deletingExercise && <DeletionModal type="exercise" item={selectedExercise} removalFunction={removeExerciseFromWorkout} closeModal={closeExerciseDeletionBox}/>}
-            {selectedUserWorkout && selectedUserWorkout.exercises && selectedUserWorkout.exercises.length > 0 ? 
+            {deletingExercise && 
+                <DeletionModal 
+                    type="exercise" 
+                    item={selectedExercise} 
+                    removalFunction={removeExerciseFromWorkout} 
+                    closeModal={closeExerciseDeletionBox}
+                />
+            }
+            {selectedUserWorkout && selectedUserWorkout.exercises && selectedUserWorkout.exercises.length > 0 ?
                 selectedUserWorkout.exercises.map(exercise => 
-                <ExerciseComponent 
-                    selectExercise={selectExercise} 
-                    openExerciseDeletionBox={openExerciseDeletionBox} 
-                    removeExerciseFromWorkout={removeExerciseFromWorkout}
-                    handleExerciseUpdate={handleExerciseUpdate} 
-                    openEditBox={openEditBox}
-                    addToBestExercises={addToBestExercises}
-                    removeFromBestExercises={removeFromBestExercises}
-                    isBestExercise={bestExercises.map(bestExercise => bestExercise.id).includes(exercise.id)}
-                    key={exercise.id} exercise={exercise}/>) 
-                    : <h3 className="fw-bold text-center">No exercise information found.</h3>
+                    <ExerciseComponent 
+                        selectExercise={selectExercise} 
+                        openExerciseDeletionBox={openExerciseDeletionBox} 
+                        removeExerciseFromWorkout={removeExerciseFromWorkout}
+                        handleExerciseUpdate={handleExerciseUpdate} 
+                        openEditBox={openEditBox}
+                        addToBestExercises={addToBestExercises}
+                        removeFromBestExercises={removeFromBestExercises}
+                        isBestExercise={bestExercises.map(bestExercise => bestExercise.id).includes(exercise.id)}
+                        key={exercise.id} exercise={exercise}
+                    />
+                ) : <h3 className="fw-bold text-center">No exercise information found.</h3>
             }
             <div id="workoutDetailLinkContainer" className="d-flex justify-content-around">
                 <Link to={`/firebase-exercise/dashboard`}>Return to dashboard</Link>

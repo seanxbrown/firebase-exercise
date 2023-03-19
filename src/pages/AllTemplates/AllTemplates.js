@@ -144,13 +144,47 @@ function openEditBox() {
     
   return (
     <div>
-        <Header title="My templates" buttonFunction={openNewTemplateBox} buttonText="Create New Template" />
-        {deletingTemplate && <DeletionModal type="template" item={selectedTemplate} closeModal={closeDeleteTemplateModal} removalFunction={deleteTemplate}/>}
-        {editingTemplate ? <WorkoutModal isEdit={true} isTemplate={true} item={selectedTemplate} closeModal={closeEditBox} updateFunction={handleTemplateUpdate} />
-        :  creatingNewTemplate ? <WorkoutModal isEdit={false} isTemplate={true} closeModal={closeNewTemplateBox} updateFunction={createNewTemplate}/>
-        : null 
+        <Header 
+            title="My templates" 
+            buttonFunction={openNewTemplateBox} 
+            buttonText="Create New Template" 
+        />
+        {deletingTemplate && 
+            <DeletionModal 
+                type="template" 
+                item={selectedTemplate} 
+                closeModal={closeDeleteTemplateModal} 
+                removalFunction={deleteTemplate}
+            />
         }
-        {templates && templates.map((template, key) => <TemplateComponent key={key} template={template} openEditBox={openEditBox} selectTemplate={selectTemplate} openDeleteTemplateModal={openDeleteTemplateModal} deleteTemplate={deleteTemplate}/>)}
+        {editingTemplate ? 
+            <WorkoutModal 
+                isEdit={true} 
+                isTemplate={true} 
+                item={selectedTemplate} 
+                closeModal={closeEditBox} 
+                updateFunction={handleTemplateUpdate} 
+            />
+            :  creatingNewTemplate ? 
+                <WorkoutModal 
+                    isEdit={false} 
+                    isTemplate={true} 
+                    closeModal={closeNewTemplateBox} 
+                    updateFunction={createNewTemplate}
+                />
+                : null 
+        }
+        {templates && templates.map((template, key) => 
+            <TemplateComponent 
+                key={key} 
+                template={template} 
+                openEditBox={openEditBox} 
+                selectTemplate={selectTemplate} 
+                openDeleteTemplateModal={openDeleteTemplateModal} 
+                deleteTemplate={deleteTemplate}
+            />
+            )
+        }
         <Link to="/firebase-exercise/dashboard">Return to dashboard</Link>
     </div>
   )

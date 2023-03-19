@@ -6,8 +6,9 @@ const AlertModal = ({ type = "info", text, closeModal}) => {
         variant={type} 
         className="text-center" 
         dismissible 
-        onClose={closeModal}>
-        {text}
+        onClose={closeModal}
+    >
+      {text}
     </Alert>
   )
 }
