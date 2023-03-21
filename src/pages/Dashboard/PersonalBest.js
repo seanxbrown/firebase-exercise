@@ -22,7 +22,7 @@ const PersonalBest = ({ bestExcercises }) => {
           bestExercise.name.toLowerCase().includes(search)
           )
         .map(bestExercise => {
-            return <ListGroup.Item>
+            return <ListGroup.Item action>
                     <Row key={bestExercise.id} className="">
                       <Col xs={12} md={2} className="text-center">{formatDate(bestExercise.date)}</Col>
                       <Col xs={7} md={2}>{bestExercise.workout}</Col>

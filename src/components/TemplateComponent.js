@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 const TemplateComponent = ({ preview, template, openDeleteTemplateModal, selectTemplate, openEditBox }) => {
   return (
-        <ListGroup.Item id={template.id} onClick={()=> selectTemplate(template.id)}>
+        <ListGroup.Item action id={template.id} onClick={()=> selectTemplate(template.id)}>
           <Row>
             <Col xs={6} md={9}>{template.name}</Col>
           <Col xs={3} md={1}>

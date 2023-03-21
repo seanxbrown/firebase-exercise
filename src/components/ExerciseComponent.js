@@ -3,7 +3,7 @@ import { CloseButton, Row, Col, ListGroup } from "react-bootstrap";
 const ExerciseComponent = ({ isBestExercise, preview, exercise, openExerciseDeletionBox, selectExercise, openEditBox, addToBestExercises, removeFromBestExercises }) => {
 
     return (
-        <ListGroup.Item>
+        <ListGroup.Item action>
             <Row xs={3} className="justify-content-center align-items-center pb-1" id={exercise.id} onClick={() => selectExercise(exercise)}>
                 <Col sm={2}>
                     <p>{exercise.name}</p>

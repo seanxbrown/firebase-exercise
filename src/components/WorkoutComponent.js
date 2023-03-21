@@ -5,7 +5,7 @@ import { formatDate } from "../utils/utils"
 const WorkoutComponent = ({workout, selectWorkout, openWorkoutDeletionBox, openEditBox, preview}) => {
 
   return (
-    <ListGroup.Item className="text-dark">
+    <ListGroup.Item action className="text-dark">
       <Row id={workout.id} onClick={(() => selectWorkout(workout.id))}>
         <Col xs={5}>{workout.title}</Col>
         <Col xs={3}>{formatDate(workout.date)}</Col>
