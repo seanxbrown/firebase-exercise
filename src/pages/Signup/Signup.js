@@ -57,7 +57,7 @@ export default function Signup() {
   return (
     <>
       {alert && <AlertModal type={alertType} text={alertMessage} closeModal={closeErrorModal} />}
-      <Container className="border border-1 border-secondary mt-5 py-5 rounded container-invisible" id="signupContainer">
+      <Container className="border border-1 border-secondary mt-5 py-5 rounded container-invisible text-dark" id="signupContainer">
           <h2 className="text-center">Sign Up</h2>
           <Form className="w-75 mx-auto" onSubmit={signUserUp}>
               <Form.Group>

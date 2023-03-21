@@ -70,7 +70,7 @@ export default function Login() {
     <>
       {alert && <AlertModal type={alertType} text={alertMessage} closeModal={closeErrorModal} />}
       {resetting && <PasswordReset closeResetModal={closeResetModal} resetPassword={resetPassword} /> }
-      <Container className="border border-1 border-secondary mt-5 py-5 rounded">
+      <Container className="border border-1 border-secondary mt-5 py-5 rounded text-dark">
           <h2 className="text-center">Log In</h2>
           <Form className="w-75 mx-auto" onSubmit={logUserIn}>
               <Form.Group>
