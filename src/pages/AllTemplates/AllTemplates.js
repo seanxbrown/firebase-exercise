@@ -7,6 +7,7 @@ import TemplateComponent from '../../components/TemplateComponent'
 import DeletionModal from "../../components/DeletionModal"
 import WorkoutModal from "../../components/WorkoutModal"
 import Header from '../../components/layouts/Header'
+import { ListGroup } from "react-bootstrap"
 
 
 const AllTemplates = () => {
@@ -174,17 +175,21 @@ function openEditBox() {
                 />
                 : null 
         }
-        {templates && templates.map((template, key) => 
-            <TemplateComponent 
-                key={key} 
-                template={template} 
-                openEditBox={openEditBox} 
-                selectTemplate={selectTemplate} 
-                openDeleteTemplateModal={openDeleteTemplateModal} 
-                deleteTemplate={deleteTemplate}
-            />
-            )
-        }
+        <ListGroup variant="flush">
+            {templates && templates.map((template, key) => 
+                <TemplateComponent 
+                    key={key} 
+                    template={template} 
+                    openEditBox={openEditBox} 
+                    selectTemplate={selectTemplate} 
+                    openDeleteTemplateModal={openDeleteTemplateModal} 
+                    deleteTemplate={deleteTemplate}
+                />
+                )
+            }
+
+        </ListGroup>
+        
         <Link to="/firebase-exercise/dashboard">Return to dashboard</Link>
     </div>
   )

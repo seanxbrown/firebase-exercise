@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Col } from "react-bootstrap"
+import { Col, ListGroup } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import TemplateComponent from '../../components/TemplateComponent'
 
@@ -20,7 +20,7 @@ useEffect(()=> {
   return (
     <Col xs={12} className="border border-1 border-dark rounded px-5 py-4">
         <h2 className="text-center">Templates</h2>
-        <div  className="mb-4">
+        <ListGroup variant="flush" className="mb-4">
           {templates && templates.length > 0 ?
             createTemplatesPreview(templates).map(template => 
               <TemplateComponent 
@@ -30,7 +30,7 @@ useEffect(()=> {
                 template={template}
               /> 
               ) : <h3 className="fw-bold text-center">No templates saved.</h3>}
-        </div>        
+        </ListGroup>        
         <Link to="/firebase-exercise/templates">View all templates</Link>
     </Col>
   )

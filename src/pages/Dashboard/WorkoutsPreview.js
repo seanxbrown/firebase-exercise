@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Col } from "react-bootstrap"
+import { Col, ListGroup } from "react-bootstrap"
 import WorkoutComponent from '../../components/WorkoutComponent';
 import { Link } from "react-router-dom"
 
@@ -22,7 +22,7 @@ const WorkoutsPreview = ({ workouts, selectWorkout }) => {
         <div className="d-flex flex-column" id="workoutColumnHeader">
             <h2 className="text-center">Workouts</h2>
         </div>
-        <div className="workoutDataContainer overflow-hidden mb-4">
+        <ListGroup variant="flush" className="mb-4">
             {workouts && workouts.length > 0 ? 
                 createWorkoutsPreview(workouts).map(workout => 
                     <WorkoutComponent 
@@ -31,8 +31,8 @@ const WorkoutsPreview = ({ workouts, selectWorkout }) => {
                         selectWorkout={selectWorkout} 
                         workout={workout}
                     /> 
-                ) : <h3 className="fw-bold text-center">No workouts saved.</h3>}
-        </div>  
+                ) : <ListGroup.Item className="fw-bold text-center">No workouts saved.</ListGroup.Item>}
+        </ListGroup>  
         <Link to={`/firebase-exercise/workouts`}>View all workouts</Link>
     </Col>
   )

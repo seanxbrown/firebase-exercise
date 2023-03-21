@@ -25,10 +25,6 @@ nav#header, footer {
 
 }
 
-p, label {
-  color: var(--primary)
-}
-
 #workoutColumnHeader, #exerciseColumnHeader {
   color: var(--primary);
 }

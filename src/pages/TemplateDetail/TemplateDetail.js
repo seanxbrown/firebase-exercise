@@ -9,6 +9,7 @@ import DeletionModal from "../../components/DeletionModal"
 import ExerciseModal from "../../components/ExerciseModal"
 import Header from "../../components/layouts/Header"
 import AlertModal from '../../components/AlertModal';
+import { ListGroup } from "react-bootstrap"
 
 
 const TemplateDetail = () => {
@@ -227,18 +228,21 @@ function closeErrorModal() {
           />
         }
         
-        {selectedUserTemplate && selectedUserTemplate.exercises && selectedUserTemplate.exercises.length > 0 ? 
-          selectedUserTemplate.exercises.map(exercise => 
-              <TemplateExerciseComponent 
-                  key={exercise.id}
-                  openEditBox={openEditBox}
-                  openTemplateExerciseDeletionBox={openTemplateExerciseDeletionBox}
-                  selectTemplateExercise={selectTemplateExercise}
-                  removeExerciseFromTemplate={removeExerciseFromTemplate}
-                  exercise={exercise}
-              />
-            ) : <h3 className="fw-bold text-center">No exercise information found.</h3>
-          }
+        <ListGroup variant="flush">
+          {selectedUserTemplate && selectedUserTemplate.exercises && selectedUserTemplate.exercises.length > 0 ? 
+            selectedUserTemplate.exercises.map(exercise => 
+                <TemplateExerciseComponent 
+                    key={exercise.id}
+                    openEditBox={openEditBox}
+                    openTemplateExerciseDeletionBox={openTemplateExerciseDeletionBox}
+                    selectTemplateExercise={selectTemplateExercise}
+                    removeExerciseFromTemplate={removeExerciseFromTemplate}
+                    exercise={exercise}
+                />
+              ) : <ListGroup.Item className="fw-bold text-center">No exercise information found.</ListGroup.Item>
+            }
+        </ListGroup>
+        
         <Link to="/firebase-exercise/templates">Return to templates</Link>
       </div>
       </>

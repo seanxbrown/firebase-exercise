@@ -10,6 +10,7 @@ import DeletionModal from "../../components/DeletionModal"
 import ExerciseModal from "../../components/ExerciseModal"
 import Header from "../../components/layouts/Header"
 import AlertModal from "../../components/AlertModal";
+import { ListGroup } from "react-bootstrap"
 
 const WorkoutDetail = () => {
     const [selectedUserWorkout, setSelectedUserWorkout] = useState({})
@@ -312,7 +313,8 @@ function closeErrorModal() {
                     closeModal={closeExerciseDeletionBox}
                 />
             }
-            {selectedUserWorkout && selectedUserWorkout.exercises && selectedUserWorkout.exercises.length > 0 ?
+            <ListGroup variant="flush">
+                {selectedUserWorkout && selectedUserWorkout.exercises && selectedUserWorkout.exercises.length > 0 ?
                 selectedUserWorkout.exercises.map(exercise => 
                     <ExerciseComponent 
                         selectExercise={selectExercise} 
@@ -325,8 +327,11 @@ function closeErrorModal() {
                         isBestExercise={bestExercises.map(bestExercise => bestExercise.id).includes(exercise.id)}
                         key={exercise.id} exercise={exercise}
                     />
-                ) : <h3 className="fw-bold text-center">No exercise information found.</h3>
+                ) : <ListGroup.Item className="fw-bold text-center">No exercise information found.</ListGroup.Item>
             }
+
+            </ListGroup>
+            
             <div id="workoutDetailLinkContainer" className="d-flex justify-content-around">
                 <Link to={`/firebase-exercise/dashboard`}>Return to dashboard</Link>
                 <Link to={`/firebase-exercise/workouts`}>Return to workouts overview</Link>

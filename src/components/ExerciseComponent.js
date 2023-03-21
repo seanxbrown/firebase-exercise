@@ -1,10 +1,10 @@
-import { CloseButton, Row, Col } from "react-bootstrap";
+import { CloseButton, Row, Col, ListGroup } from "react-bootstrap";
 
 const ExerciseComponent = ({ isBestExercise, preview, exercise, openExerciseDeletionBox, selectExercise, openEditBox, addToBestExercises, removeFromBestExercises }) => {
 
     return (
-        <>
-            <Row xs={3}className="justify-content-center workoutData align-items-center pb-1" id={exercise.id} onClick={() => selectExercise(exercise)}>
+        <ListGroup.Item>
+            <Row xs={3} className="justify-content-center align-items-center pb-1" id={exercise.id} onClick={() => selectExercise(exercise)}>
                 <Col sm={2}>
                     <p>{exercise.name}</p>
                 </Col>
@@ -35,7 +35,7 @@ const ExerciseComponent = ({ isBestExercise, preview, exercise, openExerciseDele
                     <CloseButton variant="white" className="border border-1 border-light" onClick={() => openExerciseDeletionBox(exercise)} />
                 </Col>}
             </Row>
-        </>
+        </ListGroup.Item>
     )
 }
 

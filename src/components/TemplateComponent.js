@@ -1,10 +1,11 @@
-import { CloseButton, Row, Col } from "react-bootstrap"
+import { CloseButton, Row, Col, ListGroup } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 const TemplateComponent = ({ preview, template, openDeleteTemplateModal, selectTemplate, openEditBox }) => {
   return (
-        <Row className=" workoutData align-items-center" id={template.id} onClick={()=> selectTemplate(template.id)}>
-          <Col xs={6} md={9}>{template.name}</Col>
+        <ListGroup.Item id={template.id} onClick={()=> selectTemplate(template.id)}>
+          <Row>
+            <Col xs={6} md={9}>{template.name}</Col>
           <Col xs={3} md={1}>
               <Link to={`/firebase-exercise/templates/${template.id}`}>View</Link>
           </Col>
@@ -18,7 +19,10 @@ const TemplateComponent = ({ preview, template, openDeleteTemplateModal, selectT
             <CloseButton variant="white" onClick={openDeleteTemplateModal}/>
           </Col> 
         }
-      </Row>
+
+          </Row>
+          
+      </ListGroup.Item>
   )
 }
 
