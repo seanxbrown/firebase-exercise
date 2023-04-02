@@ -113,11 +113,11 @@ useEffect(() => {
   return (
     <>
     <h2 className="py-3 text-center fw-bold">Dashboard</h2>
-    <Row id="dashboard" className="p-4 position-relative">
+    <Row id="dashboard" className="p-4 border-bottom border-1 border-secondary">
         <WorkoutsPreview workouts={workouts} selectWorkout={selectWorkout}/>
         <ExercisePreview selectedWorkout={selectedWorkout} />
     </Row>
-    <Row className="p-4 position-relative">
+    <Row className="p-4 position-relative border-bottom bborder-1 border-secondary">
         <TemplatesPreview templates={templates} selectTemplate={selectTemplate}/>
     </Row>
     <Row className="p-4 position-relative">

@@ -14,7 +14,7 @@ const PersonalBest = ({ bestExcercises }) => {
 
 
   return (
-    <Col xs={12} className="border border-1 border-dark rounded px-5 py-4 text-dark">
+    <Col xs={12} className="px-5 py-4 text-dark">
       <h2 className="text-center">Personal Bests</h2>
       <Form.Control type="search" placeholder="Search for an exercise (e.g. bench press)" className="mb-4" onChange={handlehange}/>
       <ListGroup variant="flush">

@@ -18,7 +18,7 @@ const WorkoutsPreview = ({ workouts, selectWorkout }) => {
     },[workouts])
     
   return (
-    <Col xs={12} sm={5} id="workoutDiv" className="border border-1 border-dark rounded p-2">
+    <Col xs={12} sm={5} id="workoutDiv" className="rounded p-2 border-end border-1 border-secondary">
         <div className="d-flex flex-column" id="workoutColumnHeader">
             <h2 className="text-center">Workouts</h2>
         </div>

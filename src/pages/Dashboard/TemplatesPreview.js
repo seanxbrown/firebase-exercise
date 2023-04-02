@@ -18,7 +18,7 @@ useEffect(()=> {
 },[templates])
 
   return (
-    <Col xs={12} className="border border-1 border-dark rounded px-5 py-4">
+    <Col xs={12} className="px-5 py-4">
         <h2 className="text-center">Templates</h2>
         <ListGroup variant="flush" className="mb-4">
           {templates && templates.length > 0 ?
