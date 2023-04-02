@@ -40,7 +40,7 @@ function App() {
     <AuthContext.Provider value={user}>
       <BrowserRouter>
         <Navigation logOut={logOut} />
-        <Container fluid className="App min-vh-100 text-light overflow-scroll position-relative">
+        <Container fluid className="App min-vh-100 text-light position-relative">
           <Routes>
             <Route path="/firebase-exercise/signup" element={<Signup />} />
             <Route path="/firebase-exercise/login" element={<Login logOut={logOut}/>} />
