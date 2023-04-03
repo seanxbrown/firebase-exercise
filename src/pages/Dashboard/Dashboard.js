@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Row } from "react-bootstrap";
+import React, { useState, useEffect, useContext, Suspense } from 'react';
+import { Row, Spinner } from "react-bootstrap";
 import { database, ref, onValue } from "../../firebase";
 import { AuthContext } from '../../contexts/AuthContext';
 import WorkoutsPreview from './WorkoutsPreview';
@@ -114,14 +114,25 @@ useEffect(() => {
     <>
     <h2 className="py-3 text-center fw-bold">Dashboard</h2>
     <Row id="dashboard" className="p-4 border-bottom border-1 border-secondary">
-        <WorkoutsPreview workouts={workouts} selectWorkout={selectWorkout}/>
-        <ExercisePreview selectedWorkout={selectedWorkout} />
+        <Suspense fallback={<Spinner animation="border" role="status"/>}>
+            <WorkoutsPreview workouts={workouts} selectWorkout={selectWorkout}/>
+        </Suspense>
+        
+        <Suspense fallback={<Spinner animation="border" role="status"/>}>
+            <ExercisePreview selectedWorkout={selectedWorkout} />
+        </Suspense>        
     </Row>
+
     <Row className="p-4 position-relative border-bottom bborder-1 border-secondary">
-        <TemplatesPreview templates={templates} selectTemplate={selectTemplate}/>
+        <Suspense fallback={<Spinner animation="border" role="status"/>}>
+            <TemplatesPreview templates={templates} selectTemplate={selectTemplate}/>
+        </Suspense> 
     </Row>
+
     <Row className="p-4 position-relative">
-        <PersonalBest bestExcercises={bestExercises}/>
+        <Suspense fallback={<Spinner animation="border" role="status"/>}>
+            <PersonalBest bestExcercises={bestExercises}/>
+        </Suspense>
     </Row>
     </>
     
