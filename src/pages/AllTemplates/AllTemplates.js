@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, Suspense } from 'react'
 import { Link } from "react-router-dom"
 import { set, ref, database, onValue, update } from "../../firebase"
 import { AuthContext } from '../../contexts/AuthContext'
@@ -7,7 +7,7 @@ import TemplateComponent from '../../components/TemplateComponent'
 import DeletionModal from "../../components/DeletionModal"
 import WorkoutModal from "../../components/WorkoutModal"
 import Header from '../../components/layouts/Header'
-import { ListGroup } from "react-bootstrap"
+import { ListGroup, Spinner } from "react-bootstrap"
 
 
 const AllTemplates = () => {
@@ -175,21 +175,21 @@ function openEditBox() {
                 />
                 : null 
         }
-        <ListGroup variant="flush">
-            {templates && templates.map((template, key) => 
-                <TemplateComponent 
-                    key={key} 
-                    template={template} 
-                    openEditBox={openEditBox} 
-                    selectTemplate={selectTemplate} 
-                    openDeleteTemplateModal={openDeleteTemplateModal} 
-                    deleteTemplate={deleteTemplate}
-                />
-                )
-            }
-
-        </ListGroup>
-        
+        <Suspense fallback={<Spinner animation="border" role="status"/>}>
+            <ListGroup variant="flush">
+                {templates && templates.map((template, key) => 
+                    <TemplateComponent 
+                        key={key} 
+                        template={template} 
+                        openEditBox={openEditBox} 
+                        selectTemplate={selectTemplate} 
+                        openDeleteTemplateModal={openDeleteTemplateModal} 
+                        deleteTemplate={deleteTemplate}
+                    />
+                    )
+                }
+            </ListGroup>
+        </Suspense>
         <Link to="/firebase-exercise/dashboard">Return to dashboard</Link>
     </div>
   )

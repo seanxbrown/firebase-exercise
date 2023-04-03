@@ -1,10 +1,10 @@
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect, useContext, Suspense } from "react"
 import { AuthContext } from "../../contexts/AuthContext";
 import { database, set, ref, onValue, update } from "../../firebase";
 import WorkoutComponent from "../../components/WorkoutComponent";
 import { v4 as uuidv4 } from "uuid";
 import Workout from "../../utils/workout";
-import { Form, ListGroup } from "react-bootstrap"
+import { Form, ListGroup, Spinner } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import DeletionModal from "../../components/DeletionModal"
 import WorkoutModal from "../../components/WorkoutModal"
@@ -250,24 +250,28 @@ useEffect(() => {
               updateFunction={handleWorkoutUpdate} 
             /> : null
         }
-        <ListGroup variant="flush" className="mb-3">
-          {workouts && workouts.length > 0 ? workouts.filter(workout => {
-            if (search === "") {
-              return workout
-            } else {
-              return workout.title.toLowerCase().includes(search) || workout.date.includes(search)
+        <Suspense fallback={<Spinner animation="border" role="status"/>}>
+          <ListGroup variant="flush" className="mb-3">
+            {workouts && workouts.length > 0 ? workouts.filter(workout => {
+              if (search === "") {
+                return workout
+              } else {
+                return workout.title.toLowerCase().includes(search) || workout.date.includes(search)
+              }
+            })
+            .map(workout => 
+              <WorkoutComponent 
+                key={workout.id} 
+                openEditBox={openEditBox} 
+                openWorkoutDeletionBox={openWorkoutDeletionBox} 
+                selectWorkout={selectWorkout} 
+                workout={workout}/> ) 
+                : <ListGroup.Item className="fw-bold text-center">No workouts saved.</ListGroup.Item>
             }
-          })
-          .map(workout => 
-            <WorkoutComponent 
-              key={workout.id} 
-              openEditBox={openEditBox} 
-              openWorkoutDeletionBox={openWorkoutDeletionBox} 
-              selectWorkout={selectWorkout} 
-              workout={workout}/> ) 
-              : <ListGroup.Item className="fw-bold text-center">No workouts saved.</ListGroup.Item>}
+          </ListGroup>
 
-        </ListGroup>
+        </Suspense>
+        
         
         <Link to={`/firebase-exercise/dashboard`} >Return to dashboard </Link>
       </div>
