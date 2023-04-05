@@ -114,6 +114,10 @@ button.btn-close {
 
 }
 
+#profileDiv {
+  background-color: var(--primary);
+}
+
 
 @media only screen and (min-width: 992px) {
   #addWorkoutDiv, #addExerciseDiv {
