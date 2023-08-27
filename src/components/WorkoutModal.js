@@ -44,7 +44,7 @@ const WorkoutModal = ({ item = {}, isEdit, isTemplate, closeModal, updateFunctio
                 <Form.Label>Date</Form.Label>
                 <Form.Control required id="workoutDate" type="date" defaultValue={isEdit && item && item.date || ""}/>
             </Form.Group> }
-            <Button type="submit" className="btn btn-primary rounded-pill mt-3">Create Workout or Template</Button>
+            <Button type="submit" className="btn btn-primary rounded-pill mt-3 w-100">Create Workout or Template</Button>
         </Form>
         </Modal.Body>
     </Modal>
