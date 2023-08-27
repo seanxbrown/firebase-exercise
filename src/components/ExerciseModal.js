@@ -43,7 +43,7 @@ const ExerciseModal = ({ isTemplate, isEdit, closeModal, updateFunction, workout
                     <Form.Label>Notes</Form.Label>
                     <Form.Control as="textarea" id="exerciseNotes" defaultValue={isEdit && exerciseItem && exerciseItem.notes || ""}/>
                 </Form.Group>
-                <Button type="submit" className="btn btn-primary rounded-pill mt-4">Add Exercise</Button>
+                <Button type="submit" className="btn btn-primary rounded-pill mt-4 w-100">Add Exercise</Button>
             </Form>
         </Modal.Body>
     </Modal>
