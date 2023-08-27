@@ -6,7 +6,7 @@ const ExerciseModal = ({ isTemplate, isEdit, closeModal, updateFunction, workout
     <Modal show={true} onHide={closeModal}>
         <Modal.Header closeButton >
             <Modal.Title> 
-                Add Exercise to {workoutItem && workoutItem.title || workoutItem && workoutItem.name}
+                {!isEdit ? `Add exercise to ${workoutItem.name || workoutItem.title}` : `Edit ${exerciseItem.name}`}
             </Modal.Title>
         </Modal.Header>
         <Modal.Body >
