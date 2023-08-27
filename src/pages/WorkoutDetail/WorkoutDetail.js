@@ -11,6 +11,7 @@ import ExerciseModal from "../../components/ExerciseModal"
 import Header from "../../components/layouts/Header"
 import AlertModal from "../../components/AlertModal";
 import { ListGroup } from "react-bootstrap"
+import { formatDate } from "../../utils/utils"
 
 const WorkoutDetail = () => {
     const [selectedUserWorkout, setSelectedUserWorkout] = useState({})
@@ -287,7 +288,12 @@ function closeErrorModal() {
     <>
         {alert && <AlertModal type={alertType} text={alertMessage} closeModal={closeErrorModal} />}
         <div className="text-dark position-relative">
-            <Header title={selectedUserWorkout.title} buttonFunction={openNewExerciseBox} buttonText="Add New Exercise"/>
+            <Header 
+                title={selectedUserWorkout.title} 
+                buttonFunction={openNewExerciseBox} 
+                buttonText="Add New Exercise" 
+                date={formatDate(selectedUserWorkout.date)}
+                />
             {addingNewExercise ?
                 <ExerciseModal 
                     isEdit={false} 
