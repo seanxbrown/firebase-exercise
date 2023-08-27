@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { signInAnonymously, auth } from "../../firebase"
 import AlertModal from "../../components/AlertModal"
 import { useState } from "react"
+import { Container, Row, Col } from "react-bootstrap"
 
 const Home = () => {
   const navigate = useNavigate()
@@ -37,13 +38,14 @@ const Home = () => {
     }
       <div className="vh-100 d-flex flex-column justify-content-center">
         <h2 className="text-center fw-bold ">The exercise tracker application</h2>
-        <div id="homeLinkContainer" className="d-flex justify-content-center align-items-center h-25">
-          <Link to="/firebase-exercise/signup" className="btn btn-lg homeLinkButton mx-1">Sign up</Link>
-          <Link to="/firebase-exercise/login" className="btn btn-lg homeLinkButton mx-1">Log in</Link>
-        </div>
-        <div className="text-center">
-          <a onClick={signInAsGuest} className="link-primary" id="guestSignInLink">Continue as guest</a>
-        </div>
+        <Container id="homeLinkContainer">
+          <Row className="align-items-center justify-content-center m-auto gy-5">
+            <Col xs={12} md={6}><Link to="/firebase-exercise/signup" className="btn btn-lg homeLinkButton w-100">Sign up</Link></Col>
+            <Col xs={12} md={6}><Link to="/firebase-exercise/login" className="btn btn-lg homeLinkButton w-100">Log in</Link></Col>
+            <Col xs={12} md={6} className="text-center"><a onClick={signInAsGuest} className="link-primary" id="guestSignInLink">Continue as guest</a></Col>
+            <Col xs={12} md={6} className="text-center"><Link to="/firebase-exercise/dashboard">Go to Dashboard</Link></Col>
+          </Row>
+       </Container>
       </div>
     </>
   )
