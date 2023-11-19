@@ -1,6 +1,6 @@
 import Container from "react-bootstrap/Container";
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Signup from "./pages/Signup/Signup"
 import Login from './pages/Login/Login';
 import { auth } from "./firebase"
@@ -53,6 +53,7 @@ function App() {
               <Route path="/firebase-exercise/templates" element={<AllTemplates />} />
               <Route path="/firebase-exercise/templates/:templateid" element={<TemplateDetail />} />
             </Route>
+            <Route path="*" element={<Navigate to="/firebase-exercise" />} />
           </Routes>
         </Container>
         <Footer />
