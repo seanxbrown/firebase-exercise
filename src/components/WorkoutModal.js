@@ -9,7 +9,7 @@ const WorkoutModal = ({ item = {}, isEdit, isTemplate, closeModal, updateFunctio
     }
 
   return (
-    <Modal show={true} onHide={closeModal} >
+    <Modal show={true} onHide={closeModal} backdrop="static" >
       <Modal.Header closeButton>
         <Modal.Title className="text-center">
           {isEdit ? "Edit " : "Add "} {isTemplate ? "Template" : "Workout"}

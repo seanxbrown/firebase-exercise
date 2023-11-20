@@ -3,7 +3,7 @@ import { Form, Button, Modal } from "react-bootstrap"
 
 const ExerciseModal = ({ isTemplate, isEdit, closeModal, updateFunction, workoutItem, exerciseItem }) => {
   return (
-    <Modal show={true} onHide={closeModal}>
+    <Modal show={true} onHide={closeModal} backdrop="static">
         <Modal.Header closeButton >
             <Modal.Title> 
                 {!isEdit ? `Add exercise to ${workoutItem.name || workoutItem.title}` : `Edit ${exerciseItem.name}`}
