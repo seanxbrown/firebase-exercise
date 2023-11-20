@@ -15,7 +15,7 @@ const WorkoutModal = ({ item = {}, isEdit, isTemplate, closeModal, updateFunctio
           {isEdit ? "Edit " : "Add "} {isTemplate ? "Template" : "Workout"}
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="pb-4">
         <Form onSubmit={handleSubmit}>
             <Form.Group>
                 <Form.Label>Title</Form.Label>

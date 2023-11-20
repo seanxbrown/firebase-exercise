@@ -9,7 +9,7 @@ const ExerciseModal = ({ isTemplate, isEdit, closeModal, updateFunction, workout
                 {!isEdit ? `Add exercise to ${workoutItem.name || workoutItem.title}` : `Edit ${exerciseItem.name}`}
             </Modal.Title>
         </Modal.Header>
-        <Modal.Body >
+        <Modal.Body className="pb-4">
             <Form onSubmit={updateFunction}>
                 <Form.Group>
                     <Form.Label>Exercise</Form.Label>
