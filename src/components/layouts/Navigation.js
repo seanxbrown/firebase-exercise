@@ -10,22 +10,18 @@ const user = useContext(AuthContext)
     <Navbar expand="lg" id="header">
       <Container>
         <Link to="/firebase-exercise" className="text-light navbar-brand fs-1 text-decoration-none fw-bold">Metis</Link>
-        <Navbar.Toggle/>
-        <Navbar.Collapse>
-
-          <Nav className="me-auto">
+        <Nav className="me-auto">
             <Navbar.Text className="text-light">{user && user.displayName || user && user.email || user && "Guest User"}</Navbar.Text>
           </Nav>
-
+        <Navbar.Toggle/>
+        <Navbar.Collapse>
           <Nav>
             <Link to={`/firebase-exercise/profile`} className="text-light text-decoration-none nav-link">Profile</Link>
             <Link to={`/firebase-exercise/dashboard`} className="text-light text-decoration-none nav-link">Dashboard</Link> 
           </Nav>
-
           <Nav>
             <Nav.Link className="text-decoration-none text-light" id="logout-text" onClick={() => { logOut() }}>Log Out</Nav.Link>
           </Nav>
-
         </Navbar.Collapse>
       </Container>
     </Navbar>
