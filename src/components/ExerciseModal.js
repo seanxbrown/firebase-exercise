@@ -17,7 +17,7 @@ const ExerciseModal = ({ isTemplate, isEdit, closeModal, updateFunction, workout
                 </Form.Group>
                 {!isTemplate && <Form.Group>
                     <Form.Label>Weight</Form.Label>
-                    <Form.Control required id="exerciseWeight" type="number" min="0" max="999" defaultValue={isEdit && exerciseItem && exerciseItem.weight || ""}/>
+                    <Form.Control required id="exerciseWeight" type="number" min="0" max="999" step="0.25" defaultValue={isEdit && exerciseItem && exerciseItem.weight || ""}/>
                 </Form.Group> }
                 {!isTemplate && <Form.Group>
                     <Form.Label>Unit</Form.Label>
