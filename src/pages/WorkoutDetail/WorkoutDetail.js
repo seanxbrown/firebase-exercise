@@ -24,6 +24,7 @@ const WorkoutDetail = () => {
     const [alert, setAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("")
     const [alertType, setAlertType] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
     const {workoutid} = useParams();
     const user = useContext(AuthContext)
 
@@ -124,14 +125,16 @@ const WorkoutDetail = () => {
         }
     
         try {
+            setIsLoading(true)
             update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
-            
             getDataForOneWorkout();
     
         } catch(e) {
             setAlert(true)
             setAlertMessage(e.message)
             setAlertType("danger")
+            } finally {
+                setIsLoading(false)
             }
     
         setAddingNewExercise(addingNewExercise => !addingNewExercise)
@@ -152,14 +155,15 @@ function removeExerciseFromWorkout(id) {
     setSelectedUserWorkout(newSelectedWorkout);
     
     try {
+        setIsLoading(true)
         update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
         getDataForOneWorkout();
-
     }catch(e) {
         setAlert(true)
         setAlertMessage(e.message)
         setAlertType("danger")
-
+    } finally {
+        setIsLoading(false)
     }
 
     setDeletingExercise(false)
@@ -203,14 +207,16 @@ async function handleExerciseUpdate(e) {
             })
         }
     }
-
     try {
+        setIsLoading(true)
         await update(ref(database, `${user.uid}`), {"workouts": newWorkouts});
 
     } catch(e) {
         setAlert(true)
         setAlertMessage(e.message)
         setAlertType("danger")
+    } finally {
+        setIsLoading(false)
     }
     setEditing(false)
 }
@@ -293,6 +299,7 @@ function closeErrorModal() {
                 buttonFunction={openNewExerciseBox} 
                 buttonText="Add New Exercise" 
                 date={formatDate(selectedUserWorkout.date)}
+                isLoading={isLoading}
                 />
             {addingNewExercise ?
                 <ExerciseModal 

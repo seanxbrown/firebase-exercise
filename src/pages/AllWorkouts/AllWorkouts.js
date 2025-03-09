@@ -4,7 +4,7 @@ import { database, set, ref, onValue, update } from "../../firebase";
 import WorkoutComponent from "../../components/WorkoutComponent";
 import { v4 as uuidv4 } from "uuid";
 import Workout from "../../utils/workout";
-import { Form, ListGroup, Spinner } from "react-bootstrap"
+import { Form, ListGroup } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import DeletionModal from "../../components/DeletionModal"
 import WorkoutModal from "../../components/WorkoutModal"
@@ -18,6 +18,7 @@ const AllWorkouts = () => {
   const [editing, setEditing] = useState(false);
   const [search, setSearch] = useState("");
   const [templates, setTemplates] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
   const user = useContext(AuthContext)
 
   function selectWorkout(selectedID) {
@@ -57,11 +58,14 @@ function addWorkout() {
   newWorkouts.push(newWorkout);
 
   try {
+      setIsLoading(true)
       set(ref(database, `${user.uid}/workouts/`), newWorkouts);
       getWorkoutData();
 
   } catch(error) {
       alert(error);
+  } finally {
+    setIsLoading(false)
   }
   setCreatingNewWorkout(creatingNewWorkout => !creatingNewWorkout);
 }
@@ -187,11 +191,14 @@ async function createWorkoutFromTemplate(id) {
   newWorkouts.push(newWorkout);
 
   try {
+    setIsLoading(true)
       set(ref(database, `${user.uid}/workouts/`), newWorkouts);
       getWorkoutData();
 
   } catch(error) {
       alert(error);
+  } finally {
+    setIsLoading(false)
   }
   setCreatingNewWorkout(creatingNewWorkout => !creatingNewWorkout);
 
@@ -217,6 +224,7 @@ useEffect(() => {
           title="My workouts" 
           buttonFunction={openWorkoutAdditionBox} 
           buttonText="Add New Workout" 
+          isLoading = {isLoading}
         />
         <Form.Control 
           type="search" 
@@ -250,7 +258,7 @@ useEffect(() => {
               updateFunction={handleWorkoutUpdate} 
             /> : null
         }
-        <Suspense fallback={<Spinner animation="border" role="status"/>}>
+        
           <ListGroup variant="flush" className="mb-3">
             {workouts && workouts.length > 0 ? workouts.filter(workout => {
               if (search === "") {
@@ -269,9 +277,6 @@ useEffect(() => {
                 : <ListGroup.Item className="fw-bold text-center">No workouts saved.</ListGroup.Item>
             }
           </ListGroup>
-
-        </Suspense>
-        
         
         <Link to={`/firebase-exercise/dashboard`} >Return to dashboard </Link>
       </div>

@@ -7,7 +7,7 @@ import TemplateComponent from '../../components/TemplateComponent'
 import DeletionModal from "../../components/DeletionModal"
 import WorkoutModal from "../../components/WorkoutModal"
 import Header from '../../components/layouts/Header'
-import { ListGroup, Spinner } from "react-bootstrap"
+import { ListGroup } from "react-bootstrap"
 
 
 const AllTemplates = () => {
@@ -16,6 +16,7 @@ const AllTemplates = () => {
     const [selectedTemplate, setSelectedTemplate] = useState({});
     const [deletingTemplate, setDeletingTemplate] = useState(false)
     const [editingTemplate, setEditingTemplate] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
     const user = useContext(AuthContext)
 
     function openNewTemplateBox() {
@@ -36,9 +37,12 @@ const AllTemplates = () => {
         newTemplates.push(newTemplateWorkout)
 
         try {
+            setIsLoading(true)
             await set(ref(database, `${user.uid}/templates/`), newTemplates);
         } catch(e) {
             alert(e)
+        } finally {
+            setIsLoading(false)
         }
         closeNewTemplateBox()
     }
@@ -132,9 +136,12 @@ function openEditBox() {
     )
   
      try {
+        setIsLoading(true)
         await update(ref(database, `${user.uid}`), {"templates": newTemplates});
         } catch(e) {
             alert(e)
+        } finally {
+            setIsLoading(false)
         }
         setEditingTemplate(false)
   }
@@ -149,6 +156,7 @@ function openEditBox() {
             title="My templates" 
             buttonFunction={openNewTemplateBox} 
             buttonText="Create New Template" 
+            isLoading={isLoading}
         />
         {deletingTemplate && 
             <DeletionModal 
@@ -175,7 +183,6 @@ function openEditBox() {
                 />
                 : null 
         }
-        <Suspense fallback={<Spinner animation="border" role="status"/>}>
             <ListGroup variant="flush">
                 {templates && templates.map((template, key) => 
                     <TemplateComponent 
@@ -189,7 +196,6 @@ function openEditBox() {
                     )
                 }
             </ListGroup>
-        </Suspense>
         <Link to="/firebase-exercise/dashboard">Return to dashboard</Link>
     </div>
   )
