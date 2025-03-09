@@ -42,10 +42,10 @@ const Home = () => {
         <h2 className="text-center fw-bold ">The exercise tracker application</h2>
         <Container id="homeLinkContainer">
           <Row className="align-items-center justify-content-center m-auto gy-5">
-            <Col xs={12} md={6}><Link to="/firebase-exercise/signup" className="btn btn-lg homeLinkButton w-100">Sign up</Link></Col>
-            <Col xs={12} md={6}><Link to="/firebase-exercise/login" className="btn btn-lg homeLinkButton w-100">Log in</Link></Col>
+            { !user && <Col xs={12} md={6}><Link to="/firebase-exercise/signup" className="btn btn-lg homeLinkButton w-100">Sign up</Link></Col> }
+            { !user && <Col xs={12} md={6}><Link to="/firebase-exercise/login" className="btn btn-lg homeLinkButton w-100">Log in</Link></Col> }
             { !user && <Col xs={12} md={6} className="text-center"><a onClick={signInAsGuest} className="link-primary" id="guestSignInLink">Continue as guest</a></Col> }
-            { user && <Col xs={12} md={6} className="text-center"><Link to="/firebase-exercise/dashboard">Go to Dashboard</Link></Col> }
+            { user && <Col xs={12} md={6} className="btn btn-lg homeLinkButton w-100"><Link to="/firebase-exercise/dashboard" className="text-decoration-none text-light">Go to Dashboard</Link></Col> }
           </Row>
        </Container>
       </div>

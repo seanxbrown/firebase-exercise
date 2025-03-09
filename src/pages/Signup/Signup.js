@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from '../../contexts/AuthContext';
 import AlertModal from '../../components/AlertModal';
+import SpinnerIcon from "../../components/SpinnerIcon"
 
 export default function Signup() {
     const navigate = useNavigate()
@@ -12,6 +13,7 @@ export default function Signup() {
     const [alert, setAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("")
     const [alertType, setAlertType] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
 
 
     async function signUserUp(e) {
@@ -29,15 +31,17 @@ export default function Signup() {
         }
     
         try {
+          setIsLoading(true)
           await createUserWithEmailAndPassword(auth, email, password);
+          navigate("/firebase-exercise/dashboard");
         } catch(e) {
           setAlert(true)
           setAlertMessage(e.message)
           setAlertType("danger")
-
+        } finally {
+          setIsLoading(false)
         }
 
-        navigate("/firebase-exercise/dashboard");
     
       }
 
@@ -72,7 +76,7 @@ export default function Signup() {
                   <Form.Label>Confirm password</Form.Label>
                   <Form.Control required type="password" id="signupPasswordConf"></Form.Control>
               </Form.Group>
-              <Button disabled={user} type="submit" className="w-100 mt-5 rounded-pill">Create Account</Button>
+              <Button disabled={user} type="submit" className="w-100 mt-5 rounded-pill">{isLoading ? <SpinnerIcon /> : "Create Account"}</Button>
           </Form>
           <p className="text-center text-muted">Already have an account? <Link to="/firebase-exercise/login">Log in</Link></p>
       </Container>
